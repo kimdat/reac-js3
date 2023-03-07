@@ -1,0 +1,32 @@
+RP/0/RSP1/CPU0:AGG-BDGBCT1234#admin show asd
+asd
+asdasd
+sasd
+RP/0/RSP1/CPU0:AGG-BDGBCT12345#admin show invent
+ats
+NAME: "module 0/RSP1/CPU02", DESCR: "ASR9K Route Switch Processor with 880G/slot Fabric and 16GB"
+PID: A9K-RSP880-TR, VID: V05, SN: FOC2138NSKP
+NAME: "module 0/RSP1/CPU03", DESCR: "ASR9K Route Switch Processor with 880G/slot Fabric and 16GB"
+PID: A9K-RSP880-TR, VID: V05, SN: FOC2138NSKP
+NAME: "module 0/RSP1/CPU04", DESCR: "ASR9K Route Switch Processor with 880G/slot Fabric and 16GB"
+PID: A9K-RSP880-TR, VID: V05, SN: FOC2138NSKP
+NAME: "module 0/RSP1/CPU05", DESCR: "ASR9K Route Switch Processor with 880G/slot Fabric and 16GB"
+PID: A9K-RSP880-TR, VID: V05, SN: FOC2138NSKP
+
+RP/0/RSP1/CPU0:AGG-BDGBCT123456#admin show invent
+ats
+NAME: "module 0/RSP1/CPU02", DESCR: "ASR9K Route Switch Processor with 880G/slot Fabric and 16GB"
+PID: A9K-RSP880-TR, VID: V05, SN: FOC2138NSKP
+NAME: "module 0/RSP1/CPU03", DESCR: "ASR9K Route Switch Processor with 880G/slot Fabric and 16GB"
+PID: A9K-RSP880-TR, VID: V05, SN: FOC2138NSKP
+NAME: "module 0/RSP1/CPU04", DESCR: "ASR9K Route Switch Processor with 880G/slot Fabric and 16GB"
+PID: A9K-RSP880-TR, VID: V05, SN: FOC2138NSKP
+NAME: "module 0/RSP1/CPU05", DESCR: "ASR9K Route Switch Processor with 880G/slot Fabric and 16GB"
+PID: A9K-RSP880-TR, VID: V05, SN: FOC2138NSKP
+asdasd
+
+asdas
+as
+da
+sda
+sd

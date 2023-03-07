@@ -1,0 +1,14 @@
+{
+    "name": "kimdat/api-login",
+   
+   
+    "require": {
+        "monolog/monolog": "^2.0",
+        "firebase/php-jwt": "^6.4",
+        "phpoffice/phpspreadsheet": "^1.13.0",
+        "slim/slim": "^4.11",
+        "nyholm/psr7": "^1.5",
+        "nyholm/psr7-server": "^1.0",
+        "slim/psr7": "^1.6"
+    }
+}

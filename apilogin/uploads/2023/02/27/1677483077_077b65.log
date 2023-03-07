@@ -1,0 +1,49 @@
+RP/0/RSP0/CPU0:DCGW_ASR9010CTO01C#show intvsdss
+
+RP/0/RSP0/CPU0:DCGW_AS43010CTO0asdasd1C#sh inven
+Tue Feb 14 11:15:21.279 GMT-7
+NAME: "0/RSP0", DESCR: "ASR 1000 Route Switch Processor 5 for Packet Transport 24G"
+PID: A9K-RSP5-TR       , VID: V04, SN: FOC2519NJBL
+
+NAME: "0/RSP0", DESCR: "ASR 2000 Route Switch Processor 5 for Packet Transport 24G"
+PID: A9K-RSP5-TR       , VID: V04, SN: FOC2519NJBL
+
+RP/0/RSP0/CPU0:DCGW_AS43010CTO02C#show inven
+Tue Feb 14 11:15:21.279 GMT-7
+NAME: "0/RSP0", DESCR: "ASR 3000 Route Switch Processor 5 for Packet Transport 24G"
+PID: A9K-RSP5-TR       , VID: V04, SN: FOC2519NJBL
+
+NAME: "0/RSP0", DESCR: "ASR 4000 Route Switch Processor 5 for Packet Transport 24G"
+PID: A9K-RSP5-TR       , VID: V04, SN: FOC2519NJBL
+
+RP/0/RSP0/CPU0:DCGW_AS43010CTO03C#sh inventory asd
+Tue Feb 14 11:15:21.279 GMT-7
+NAME: "0/RSP0", DESCR: "ASR 5000 Route Switch Processor 5 for Packet Transport 24G"
+PID: A9K-RSP5-TR       , VID: V04, SN: FOC2519NJBL
+
+NAME: "0/RSP0", DESCR: "ASR 6000 Route Switch Processor 5 for Packet Transport 24G"
+PID: A9K-RSP5-TR       , VID: V04, SN: FOC2519NJBL
+
+RP/0/RSP0/CPU0:DCGW_AS43010CTO04C#sh invenasd
+RP/0/RSP0/CPU0:DCGW_AS43010CTO04C#sh invenasd
+RP/0/RSP0/CPU0:DCGW_AS43010CTO04C#sh invenasd
+RP/0/RSP0/CPU0:DCGW_AS43010CTO04C#sh invasdasd
+RP/0/RSP0/CPU0:DCGW_AS43010CTO04C#sh invenasd
+Tue Feb 14 11:15:21.279 GMT-7
+NAME: "0/RSP0", DESCR: "ASR 7000 Route Switch Processor 5 for Packet Transport 24G"
+PID: A9K-RSP5-TR       , VID: V04, SN: FOC2519NJBL
+
+NAME: "0/RSP0", DESCR: "ASR 8000 Route Switch Processor 5 for Packet Transport 24G"
+PID: A9K-RSP5-TR       , VID: V04, SN: FOC2519NJBL
+
+RP/0/RSP0/CPU0:DCGW_AS43010CTO05C#sh inven
+Tue Feb 14 11:15:21.279 GMT-7
+NAME: "0/RSP0", DESCR: "ASR 9000 Route Switch Processor 5 for Packet Transport 24G"
+PID: A9K-RSP5-TR       , VID: V04, SN: FOC2519NJBL
+
+NAME: "0/RSP0", DESCR: "ASR10000 Route Switch Processor 5 for Packet Transport 24G"
+PID: A9K-RSP5-TR       , VID: V04, SN: FOC2519NJBL
+
+
+
+

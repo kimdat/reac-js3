@@ -1,0 +1,98 @@
+
+RP/0/RSP1/CPU0:AGG-HCMBCH32#admin show invent
+Tue Sep 20 17:03:04.683 GMT
+NAME: "module 0/RSP0/CPU0", DESCR: "ASR9K Route Switch Processor with 440G/slot Fabric and 6GB"
+PID: A9K-RSP440-TR, VID: V09, SN: FOC2110NQA7
+
+NAME: "module 0/RSP1/CPU0", DESCR: "ASR9K Route Switch Processor with 440G/slot Fabric and 6GB"
+PID: A9K-RSP440-TR, VID: V09, SN: FOC2110NQ9C
+
+NAME: "fantray 0/FT0/SP", DESCR: "ASR-9006 Fan Tray V2"
+PID: ASR-9006-FAN-V2, VID: V01, SN: FOC2123NQVN
+
+NAME: "fan0 0/FT0/SP", DESCR: "ASR9K Generic Fan"
+PID: N/A, VID: N/A, SN: 
+
+NAME: "fan1 0/FT0/SP", DESCR: "ASR9K Generic Fan"
+PID: N/A, VID: N/A, SN: 
+
+NAME: "fan2 0/FT0/SP", DESCR: "ASR9K Generic Fan"
+PID: N/A, VID: N/A, SN: 
+
+NAME: "fan3 0/FT0/SP", DESCR: "ASR9K Generic Fan"
+PID: N/A, VID: N/A, SN: 
+
+NAME: "fan4 0/FT0/SP", DESCR: "ASR9K Generic Fan"
+PID: N/A, VID: N/A, SN: 
+
+NAME: "fan5 0/FT0/SP", DESCR: "ASR9K Generic Fan"
+PID: N/A, VID: N/A, SN: 
+
+NAME: "fantray 0/FT1/SP", DESCR: "ASR-9006 Fan Tray V2"
+PID: ASR-9006-FAN-V2, VID: V01, SN: FOC2123NQVM
+
+NAME: "fan0 0/FT1/SP", DESCR: "ASR9K Generic Fan"
+PID: N/A, VID: N/A, SN: 
+
+NAME: "fan1 0/FT1/SP", DESCR: "ASR9K Generic Fan"
+PID: N/A, VID: N/A, SN: 
+
+NAME: "fan2 0/FT1/SP", DESCR: "ASR9K Generic Fan"
+PID: N/A, VID: N/A, SN: 
+
+NAME: "fan3 0/FT1/SP", DESCR: "ASR9K Generic Fan"
+PID: N/A, VID: N/A, SN: 
+
+NAME: "fan4 0/FT1/SP", DESCR: "ASR9K Generic Fan"
+PID: N/A, VID: N/A, SN: 
+
+NAME: "fan5 0/FT1/SP", DESCR: "ASR9K Generic Fan"
+PID: N/A, VID: N/A, SN: 
+
+NAME: "module 0/0/CPU0", DESCR: "20-Port, 16x1GE_4xT Packet Transport Optimized LC"
+PID: A9K-4T16GE-TR, VID: V03, SN: FOC2140N0C0
+
+NAME: "TenGigE0/0/0/16", DESCR: "Non-Cisco OEM SFP+ 10G Pluggable Optics Module"
+PID: TSPLXG40D, VID: B, SN: CI2110220051    
+
+NAME: "TenGigE0/0/0/17", DESCR: "Non-Cisco OEM SFP+ 10G Pluggable Optics Module"
+PID: TSPLXG40D, VID: B, SN: CI2110220054    
+
+NAME: "module 0/1/CPU0", DESCR: "24X10G/1G Packet Transport Optimized LC"
+PID: A9K-24X10GE-1G-TR, VID: V04, SN: FOC2423N6D0
+
+NAME: "TenGigE0/1/0/6", DESCR: "Non-Cisco OEM SFP+ 10G Pluggable Optics Module"
+PID: TSPLXG10D, VID: 2., SN: CI2110220511    
+
+NAME: "TenGigE0/1/0/7", DESCR: "Non-Cisco OEM SFP+ 10G Pluggable Optics Module"
+PID: TSPLXG40D, VID: B, SN: CI2112230011    
+
+NAME: "TenGigE0/1/0/8", DESCR: "Non-Cisco OEM SFP+ 10G Pluggable Optics Module"
+PID: TSPLXG80D, VID: 00, SN: CI2201180042    
+
+NAME: "TenGigE0/1/0/9", DESCR: "Non-Cisco TIBTRONIX SFP+ 10G Pluggable Optics Module"
+PID: TSPLXG80D, VID: 00, SN: CI201218127     
+
+NAME: "TenGigE0/1/0/10", DESCR: "Non-Cisco OEM SFP+ 10G Pluggable Optics Module"
+PID: TSPLXG40D, VID: B, SN: CI2112230017    
+
+NAME: "TenGigE0/1/0/16", DESCR: "Non-Cisco OEM SFP+ 10G Pluggable Optics Module"
+PID: TSPLXG40D, VID: B, SN: CI2110220055    
+
+NAME: "TenGigE0/1/0/17", DESCR: "Non-Cisco OEM SFP+ 10G Pluggable Optics Module"
+PID: TSPLXG40D, VID: B, SN: CI2110220056    
+
+NAME: "power-module 0/PS0/M0/SP", DESCR: "2kW DC V2 Power Module"
+PID: PWR-2KW-DC-V2, VID: V03, SN: ART2121Y07V
+
+NAME: "power-module 0/PS0/M1/SP", DESCR: "2kW DC V2 Power Module"
+PID: PWR-2KW-DC-V2, VID: V03, SN: ART2121Y07D
+
+NAME: "power-module 0/PS0/M2/SP", DESCR: "2kW DC V2 Power Module"
+PID: PWR-2KW-DC-V2, VID: V03, SN: ART2436Y056
+
+NAME: "chassis ASR-9006-DC-V2", DESCR: "ASR 9006 4 Line Card Slot Chassis with V2 DC PEM"
+PID: ASR-9006-DC-V2, VID: V02, SN: FOX2142P0F0
+
+RP/0/RSP1/CPU0:AGG-HCMBCH32#
+RP/0/RSP1/CPU0:AGG-HCMBCH32#

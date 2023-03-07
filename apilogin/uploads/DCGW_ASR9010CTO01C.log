@@ -1,0 +1,193 @@
+
+RP/0/RSP0/CPU0:DCGW_ASR9010CTO01C#show invent
+Tue Feb 14 11:15:21.279 GMT-7
+NAME: "0/RSP0", DESCR: "ASR 9000 Route Switch Processor 5 for Packet Transport 24G"
+PID: A9K-RSP5-TR       , VID: V04, SN: FOC2519NJBL
+
+NAME: "0/RSP1", DESCR: "ASR 9000 Route Switch Processor 5 for Packet Transport 24G"
+PID: A9K-RSP5-TR       , VID: V04, SN: FOC2519NJ9R
+
+NAME: "0/0", DESCR: "24X10G/1G Packet Transport Optimized LC"
+PID: A9K-24X10GE-1G-TR , VID: V05, SN: FOC2512NFSG
+
+NAME: "TenGigE0/0/0/0", DESCR: "10GBASE-LR SFP+ Module for SMF"
+PID: SFP-10G-LR        , VID: V03, SN: FC2105190074
+
+NAME: "TenGigE0/0/0/1", DESCR: "10GBASE-LR SFP+ Module for SMF"
+PID: SFP-10G-LR        , VID: V03, SN: FC2105190075
+
+NAME: "TenGigE0/0/0/2", DESCR: "10GBASE-LR SFP+ Module for SMF"
+PID: SFP-10G-LR        , VID: V03, SN: FC2105190056
+
+NAME: "TenGigE0/0/0/3", DESCR: "10GBASE-LR SFP+ Module for SMF"
+PID: SFP-10G-LR        , VID: V03, SN: FC2105190057
+
+NAME: "TenGigE0/0/0/4", DESCR: "10GBASE-LR SFP+ Module for SMF"
+PID: SFP-10G-LR        , VID: V03, SN: FC2105190058
+
+NAME: "TenGigE0/0/0/5", DESCR: "10GBASE-LR SFP+ Module for SMF"
+PID: SFP-10G-LR        , VID: V03, SN: FC2105190051
+
+NAME: "TenGigE0/0/0/6", DESCR: "10GBASE-LR SFP+ Module for SMF"
+PID: SFP-10G-LR        , VID: V03, SN: FC2105190065
+
+NAME: "GigabitEthernet0/0/0/8", DESCR: "1000BASE-LX/LH SFP transceiver module, MMF/SMF, 1310nm, DOM"
+PID: GLC-LH-SMD        , VID: V01, SN: FC2105269171
+
+NAME: "GigabitEthernet0/0/0/9", DESCR: "1000BASE-LX/LH SFP transceiver module, MMF/SMF, 1310nm, DOM"
+PID: GLC-LH-SMD        , VID: V01, SN: ACW20370D6C
+
+NAME: "GigabitEthernet0/0/0/10", DESCR: "1000BASE-LX/LH SFP transceiver module, MMF/SMF, 1310nm, DOM"
+PID: GLC-LH-SMD        , VID: V01, SN: ACW20370A17
+
+NAME: "GigabitEthernet0/0/0/11", DESCR: "1000BASE-LX/LH SFP transceiver module, MMF/SMF, 1310nm, DOM"
+PID: GLC-LH-SMD        , VID: V01, SN: ACW203701RL
+
+NAME: "GigabitEthernet0/0/0/12", DESCR: "1000BASE-LX/LH SFP transceiver module, MMF/SMF, 1310nm, DOM"
+PID: GLC-LH-SMD        , VID: V01, SN: ACW203706VM
+
+NAME: "GigabitEthernet0/0/0/13", DESCR: "1000BASE-LX/LH SFP transceiver module, MMF/SMF, 1310nm, DOM"
+PID: GLC-LH-SMD        , VID: V01, SN: FC2105269148
+
+NAME: "GigabitEthernet0/0/0/14", DESCR: "1000BASE-LX/LH SFP transceiver module, MMF/SMF, 1310nm, DOM"
+PID: GLC-LH-SMD        , VID: V01, SN: FC2105269149
+
+NAME: "GigabitEthernet0/0/0/15", DESCR: "1000BASE-LX/LH SFP transceiver module, MMF/SMF, 1310nm, DOM"
+PID: GLC-LH-SMD        , VID: V01, SN: FC2105269226
+
+NAME: "GigabitEthernet0/0/0/16", DESCR: "1000BASE-LX/LH SFP transceiver module, MMF/SMF, 1310nm, DOM"
+PID: GLC-LH-SMD        , VID: V01, SN: FC2105269227
+
+NAME: "GigabitEthernet0/0/0/17", DESCR: "1000BASE-LX/LH SFP transceiver module, MMF/SMF, 1310nm, DOM"
+PID: GLC-LH-SMD        , VID: V01, SN: FC2105269228
+
+NAME: "GigabitEthernet0/0/0/18", DESCR: "1000BASE-LX/LH SFP transceiver module, MMF/SMF, 1310nm, DOM"
+PID: GLC-LH-SMD        , VID: V01, SN: FC2105269223
+
+NAME: "GigabitEthernet0/0/0/19", DESCR: "1000BASE-LX/LH SFP transceiver module, MMF/SMF, 1310nm, DOM"
+PID: GLC-LH-SMD        , VID: V01, SN: FC2105269222
+
+NAME: "GigabitEthernet0/0/0/20", DESCR: "1000BASE-LX/LH SFP transceiver module, MMF/SMF, 1310nm, DOM"
+PID: GLC-LH-SMD        , VID: V01, SN: FC2105269156
+
+NAME: "GigabitEthernet0/0/0/21", DESCR: "1000BASE-LX/LH SFP transceiver module, MMF/SMF, 1310nm, DOM"
+PID: GLC-LH-SMD        , VID: V01, SN: FC2105269221
+
+NAME: "GigabitEthernet0/0/0/22", DESCR: "1000BASE-LX/LH SFP transceiver module, MMF/SMF, 1310nm, DOM"
+PID: GLC-LH-SMD        , VID: V01, SN: FC2105269158
+
+NAME: "GigabitEthernet0/0/0/23", DESCR: "1000BASE-LX/LH SFP transceiver module, MMF/SMF, 1310nm, DOM"
+PID: GLC-LH-SMD        , VID: V01, SN: FC2105269157
+
+NAME: "0/1", DESCR: "24X10G/1G Packet Transport Optimized LC"
+PID: A9K-24X10GE-1G-TR , VID: V04, SN: FOC2429N6XQ
+
+NAME: "TenGigE0/1/0/0", DESCR: "10GBASE-LR SFP+ Module for SMF"
+PID: SFP-10G-LR        , VID: V03, SN: FC2105190020
+
+NAME: "TenGigE0/1/0/1", DESCR: "10GBASE-LR SFP+ Module for SMF"
+PID: SFP-10G-LR        , VID: V03, SN: FC2105190077
+
+NAME: "TenGigE0/1/0/2", DESCR: "10GBASE-LR SFP+ Module for SMF"
+PID: SFP-10G-LR        , VID: V03, SN: FC2105190076
+
+NAME: "TenGigE0/1/0/3", DESCR: "10GBASE-LR SFP+ Module for SMF"
+PID: SFP-10G-LR        , VID: V03, SN: FC2105190025
+
+NAME: "GigabitEthernet0/1/0/16", DESCR: "1000BASE-LX/LH SFP transceiver module, MMF/SMF, 1310nm, DOM"
+PID: GLC-LH-SMD        , VID: V01, SN: FNS17371Z58
+
+NAME: "GigabitEthernet0/1/0/17", DESCR: "1000BASE-LX/LH SFP (DOM), SMF 10Km, MMF 550m"
+PID: SFP-GE-L          , VID: V01, SN: FNS152407NE
+
+NAME: "GigabitEthernet0/1/0/18", DESCR: "unsupported module"
+PID: N/A               , VID: N/A, SN: HB15480172143
+
+NAME: "GigabitEthernet0/1/0/19", DESCR: "1000BASE-LX/LH SFP (DOM), SMF 10Km, MMF 550m"
+PID: SFP-GE-L          , VID: V01, SN: FNS1524066U
+
+NAME: "GigabitEthernet0/1/0/20", DESCR: "1000BASE-LX/LH SFP transceiver module, MMF/SMF, 1310nm, DOM"
+PID: GLC-LH-SMD        , VID: V01, SN: ACW203709VV
+
+NAME: "0/7", DESCR: "24X10G/1G Packet Transport Optimized LC"
+PID: A9K-24X10GE-1G-TR , VID: V05, SN: FOC2513N042
+
+NAME: "TenGigE0/7/0/0", DESCR: "10GBASE-LR SFP+ Module for SMF"
+PID: SFP-10G-LR        , VID: V03, SN: FC2105190080
+
+NAME: "TenGigE0/7/0/1", DESCR: "10GBASE-LR SFP+ Module for SMF"
+PID: SFP-10G-LR        , VID: V03, SN: FC2105190079
+
+NAME: "TenGigE0/7/0/2", DESCR: "10GBASE-LR SFP+ Module for SMF"
+PID: SFP-10G-LR        , VID: V03, SN: FC2105190055
+
+NAME: "TenGigE0/7/0/3", DESCR: "10GBASE-LR SFP+ Module for SMF"
+PID: SFP-10G-LR        , VID: V03, SN: FC2105190059
+
+NAME: "TenGigE0/7/0/4", DESCR: "10GBASE-LR SFP+ Module for SMF"
+PID: SFP-10G-LR        , VID: V03, SN: FC2105190054
+
+NAME: "TenGigE0/7/0/5", DESCR: "10GBASE-LR SFP+ Module for SMF"
+PID: SFP-10G-LR        , VID: V03, SN: FC2105190053
+
+NAME: "TenGigE0/7/0/6", DESCR: "10GBASE-LR SFP+ Module for SMF"
+PID: SFP-10G-LR        , VID: V03, SN: FC2105190052
+
+NAME: "GigabitEthernet0/7/0/13", DESCR: "1000BASE-LX/LH SFP transceiver module, MMF/SMF, 1310nm, DOM"
+PID: GLC-LH-SMD        , VID: V01, SN: FC2105269225
+
+NAME: "GigabitEthernet0/7/0/14", DESCR: "1000BASE-LX/LH SFP transceiver module, MMF/SMF, 1310nm, DOM"
+PID: GLC-LH-SMD        , VID: V01, SN: FC2105269224
+
+NAME: "GigabitEthernet0/7/0/15", DESCR: "1000BASE-LX/LH SFP transceiver module, MMF/SMF, 1310nm, DOM"
+PID: GLC-LH-SMD        , VID: V01, SN: FC2105269230
+
+NAME: "GigabitEthernet0/7/0/16", DESCR: "1000BASE-LX/LH SFP transceiver module, MMF/SMF, 1310nm, DOM"
+PID: GLC-LH-SMD        , VID: V01, SN: FC2105269229
+
+NAME: "GigabitEthernet0/7/0/17", DESCR: "1000BASE-LX/LH SFP transceiver module, MMF/SMF, 1310nm, DOM"
+PID: GLC-LH-SMD        , VID: V01, SN: FC2105269159
+
+NAME: "GigabitEthernet0/7/0/18", DESCR: "1000BASE-LX/LH SFP transceiver module, MMF/SMF, 1310nm, DOM"
+PID: GLC-LH-SMD        , VID: V01, SN: FC2105269160
+
+NAME: "GigabitEthernet0/7/0/19", DESCR: "1000BASE-LX/LH SFP transceiver module, MMF/SMF, 1310nm, DOM"
+PID: GLC-LH-SMD        , VID: V01, SN: FC2105269151
+
+NAME: "GigabitEthernet0/7/0/20", DESCR: "1000BASE-LX/LH SFP transceiver module, MMF/SMF, 1310nm, DOM"
+PID: GLC-LH-SMD        , VID: V01, SN: FC2105269152
+
+NAME: "GigabitEthernet0/7/0/21", DESCR: "1000BASE-LX/LH SFP transceiver module, MMF/SMF, 1310nm, DOM"
+PID: GLC-LH-SMD        , VID: V01, SN: FC2105269153
+
+NAME: "GigabitEthernet0/7/0/22", DESCR: "1000BASE-LX/LH SFP transceiver module, MMF/SMF, 1310nm, DOM"
+PID: GLC-LH-SMD        , VID: V01, SN: FC2105269154
+
+NAME: "Rack 0", DESCR: "ASR-9010 Chassis"
+PID: ASR-9010          , VID: V01, SN: FOX2518P0XN
+
+NAME: "0/FT0", DESCR: "ASR 9010 Fan Tray Version 2"
+PID: ASR-9010-FAN-V2   , VID: V03, SN: FOC2513N6JC
+
+NAME: "0/FT1", DESCR: "ASR 9010 Fan Tray Version 2"
+PID: ASR-9010-FAN-V2   , VID: V03, SN: FOC2517N8MC
+
+NAME: "0/PT0", DESCR: "Simulated Power Tray IDPROM"
+PID: A9K-DC-PEM-V2     , VID: V02, SN: FOT1981P81A
+
+NAME: "0/PT0-PM0", DESCR: "2kW DC Power Module"
+PID: PWR-2KW-DC-V2     , VID: V03, SN: ART2504Y0C4
+
+NAME: "0/PT0-PM1", DESCR: "2kW DC Power Module"
+PID: PWR-2KW-DC-V2     , VID: V03, SN: ART2506Y03S
+
+NAME: "0/PT1", DESCR: "Simulated Power Tray IDPROM"
+PID: A9K-DC-PEM-V2     , VID: V02, SN: FOT1981P81B
+
+NAME: "0/PT1-PM0", DESCR: "2kW DC Power Module"
+PID: PWR-2KW-DC-V2     , VID: V03, SN: ART2506Y03M
+
+NAME: "0/PT1-PM1", DESCR: "2kW DC Power Module"
+PID: PWR-2KW-DC-V2     , VID: V03, SN: ART2506Y03W
+
+RP/0/RSP0/CPU0:DCGW_ASR9010CTO01C#

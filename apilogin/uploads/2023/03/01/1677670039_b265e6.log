@@ -1,0 +1,131 @@
+
+RP/0/RSP0/CPU0:AGG-DNINTH11#admin show invent
+Tue Sep 20 17:03:04.792 GMT
+NAME: "module 0/RSP0/CPU0", DESCR: "ASR9K Route Switch Processor with 880G/slot Fabric and 16GB"
+PID: A9K-RSP880-TR, VID: V05, SN: FOC2138NSRJ
+
+NAME: "module 0/RSP1/CPU0", DESCR: "ASR9K Route Switch Processor with 880G/slot Fabric and 16GB"
+PID: A9K-RSP880-TR, VID: V05, SN: FOC2138NSJ8
+
+NAME: "fantray 0/FT0/SP", DESCR: "ASR-9006 Fan Tray V2"
+PID: ASR-9006-FAN-V2, VID: V01, SN: FOC2141N9U8
+
+NAME: "fan0 0/FT0/SP", DESCR: "ASR9K Generic Fan"
+PID: N/A, VID: N/A, SN: 
+
+NAME: "fan1 0/FT0/SP", DESCR: "ASR9K Generic Fan"
+PID: N/A, VID: N/A, SN: 
+
+NAME: "fan2 0/FT0/SP", DESCR: "ASR9K Generic Fan"
+PID: N/A, VID: N/A, SN: 
+
+NAME: "fan3 0/FT0/SP", DESCR: "ASR9K Generic Fan"
+PID: N/A, VID: N/A, SN: 
+
+NAME: "fan4 0/FT0/SP", DESCR: "ASR9K Generic Fan"
+PID: N/A, VID: N/A, SN: 
+
+NAME: "fan5 0/FT0/SP", DESCR: "ASR9K Generic Fan"
+PID: N/A, VID: N/A, SN: 
+
+NAME: "fantray 0/FT1/SP", DESCR: "ASR-9006 Fan Tray V2"
+PID: ASR-9006-FAN-V2, VID: V01, SN: FOC2141N9UR
+
+NAME: "fan0 0/FT1/SP", DESCR: "ASR9K Generic Fan"
+PID: N/A, VID: N/A, SN: 
+
+NAME: "fan1 0/FT1/SP", DESCR: "ASR9K Generic Fan"
+PID: N/A, VID: N/A, SN: 
+
+NAME: "fan2 0/FT1/SP", DESCR: "ASR9K Generic Fan"
+PID: N/A, VID: N/A, SN: 
+
+NAME: "fan3 0/FT1/SP", DESCR: "ASR9K Generic Fan"
+PID: N/A, VID: N/A, SN: 
+
+NAME: "fan4 0/FT1/SP", DESCR: "ASR9K Generic Fan"
+PID: N/A, VID: N/A, SN: 
+
+NAME: "fan5 0/FT1/SP", DESCR: "ASR9K Generic Fan"
+PID: N/A, VID: N/A, SN: 
+
+NAME: "module 0/0/CPU0", DESCR: "20-Port, 16x1GE_4xT Packet Transport Optimized LC"
+PID: A9K-4T16GE-TR, VID: V03, SN: FOC2135NHM1
+
+NAME: "module mau GigabitEthernet0/0/CPU0/14", DESCR: "Unknown pluggable optics"
+PID:    , VID: N/A, SN: PQH4081         
+
+NAME: "module mau GigabitEthernet0/0/CPU0/15", DESCR: "Unknown pluggable optics"
+PID:    , VID: N/A, SN: PQH4081         
+
+NAME: "module mau TenGigE0/0/CPU0/16", DESCR: "10GBASE-ZR SFP+, SMF 80km"
+PID: SFP-10G-ZR         , VID: V02 , SN: CI200321027     
+
+NAME: "module mau TenGigE0/0/CPU0/17", DESCR: "10GBASE-LR SFP+ Module for SMF"
+PID: SFP-10G-LR         , VID: V03 , SN: FC1711192464    
+
+NAME: "module mau TenGigE0/0/CPU0/18", DESCR: "10GBASE-LR SFP+ Module for SMF"
+PID: SFP-10G-LR         , VID: V03 , SN: FC1711192493    
+
+NAME: "module mau TenGigE0/0/CPU0/19", DESCR: "Unknown or Unsupported SFP Module"
+PID: `  , VID: N/A, SN: AD1325LE0A1     
+
+NAME: "module 0/1/CPU0", DESCR: "20-Port, 16x1GE_4xT Packet Transport Optimized LC"
+PID: A9K-4T16GE-TR, VID: V03, SN: FOC2135NHM4
+
+NAME: "module mau TenGigE0/1/CPU0/16", DESCR: "Unknown or Unsupported SFP Module"
+PID: `  , VID: N/A, SN: AD1325LE0A1     
+
+NAME: "module mau TenGigE0/1/CPU0/17", DESCR: "Unknown or Unsupported SFP Module"
+PID: ØÉ*g9, VID: N/A, SN: A0114071005     
+
+NAME: "module mau TenGigE0/1/CPU0/18", DESCR: "Unknown or Unsupported SFP Module"
+PID: `  , VID: N/A, SN: AD1325LE0A1     
+
+NAME: "module mau TenGigE0/1/CPU0/19", DESCR: "Unknown or Unsupported SFP Module"
+PID: `  , VID: N/A, SN: AD1325LE0A1     
+
+NAME: "module 0/2/CPU0", DESCR: "20-Port, 16x1GE_4xT Packet Transport Optimized LC"
+PID: A9K-4T16GE-TR, VID: V03, SN: FOC2123NL54
+
+NAME: "module mau TenGigE0/2/CPU0/16", DESCR: "Unknown or Unsupported SFP Module"
+PID: `  , VID: N/A, SN: AD1325LE0A1     
+
+NAME: "module mau TenGigE0/2/CPU0/17", DESCR: "10GBASE-ZR SFP+, SMF 80km"
+PID: SFP-10G-ZR         , VID: V02 , SN: CI2008251259    
+
+NAME: "module mau TenGigE0/2/CPU0/18", DESCR: "Unknown or Unsupported SFP Module"
+PID: `  , VID: N/A, SN: AD1325LE0A1     
+
+NAME: "module mau TenGigE0/2/CPU0/19", DESCR: "10GBASE-LR SFP+ Module for SMF"
+PID: SFP-10G-LR         , VID: V02 , SN: CI2008251173    
+
+NAME: "module 0/3/CPU0", DESCR: "20-Port, 16x1GE_4xT Packet Transport Optimized LC"
+PID: A9K-4T16GE-TR, VID: V03, SN: FOC2103N7VP
+
+NAME: "module mau TenGigE0/3/CPU0/16", DESCR: "10GBASE-LR SFP Module, Enterprise-Class"
+PID: SFP-10G-LR-S       , VID: V01 , SN: CI2103310155    
+
+NAME: "module mau TenGigE0/3/CPU0/17", DESCR: "10GBASE-ZR SFP+, SMF 80km"
+PID: SFP-10G-ZR         , VID: V02 , SN: CI2207280064    
+
+NAME: "module mau TenGigE0/3/CPU0/18", DESCR: "10GBASE-ER 1550nm SMF 40KM"
+PID: SFP-10G-ER         , VID: V01 , SN: FC2202164281    
+
+NAME: "power-module 0/PS0/M0/SP", DESCR: "2kW DC V2 Power Module"
+PID: PWR-2KW-DC-V2, VID: V03, SN: DTM213502KL
+
+NAME: "power-module 0/PS0/M1/SP", DESCR: "2kW DC V2 Power Module"
+PID: PWR-2KW-DC-V2, VID: V03, SN: DTM213502LK
+
+NAME: "power-module 0/PS0/M2/SP", DESCR: "2kW DC V2 Power Module"
+PID: PWR-2KW-DC-V2, VID: V03, SN: DTM213502LG
+
+NAME: "power-module 0/PS0/M3/SP", DESCR: "2kW DC V2 Power Module"
+PID: PWR-2KW-DC-V2, VID: V03, SN: DTM213502LW
+
+NAME: "chassis ASR-9006-DC-V2", DESCR: "ASR 9006 4 Line Card Slot Chassis with V2 DC PEM"
+PID: ASR-9006-DC-V2, VID: V02, SN: FOX2139P86F
+
+RP/0/RSP0/CPU0:AGG-DNINTH11#
+RP/0/RSP0/CPU0:AGG-DNINTH11#

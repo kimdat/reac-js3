@@ -1,0 +1,185 @@
+
+RP/0/RSP0/CPU0:MTC-DTPSDC11#admin show invent
+Tue Sep 20 17:02:37.292 GMT
+NAME: "module 0/RSP0/CPU0", DESCR: "ASR 9K Route Switch Processor for Transport"
+PID: A9K-RSP880-LT-TR, VID: V01, SN: FOC2314NH5K
+
+NAME: "module 0/RSP1/CPU0", DESCR: "ASR 9K Route Switch Processor for Transport"
+PID: A9K-RSP880-LT-TR, VID: V01, SN: FOC2314NGZ8
+
+NAME: "fantray 0/FT0/SP", DESCR: "ASR 9010 Fan Tray Version 2"
+PID: ASR-9010-FAN-V2, VID: V03 , SN: FOC2224NQ36
+
+NAME: "fan0 0/FT0/SP", DESCR: "ASR9K Generic Fan"
+PID: N/A, VID: N/A, SN: 
+
+NAME: "fan1 0/FT0/SP", DESCR: "ASR9K Generic Fan"
+PID: N/A, VID: N/A, SN: 
+
+NAME: "fan2 0/FT0/SP", DESCR: "ASR9K Generic Fan"
+PID: N/A, VID: N/A, SN: 
+
+NAME: "fan3 0/FT0/SP", DESCR: "ASR9K Generic Fan"
+PID: N/A, VID: N/A, SN: 
+
+NAME: "fan4 0/FT0/SP", DESCR: "ASR9K Generic Fan"
+PID: N/A, VID: N/A, SN: 
+
+NAME: "fan5 0/FT0/SP", DESCR: "ASR9K Generic Fan"
+PID: N/A, VID: N/A, SN: 
+
+NAME: "fan6 0/FT0/SP", DESCR: "ASR9K Generic Fan"
+PID: N/A, VID: N/A, SN: 
+
+NAME: "fan7 0/FT0/SP", DESCR: "ASR9K Generic Fan"
+PID: N/A, VID: N/A, SN: 
+
+NAME: "fan8 0/FT0/SP", DESCR: "ASR9K Generic Fan"
+PID: N/A, VID: N/A, SN: 
+
+NAME: "fan9 0/FT0/SP", DESCR: "ASR9K Generic Fan"
+PID: N/A, VID: N/A, SN: 
+
+NAME: "fan10 0/FT0/SP", DESCR: "ASR9K Generic Fan"
+PID: N/A, VID: N/A, SN: 
+
+NAME: "fan11 0/FT0/SP", DESCR: "ASR9K Generic Fan"
+PID: N/A, VID: N/A, SN: 
+
+NAME: "fantray 0/FT1/SP", DESCR: "ASR 9010 Fan Tray Version 2"
+PID: ASR-9010-FAN-V2, VID: V03 , SN: FOC2224NQ25
+
+NAME: "fan0 0/FT1/SP", DESCR: "ASR9K Generic Fan"
+PID: N/A, VID: N/A, SN: 
+
+NAME: "fan1 0/FT1/SP", DESCR: "ASR9K Generic Fan"
+PID: N/A, VID: N/A, SN: 
+
+NAME: "fan2 0/FT1/SP", DESCR: "ASR9K Generic Fan"
+PID: N/A, VID: N/A, SN: 
+
+NAME: "fan3 0/FT1/SP", DESCR: "ASR9K Generic Fan"
+PID: N/A, VID: N/A, SN: 
+
+NAME: "fan4 0/FT1/SP", DESCR: "ASR9K Generic Fan"
+PID: N/A, VID: N/A, SN: 
+
+NAME: "fan5 0/FT1/SP", DESCR: "ASR9K Generic Fan"
+PID: N/A, VID: N/A, SN: 
+
+NAME: "fan6 0/FT1/SP", DESCR: "ASR9K Generic Fan"
+PID: N/A, VID: N/A, SN: 
+
+NAME: "fan7 0/FT1/SP", DESCR: "ASR9K Generic Fan"
+PID: N/A, VID: N/A, SN: 
+
+NAME: "fan8 0/FT1/SP", DESCR: "ASR9K Generic Fan"
+PID: N/A, VID: N/A, SN: 
+
+NAME: "fan9 0/FT1/SP", DESCR: "ASR9K Generic Fan"
+PID: N/A, VID: N/A, SN: 
+
+NAME: "fan10 0/FT1/SP", DESCR: "ASR9K Generic Fan"
+PID: N/A, VID: N/A, SN: 
+
+NAME: "fan11 0/FT1/SP", DESCR: "ASR9K Generic Fan"
+PID: N/A, VID: N/A, SN: 
+
+NAME: "module 0/0/CPU0", DESCR: "160G Modular Linecard, Packet Transport Optimized"
+PID: A9K-MOD160-TR, VID: V10, SN: FOC2123N1QK
+
+NAME: "module 0/0/0", DESCR: "ASR 9000 8-port 10GE Modular Port Adapter"
+PID: A9K-MPA-8X10GE, VID: V04, SN: FOC2223NW7Y
+
+NAME: "TenGigE0/0/0/0", DESCR: "Non-Cisco OEM SFP+ 10G Pluggable Optics Module"
+PID: TSPLXG80D, VID: 0001, SN: CI2202210002    
+
+NAME: "module mau 0/0/0/1", DESCR: "10GBASE-ER 1550nm SMF 40KM"
+PID: SFP-10G-ER          , VID: V01 , SN: FC1808055229    
+
+NAME: "module mau 0/0/0/2", DESCR: "10GBASE-LR SFP+ Module for SMF"
+PID: SFP-10G-LR          , VID: V03 , SN: FC1808054014    
+
+NAME: "TenGigE0/0/0/3", DESCR: "Non-Cisco TIBTRONIX SFP+ 10G Pluggable Optics Module"
+PID: TSPLXGC0D, VID: 0001, SN: CI211027003     
+
+NAME: "module mau 0/0/0/4", DESCR: "10GBASE-ZR SFP+, SMF 80km"
+PID: SFP-10G-ZR          , VID: V02 , SN: CI2103310675    
+
+NAME: "module 0/0/1", DESCR: "ASR 9000 8-port 10GE Modular Port Adapter"
+PID: A9K-MPA-8X10GE, VID: V04, SN: FOC2223NW7B
+
+NAME: "module mau 0/0/1/0", DESCR: "10GBASE-ZR SFP+, SMF 80km"
+PID: SFP-10G-ZR          , VID: V02 , SN: CI2103310674    
+
+NAME: "module mau 0/0/1/1", DESCR: "10GBASE-LR SFP+ Module for SMF"
+PID: SFP-10G-LR          , VID: V03 , SN: FC1808054144    
+
+NAME: "TenGigE0/0/1/2", DESCR: "Non-Cisco TIBTRONIX SFP+ 10G Pluggable Optics Module"
+PID: TSPLXGC0D, VID: 0001, SN: CI211027002     
+
+NAME: "module 0/1/CPU0", DESCR: "20-Port, 16x1GE_4xT Packet Transport Optimized LC"
+PID: A9K-4T16GE-TR, VID: V04, SN: FOC2215NSCK
+
+NAME: "GigabitEthernet0/1/0/0", DESCR: "Non-Cisco TIBTRONIX SFP 1G Pluggable Optics Module"
+PID: TSPL1G80D, VID: A, SN: CI200930061     
+
+NAME: "module mau GigabitEthernet0/1/CPU0/2", DESCR: "1000BASE-LX/LH SFP transceiver module, MMF/SMF, 1310nm, DOM"
+PID: GLC-LH-SMD         , VID: V01 , SN: FC1808048679    
+
+NAME: "TenGigE0/1/0/16", DESCR: "Non-Cisco OEM SFP+ 10G Pluggable Optics Module"
+PID: SFP+-10G-80ZR, VID: V0, SN: CI1911150025    
+
+NAME: "module mau TenGigE0/1/CPU0/17", DESCR: "10GBASE-LR SFP+ Module for SMF"
+PID: SFP-10G-LR         , VID: V03 , SN: FC1808054138    
+
+NAME: "TenGigE0/1/0/18", DESCR: "Non-Cisco ACEC SFP+ 10G Pluggable Optics Module"
+PID: SFP-10G-LR-S, VID: 1., SN: CI2103310484    
+
+NAME: "TenGigE0/1/0/19", DESCR: "Non-Cisco TIBTRONIX SFP+ 10G Pluggable Optics Module"
+PID: TSPLXG80D, VID: 00, SN: CI201218110     
+
+NAME: "module 0/2/CPU0", DESCR: "20-Port, 16x1GE_4xT Packet Transport Optimized LC"
+PID: A9K-4T16GE-TR, VID: V03, SN: FOC2133N2UD
+
+NAME: "module mau GigabitEthernet0/2/CPU0/0", DESCR: "1000BASE-EX SFP transceiver module, SMF, 1310nm, DOM"
+PID: GLC-EX-SMD         , VID: V01 , SN: FC1808052005    
+
+NAME: "module mau GigabitEthernet0/2/CPU0/2", DESCR: "1000BASE-LX/LH SFP (DOM), SMF 10Km, MMF 550m"
+PID: SFP-GE-L           , VID: V01 , SN: FC1711187123    
+
+NAME: "TenGigE0/2/0/16", DESCR: "Non-Cisco TIBTRONIX SFP+ 10G Pluggable Optics Module"
+PID: TSPLXG80D, VID: 00, SN: CI2207280071    
+
+NAME: "TenGigE0/2/0/17", DESCR: "Non-Cisco TIBTRONIX SFP+ 10G Pluggable Optics Module"
+PID: TSPLXGC0D, VID: 00, SN: CI211027001     
+
+NAME: "TenGigE0/2/0/18", DESCR: "Non-Cisco OEM SFP+ 10G Pluggable Optics Module"
+PID: RTXM228-401, VID: A, SN: AQM38EY         
+
+NAME: "TenGigE0/2/0/19", DESCR: "Non-Cisco WINTOP SFP+ 10G Pluggable Optics Module"
+PID: WT-SFP+ZR, VID: 00, SN: W2008190015     
+
+NAME: "power-module 0/PS0/M0/SP", DESCR: "2kW DC V2 Power Module"
+PID: PWR-2KW-DC-V2, VID: V03, SN: ART2224Y0LH
+
+NAME: "power-module 0/PS0/M1/SP", DESCR: "2kW DC V2 Power Module"
+PID: PWR-2KW-DC-V2, VID: V03, SN: ART2224Y0L2
+
+NAME: "power-module 0/PS0/M2/SP", DESCR: "2kW DC V2 Power Module"
+PID: PWR-2KW-DC-V2, VID: V03, SN: ART2301Y09R
+
+NAME: "power-module 0/PS1/M0/SP", DESCR: "2kW DC V2 Power Module"
+PID: PWR-2KW-DC-V2, VID: V03, SN: ART2226Y0HW
+
+NAME: "power-module 0/PS1/M1/SP", DESCR: "2kW DC V2 Power Module"
+PID: PWR-2KW-DC-V2, VID: V03, SN: ART2226Y0JA
+
+NAME: "power-module 0/PS1/M2/SP", DESCR: "2kW DC V2 Power Module"
+PID: PWR-2KW-DC-V2, VID: V03, SN: ART2302Y00R
+
+NAME: "chassis ASR-9010", DESCR: "ASR 9010 8 Line Card Slot Chassis with V2 DC PEM"
+PID: ASR-9010, VID: V01, SN: FOX2227P3VM
+
+RP/0/RSP0/CPU0:MTC-DTPSDC11#
+RP/0/RSP0/CPU0:MTC-DTPSDC11#

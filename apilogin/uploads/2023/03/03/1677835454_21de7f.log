@@ -1,0 +1,9 @@
+RP/0/RSP1/CPU0:AGG-BDGBCT112#admin show invent
+Tue Sep 20 17:03:04.450 GMT
+NAME: "module 0/RSP0/CPU0", DESCR: "ASR9K Route Switch Processor with 880G/slot Fabric and 16GB"
+PID: A9K-RSP880-TR, VID: V05, SN: FOC2138NSMR
+RP/0/RSP1/CPU0:AGG-BDGBCT11#admin show invent
+
+Tue Sep 20 17:03:04.450 GMT
+NAME: "module 0/RSP0/CPU0", DESCR: "ASR9K Route Switch Processor with 880G/slot Fabric and 16GB"
+PID: A9K-RSP880-TR, VID: V05, SN: FOC2138NSMR

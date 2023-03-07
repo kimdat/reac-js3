@@ -1,0 +1,143 @@
+
+RP/0/RSP1/CPU0:PE_ASR9006BLU02C#admin show invent
+Tue Sep 20 17:03:09.074 GMT
+NAME: "module 0/RSP0/CPU0", DESCR: "ASR9K Route Switch Processor with 440G/slot Fabric and 6GB"
+PID: A9K-RSP440-TR, VID: V08, SN: FOC1949NCZ3
+
+NAME: "module 0/RSP1/CPU0", DESCR: "ASR9K Route Switch Processor with 440G/slot Fabric and 6GB"
+PID: A9K-RSP440-TR, VID: V08, SN: FOC1949ND0S
+
+NAME: "fantray 0/FT0/SP", DESCR: "ASR-9006 Fan Tray V2"
+PID: ASR-9006-FAN-V2, VID: V01, SN: FOC1952N7CF
+
+NAME: "fan0 0/FT0/SP", DESCR: "ASR9K Generic Fan"
+PID:    , VID: N/A, SN: 
+
+NAME: "fan1 0/FT0/SP", DESCR: "ASR9K Generic Fan"
+PID:    , VID: N/A, SN: 
+
+NAME: "fan2 0/FT0/SP", DESCR: "ASR9K Generic Fan"
+PID:    , VID: N/A, SN: 
+
+NAME: "fan3 0/FT0/SP", DESCR: "ASR9K Generic Fan"
+PID:    , VID: N/A, SN: 
+
+NAME: "fan4 0/FT0/SP", DESCR: "ASR9K Generic Fan"
+PID:    , VID: N/A, SN: 
+
+NAME: "fan5 0/FT0/SP", DESCR: "ASR9K Generic Fan"
+PID:    , VID: N/A, SN: 
+
+NAME: "fantray 0/FT1/SP", DESCR: "ASR-9006 Fan Tray V2"
+PID: ASR-9006-FAN-V2, VID: V01, SN: FOC1952N7CA
+
+NAME: "fan0 0/FT1/SP", DESCR: "ASR9K Generic Fan"
+PID:    , VID: N/A, SN: 
+
+NAME: "fan1 0/FT1/SP", DESCR: "ASR9K Generic Fan"
+PID:    , VID: N/A, SN: 
+
+NAME: "fan2 0/FT1/SP", DESCR: "ASR9K Generic Fan"
+PID:    , VID: N/A, SN: 
+
+NAME: "fan3 0/FT1/SP", DESCR: "ASR9K Generic Fan"
+PID:    , VID: N/A, SN: 
+
+NAME: "fan4 0/FT1/SP", DESCR: "ASR9K Generic Fan"
+PID:    , VID: N/A, SN: 
+
+NAME: "fan5 0/FT1/SP", DESCR: "ASR9K Generic Fan"
+PID:    , VID: N/A, SN: 
+
+NAME: "module 0/3/CPU0", DESCR: "80G Modular Linecard, Packet Transport Optimized"
+PID: A9K-MOD80-TR, VID: V08, SN: FOC1950N0C0
+
+NAME: "module 0/3/0", DESCR: "ASR 9000 4-port 10GE Modular Port Adapter"
+PID: A9K-MPA-4X10GE, VID: V05, SN: FOC1946NEKR
+
+NAME: "module mau 0/3/0/0", DESCR: "Multirate 10GBASE-SR, SMF"
+PID: XFP-10G-MM-SR       , VID: V03 , SN: FNS194409TN     
+
+NAME: "module mau 0/3/0/1", DESCR: "Multirate 10GBASE-LR and OC-192/STM-64 SR-1 XFP, SMF"
+PID: XFP-10GLR-OC192SR   , VID: V03 , SN: CI191205129     
+
+NAME: "module mau 0/3/0/2", DESCR: "Multirate 10GBASE-LR and OC-192/STM-64 SR-1 XFP, SMF"
+PID: XFP-10GLR-OC192SR   , VID: V03 , SN: CI191205128     
+
+NAME: "module mau 0/3/0/3", DESCR: "Multirate 10GBASE-LR and OC-192/STM-64 SR-1 XFP, SMF"
+PID: XFP-10GLR-OC192SR   , VID: V04 , SN: ONT194001BH     
+
+NAME: "module 0/3/1", DESCR: "ASR 9000 20-port 1GE Modular Port Adapter"
+PID: A9K-MPA-20X1GE, VID: V03, SN: FOC1953N0SR
+
+NAME: "module mau 0/3/1/0", DESCR: "1000BASE-LX/LH SFP transceiver module, MMF/SMF, 1310nm, DOM"
+PID: GLC-LH-SMD          , VID: V01 , SN: AVJ19453PHA     
+
+NAME: "module mau 0/3/1/1", DESCR: "1000BASE-EX SFP transceiver module, SMF, 1310nm, DOM"
+PID: GLC-EX-SMD          , VID: V01 , SN: FC1611132078    
+
+NAME: "module mau 0/3/1/2", DESCR: ""
+PID:    , VID: N/A, SN: AC5022743       
+
+NAME: "module mau 0/3/1/3", DESCR: ""
+PID:    , VID: N/A, SN: AC5022739       
+
+NAME: "module mau 0/3/1/4", DESCR: ""
+PID:    , VID: N/A, SN: 95VT000395      
+
+NAME: "module mau 0/3/1/5", DESCR: ""
+PID:    , VID: N/A, SN: AC5022733       
+
+NAME: "module mau 0/3/1/6", DESCR: ""
+PID:    , VID: N/A, SN: AC5022742       
+
+NAME: "module mau 0/3/1/7", DESCR: ""
+PID:    , VID: N/A, SN: AC5022745       
+
+NAME: "module mau 0/3/1/8", DESCR: ""
+PID:    , VID: N/A, SN: AC5022746       
+
+NAME: "module mau 0/3/1/9", DESCR: ""
+PID:    , VID: N/A, SN: AC5022737       
+
+NAME: "module mau 0/3/1/10", DESCR: ""
+PID:    , VID: 5200, SN: HB15140600043   
+
+NAME: "module mau 0/3/1/11", DESCR: ""
+PID:    , VID: N/A, SN: BE0921660703    
+
+NAME: "module mau 0/3/1/12", DESCR: ""
+PID:    , VID: N/A, SN: EA152700340626  
+
+NAME: "module mau 0/3/1/13", DESCR: ""
+PID:    , VID: N/A, SN: HS1034080154    
+
+NAME: "module mau 0/3/1/14", DESCR: ""
+PID:    , VID: N/A, SN: BE0921660701    
+
+NAME: "module mau 0/3/1/15", DESCR: ""
+PID:    , VID: 5200, SN: HB15140600043   
+
+NAME: "module mau 0/3/1/16", DESCR: ""
+PID:    , VID: 5200, SN: HB15140600043   
+
+NAME: "module mau 0/3/1/17", DESCR: ""
+PID:    , VID: 5200, SN: HB15140600043   
+
+NAME: "module mau 0/3/1/18", DESCR: ""
+PID:    , VID: 5200, SN: HB15140600043   
+
+NAME: "module mau 0/3/1/19", DESCR: ""
+PID:    , VID: N/A, SN: WX1301152978    
+
+NAME: "power-module 0/PM0/0/SP", DESCR: "2kW DC V2 Power Module"
+PID: PWR-2KW-DC-V2, VID: V03, SN: ART1949Y0FX
+
+NAME: "power-module 0/PM0/1/SP", DESCR: "2kW DC V2 Power Module"
+PID: PWR-2KW-DC-V2, VID: V03, SN: ART1949Y0DC
+
+NAME: "chassis ASR-9006-DC-V2", DESCR: "ASR 9006 4 Line Card Slot Chassis with V2 DC PEM"
+PID: ASR-9006-DC-V2, VID: V02, SN: FOX1952GMW2
+
+RP/0/RSP1/CPU0:PE_ASR9006BLU02C#
+RP/0/RSP1/CPU0:PE_ASR9006BLU02C#

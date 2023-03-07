@@ -1,0 +1,290 @@
+
+RP/0/RSP1/CPU0:PE_ASR9010C3011C#admin show invent
+Tue Sep 20 17:02:35.963 GMT
+NAME: "module 0/RSP0/CPU0", DESCR: "ASR9K Route Switch Processor with 440G/slot Fabric and 6GB"
+PID: A9K-RSP440-TR, VID: V09, SN: FOC2102NLQ7
+
+NAME: "module 0/RSP1/CPU0", DESCR: "ASR9K Route Switch Processor with 440G/slot Fabric and 6GB"
+PID: A9K-RSP440-TR, VID: V03, SN: FOC1644N2ML
+
+NAME: "fantray 0/FT0/SP", DESCR: "ASR 9010 Fan Tray Version 2"
+PID: ASR-9010-FAN-V2, VID: V03 , SN: FOC2101NPQX
+
+NAME: "fan0 0/FT0/SP", DESCR: "ASR9K Generic Fan"
+PID:    , VID: N/A, SN: 
+
+NAME: "fan1 0/FT0/SP", DESCR: "ASR9K Generic Fan"
+PID:    , VID: N/A, SN: 
+
+NAME: "fan2 0/FT0/SP", DESCR: "ASR9K Generic Fan"
+PID:    , VID: N/A, SN: 
+
+NAME: "fan3 0/FT0/SP", DESCR: "ASR9K Generic Fan"
+PID:    , VID: N/A, SN: 
+
+NAME: "fan4 0/FT0/SP", DESCR: "ASR9K Generic Fan"
+PID:    , VID: N/A, SN: 
+
+NAME: "fan5 0/FT0/SP", DESCR: "ASR9K Generic Fan"
+PID:    , VID: N/A, SN: 
+
+NAME: "fan6 0/FT0/SP", DESCR: "ASR9K Generic Fan"
+PID:    , VID: N/A, SN: 
+
+NAME: "fan7 0/FT0/SP", DESCR: "ASR9K Generic Fan"
+PID:    , VID: N/A, SN: 
+
+NAME: "fan8 0/FT0/SP", DESCR: "ASR9K Generic Fan"
+PID:    , VID: N/A, SN: 
+
+NAME: "fan9 0/FT0/SP", DESCR: "ASR9K Generic Fan"
+PID:    , VID: N/A, SN: 
+
+NAME: "fan10 0/FT0/SP", DESCR: "ASR9K Generic Fan"
+PID:    , VID: N/A, SN: 
+
+NAME: "fan11 0/FT0/SP", DESCR: "ASR9K Generic Fan"
+PID:    , VID: N/A, SN: 
+
+NAME: "fantray 0/FT1/SP", DESCR: "ASR 9010 Fan Tray Version 2"
+PID: ASR-9010-FAN-V2, VID: V03 , SN: FOC2101NPPQ
+
+NAME: "fan0 0/FT1/SP", DESCR: "ASR9K Generic Fan"
+PID:    , VID: N/A, SN: 
+
+NAME: "fan1 0/FT1/SP", DESCR: "ASR9K Generic Fan"
+PID:    , VID: N/A, SN: 
+
+NAME: "fan2 0/FT1/SP", DESCR: "ASR9K Generic Fan"
+PID:    , VID: N/A, SN: 
+
+NAME: "fan3 0/FT1/SP", DESCR: "ASR9K Generic Fan"
+PID:    , VID: N/A, SN: 
+
+NAME: "fan4 0/FT1/SP", DESCR: "ASR9K Generic Fan"
+PID:    , VID: N/A, SN: 
+
+NAME: "fan5 0/FT1/SP", DESCR: "ASR9K Generic Fan"
+PID:    , VID: N/A, SN: 
+
+NAME: "fan6 0/FT1/SP", DESCR: "ASR9K Generic Fan"
+PID:    , VID: N/A, SN: 
+
+NAME: "fan7 0/FT1/SP", DESCR: "ASR9K Generic Fan"
+PID:    , VID: N/A, SN: 
+
+NAME: "fan8 0/FT1/SP", DESCR: "ASR9K Generic Fan"
+PID:    , VID: N/A, SN: 
+
+NAME: "fan9 0/FT1/SP", DESCR: "ASR9K Generic Fan"
+PID:    , VID: N/A, SN: 
+
+NAME: "fan10 0/FT1/SP", DESCR: "ASR9K Generic Fan"
+PID:    , VID: N/A, SN: 
+
+NAME: "fan11 0/FT1/SP", DESCR: "ASR9K Generic Fan"
+PID:    , VID: N/A, SN: 
+
+NAME: "module 0/0/CPU0", DESCR: "80G Modular Linecard, Packet Transport Optimized"
+PID: A9K-MOD80-TR, VID: V10, SN: FOC2101NL2F
+
+NAME: "module 0/0/0", DESCR: "ASR 9000 4-port 10GE Modular Port Adapter"
+PID: A9K-MPA-4X10GE, VID: V06, SN: FOC2101NEVS
+
+NAME: "module mau 0/0/0/0", DESCR: "Multirate 10GBASE-SR, SMF"
+PID: XFP-10G-MM-SR       , VID: V03 , SN: FNS205201UZ     
+
+NAME: "module mau 0/0/0/1", DESCR: "Multirate 10GBASE-LR and OC-192/STM-64 SR-1 XFP, SMF"
+PID: XFP-10GLR-OC192SR   , VID: V04 , SN: SPC2025001J     
+
+NAME: "module mau 0/0/0/2", DESCR: "Multirate 10GBASE-LR and OC-192/STM-64 SR-1 XFP, SMF"
+PID: XFP-10GLR-OC192SR   , VID: V04 , SN: SPC202401FJ     
+
+NAME: "module mau 0/0/0/3", DESCR: ""
+PID:    , VID: 8/1 , SN: UW200H9         
+
+NAME: "module 0/0/1", DESCR: "ASR 9000 4-port 10GE Modular Port Adapter"
+PID: A9K-MPA-4X10GE, VID: V06, SN: FOC2101NEP7
+
+NAME: "module mau 0/0/1/0", DESCR: "Multirate 10GBASE-SR, SMF"
+PID: XFP-10G-MM-SR       , VID: V03 , SN: FNS205201VA     
+
+NAME: "module mau 0/0/1/1", DESCR: "Multirate 10GBASE-LR and OC-192/STM-64 SR-1 XFP, SMF"
+PID: XFP-10GLR-OC192SR   , VID: V04 , SN: SPC202500AK     
+
+NAME: "module mau 0/0/1/2", DESCR: "Multirate 10GBASE-LR and OC-192/STM-64 SR-1 XFP, SMF"
+PID: XFP-10GLR-OC192SR   , VID: V04 , SN: SPC2027030E     
+
+NAME: "module mau 0/0/1/3", DESCR: "Multirate 10GBASE-LR and OC-192/STM-64 SR-1 XFP, SMF"
+PID: XFP-10GLR-OC192SR   , VID: V04 , SN: SPC202401FK     
+
+NAME: "module 0/1/CPU0", DESCR: "80G Modular Linecard, Packet Transport Optimized"
+PID: A9K-MOD80-TR, VID: V10, SN: FOC2101NLBF
+
+NAME: "module 0/1/0", DESCR: "ASR 9000 4-port 10GE Modular Port Adapter"
+PID: A9K-MPA-4X10GE, VID: V06, SN: FOC2101NEMJ
+
+NAME: "module mau 0/1/0/0", DESCR: "Multirate 10GBASE-SR, SMF"
+PID: XFP-10G-MM-SR       , VID: V03 , SN: FNS205201VU     
+
+NAME: "module mau 0/1/0/1", DESCR: "Multirate 10GBASE-LR and OC-192/STM-64 SR-1 XFP, SMF"
+PID: XFP-10GLR-OC192SR   , VID: V04 , SN: SPC202500AU     
+
+NAME: "module mau 0/1/0/2", DESCR: "Multirate 10GBASE-LR and OC-192/STM-64 SR-1 XFP, SMF"
+PID: XFP-10GLR-OC192SR   , VID: V04 , SN: SPC202401G3     
+
+NAME: "module mau 0/1/0/3", DESCR: "Multirate 10GBASE-LR and OC-192/STM-64 SR-1 XFP, SMF"
+PID: XFP-10GLR-OC192SR   , VID: V04 , SN: SPC2025002C     
+
+NAME: "module 0/1/1", DESCR: "ASR 9000 4-port 10GE Modular Port Adapter"
+PID: A9K-MPA-4X10GE, VID: V06, SN: FOC2101NE73
+
+NAME: "module mau 0/1/1/0", DESCR: "Multirate 10GBASE-LR and OC-192/STM-64 SR-1 XFP, SMF"
+PID: XFP-10GLR-OC192SR   , VID: V04 , SN: SPC202500B9     
+
+NAME: "module mau 0/1/1/1", DESCR: ""
+PID:    , VID: 9/1 , SN: UM200S4         
+
+NAME: "module mau 0/1/1/2", DESCR: ""
+PID:    , VID: 9/1 , SN: 
+
+NAME: "module mau 0/1/1/3", DESCR: "Multirate 10GBASE-LR and OC-192/STM-64 SR-1 XFP, SMF"
+PID: XFP-10GLR-OC192SR   , VID: V04 , SN: SPC193701PQ     
+
+NAME: "module 0/7/CPU0", DESCR: "40-port 1GE, Packet Transport Optimized LC"
+PID: A9K-40GE-TR, VID: V03, SN: FOC2101P982
+
+NAME: "module mau GigabitEthernet0/7/CPU0/0", DESCR: "1000BASE-LX/LH SFP transceiver module, MMF/SMF, 1310nm, DOM"
+PID: GLC-LH-SMD         , VID: V01 , SN: FC1611125702  
+
+NAME: "module mau GigabitEthernet0/7/CPU0/1", DESCR: "1000BASE-LX/LH SFP transceiver module, MMF/SMF, 1310nm, DOM"
+PID: GLC-LH-SMD         , VID: V01 , SN: ACW20510G4N   
+
+NAME: "module mau GigabitEthernet0/7/CPU0/2", DESCR: "1000BASE-LX/LH SFP transceiver module, MMF/SMF, 1310nm, DOM"
+PID: GLC-LH-SMD         , VID: V01 , SN: ACW20510G43   
+
+NAME: "module mau GigabitEthernet0/7/CPU0/3", DESCR: "1000BASE-LX/LH SFP transceiver module, MMF/SMF, 1310nm, DOM"
+PID: GLC-LH-SMD         , VID: V01 , SN: ACW20510G50   
+
+NAME: "module mau GigabitEthernet0/7/CPU0/4", DESCR: "Unknown pluggable optics"
+PID:    , VID: N/A, SN: PVF0MCM       
+
+NAME: "module mau GigabitEthernet0/7/CPU0/5", DESCR: "Unknown pluggable optics"
+PID:    , VID: N/A, SN: PVE0XN7       
+
+NAME: "module mau GigabitEthernet0/7/CPU0/6", DESCR: "Unknown pluggable optics"
+PID:    , VID: N/A, SN: PVF14GJ       
+
+NAME: "module mau GigabitEthernet0/7/CPU0/7", DESCR: "Unknown pluggable optics"
+PID:    , VID: N/A, SN: PVE0XN3       
+
+NAME: "module mau GigabitEthernet0/7/CPU0/8", DESCR: "Unknown pluggable optics"
+PID:    , VID: N/A, SN: PVE0XKC       
+
+NAME: "module mau GigabitEthernet0/7/CPU0/9", DESCR: "Unknown pluggable optics"
+PID:    , VID: N/A, SN: PVF0MCD       
+
+NAME: "module mau GigabitEthernet0/7/CPU0/10", DESCR: "1000BASE-LX/LH SFP transceiver module, MMF/SMF, 1310nm, DOM"
+PID: GLC-LH-SMD         , VID: V01 , SN: ACW215000KN   
+
+NAME: "module mau GigabitEthernet0/7/CPU0/11", DESCR: "1000BASE-LX/LH SFP transceiver module, MMF/SMF, 1310nm, DOM"
+PID: GLC-LH-SMD         , VID: V01 , SN: ACW215000K6   
+
+NAME: "module mau GigabitEthernet0/7/CPU0/12", DESCR: "1000BASE-LX/LH SFP transceiver module, MMF/SMF, 1310nm, DOM"
+PID: GLC-LH-SMD         , VID: V01 , SN: AVJ220434PP   
+
+NAME: "module mau GigabitEthernet0/7/CPU0/13", DESCR: "1000BASE-LX/LH SFP (DOM), SMF 10Km, MMF 550m"
+PID: SFP-GE-L           , VID: V01 , SN: FC1711186564  
+
+NAME: "module mau GigabitEthernet0/7/CPU0/14", DESCR: "1000BASE-LX/LH SFP (DOM), SMF 10Km, MMF 550m"
+PID: SFP-GE-L           , VID: V01 , SN: FC1711180506  
+
+NAME: "module mau GigabitEthernet0/7/CPU0/15", DESCR: "1000BASE-LX/LH SFP (DOM), SMF 10Km, MMF 550m"
+PID: SFP-GE-L           , VID: V01 , SN: FC1711186568  
+
+NAME: "module mau GigabitEthernet0/7/CPU0/16", DESCR: "1000BASE-LX/LH SFP (DOM), SMF 10Km, MMF 550m"
+PID: SFP-GE-L           , VID: V01 , SN: FC1711186579  
+
+NAME: "module mau GigabitEthernet0/7/CPU0/17", DESCR: "1000BASE-LX/LH SFP transceiver module, MMF/SMF, 1310nm, DOM"
+PID: GLC-LH-SMD         , VID: V01 , SN: FC1808045298  
+
+NAME: "module mau GigabitEthernet0/7/CPU0/18", DESCR: "1000BASE-LX/LH SFP transceiver module, MMF/SMF, 1310nm, DOM"
+PID: GLC-LH-SMD         , VID: V01 , SN: FC1808045296  
+
+NAME: "module mau GigabitEthernet0/7/CPU0/19", DESCR: "1000BASE-LX/LH SFP transceiver module, MMF/SMF, 1310nm, DOM"
+PID: GLC-LH-SMD         , VID: V01 , SN: 202011300080  
+
+NAME: "module mau GigabitEthernet0/7/CPU0/20", DESCR: "Unknown pluggable optics"
+PID:    , VID: N/A, SN: PKL0L1L       
+
+NAME: "module mau GigabitEthernet0/7/CPU0/21", DESCR: "Unknown pluggable optics"
+PID:    , VID: N/A, SN: PVJ1SX9       
+
+NAME: "module mau GigabitEthernet0/7/CPU0/22", DESCR: "1000BASE-LX/LH SFP transceiver module, MMF/SMF, 1310nm, DOM"
+PID: GLC-LH-SMD         , VID: V01 , SN: FC1611120310  
+
+NAME: "module mau GigabitEthernet0/7/CPU0/23", DESCR: "1000BASE-LX/LH SFP transceiver module, MMF/SMF, 1310nm, DOM"
+PID: GLC-LH-SMD         , VID: V01 , SN: FC1611125028  
+
+NAME: "module mau GigabitEthernet0/7/CPU0/24", DESCR: "1000BASE-LX/LH SFP transceiver module, MMF/SMF, 1310nm, DOM"
+PID: GLC-LH-SMD         , VID: V01 , SN: CLS10806009   
+
+NAME: "module mau GigabitEthernet0/7/CPU0/25", DESCR: "1000BASE-LX/LH SFP transceiver module, MMF/SMF, 1310nm, DOM"
+PID: GLC-LH-SMD         , VID: V01 , SN: FC1611122780  
+
+NAME: "module mau GigabitEthernet0/7/CPU0/26", DESCR: "1000BASE-LX/LH SFP transceiver module, MMF/SMF, 1310nm, DOM"
+PID: GLC-LH-SMD         , VID: V01 , SN: FC1611123517  
+
+NAME: "module mau GigabitEthernet0/7/CPU0/27", DESCR: "1000BASE-LX/LH SFP transceiver module, MMF/SMF, 1310nm, DOM"
+PID: GLC-LH-SMD         , VID: V01 , SN: FC1611126803  
+
+NAME: "module mau GigabitEthernet0/7/CPU0/28", DESCR: "1000BASE-LX/LH SFP transceiver module, MMF/SMF, 1310nm, DOM"
+PID: GLC-LH-SMD         , VID: V01 , SN: FC1611123513  
+
+NAME: "module mau GigabitEthernet0/7/CPU0/29", DESCR: "1000BASE-LX/LH SFP transceiver module, MMF/SMF, 1310nm, DOM"
+PID: GLC-LH-SMD         , VID: V01 , SN: FC1611122789  
+
+NAME: "module mau GigabitEthernet0/7/CPU0/30", DESCR: "1000BASE-LX/LH SFP transceiver module, MMF/SMF, 1310nm, DOM"
+PID: GLC-LH-SMD         , VID: V01 , SN: CI2004150944  
+
+NAME: "module mau GigabitEthernet0/7/CPU0/31", DESCR: "1000BASE-LX/LH SFP transceiver module, MMF/SMF, 1310nm, DOM"
+PID: GLC-LH-SMD         , VID: V01 , SN: CI2004150945  
+
+NAME: "module mau GigabitEthernet0/7/CPU0/32", DESCR: "Unknown pluggable optics"
+PID:    , VID: N/A, SN: C09C12786     
+
+NAME: "module mau GigabitEthernet0/7/CPU0/33", DESCR: "1000BASE-T SFP (NEBS 3), UTP, 100m"
+PID: SFP-GE-T           , VID: V02, SN: MTC20330YG5   
+
+NAME: "module mau GigabitEthernet0/7/CPU0/34", DESCR: "Unknown or Unsupported SFP Module"
+PID:  terms, VID: N/A, SN: 3US6255846    
+
+NAME: "module mau GigabitEthernet0/7/CPU0/35", DESCR: "1000BASE-T SFP (NEBS 3), UTP, 100m"
+PID: SFP-GE-T           , VID: V02, SN: MTC20330Y2W   
+
+NAME: "module mau GigabitEthernet0/7/CPU0/36", DESCR: "1000BASE-T SFP (NEBS 3), UTP, 100m"
+PID: SFP-GE-T           , VID: V02, SN: MTC20330YH5   
+
+NAME: "module mau GigabitEthernet0/7/CPU0/37", DESCR: "1000BASE-T SFP (NEBS 3), UTP, 100m"
+PID: SFP-GE-T           , VID: V02, SN: MTC20330ZGD   
+
+NAME: "module mau GigabitEthernet0/7/CPU0/38", DESCR: "Unknown pluggable optics"
+PID:    , VID: N/A, SN: PWD14MP       
+
+NAME: "module mau GigabitEthernet0/7/CPU0/39", DESCR: "1000BASE-T SFP (NEBS 3), UTP, 100m"
+PID: SFP-GE-T           , VID: V02, SN: MTC20330YWE   
+
+NAME: "power-module 0/PS0/M0/SP", DESCR: "2kW DC V2 Power Module"
+PID: PWR-2KW-DC-V2, VID: V03, SN: ART2035Y0GP
+
+NAME: "power-module 0/PS0/M1/SP", DESCR: "2kW DC V2 Power Module"
+PID: PWR-2KW-DC-V2, VID: V03, SN: ART2035Y0GR
+
+NAME: "power-module 0/PS1/M0/SP", DESCR: "2kW DC V2 Power Module"
+PID: PWR-2KW-DC-V2, VID: V03, SN: ART2035Y0EL
+
+NAME: "chassis ASR-9010-DC-V2", DESCR: "ASR 9010 8 Line Card Slot Chassis with V2 DC PEM"
+PID: ASR-9010-DC-V2, VID: V02, SN: FOX2102QH4K
+
+RP/0/RSP1/CPU0:PE_ASR9010C3011C#
+RP/0/RSP1/CPU0:PE_ASR9010C3011C#

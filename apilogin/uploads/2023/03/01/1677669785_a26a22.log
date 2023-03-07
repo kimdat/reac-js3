@@ -1,0 +1,206 @@
+
+RP/0/RSP1/CPU0:PE-ASR9006KGG02C#admin show invent
+Tue Sep 20 17:02:37.684 GMT
+NAME: "module 0/RSP0/CPU0", DESCR: "ASR9K Route Switch Processor with 440G/slot Fabric and 6GB"
+PID: A9K-RSP440-TR, VID: V09, SN: FOC2035NZPQ
+
+NAME: "module 0/RSP1/CPU0", DESCR: "ASR9K Route Switch Processor with 440G/slot Fabric and 6GB"
+PID: A9K-RSP440-TR, VID: V09, SN: FOC2035NZPP
+
+NAME: "fantray 0/FT0/SP", DESCR: "ASR-9006 Fan Tray V2"
+PID: ASR-9006-FAN-V2, VID: V01, SN: FOC2035NS3N
+
+NAME: "fan0 0/FT0/SP", DESCR: "ASR9K Generic Fan"
+PID:    , VID: N/A, SN: 
+
+NAME: "fan1 0/FT0/SP", DESCR: "ASR9K Generic Fan"
+PID:    , VID: N/A, SN: 
+
+NAME: "fan2 0/FT0/SP", DESCR: "ASR9K Generic Fan"
+PID:    , VID: N/A, SN: 
+
+NAME: "fan3 0/FT0/SP", DESCR: "ASR9K Generic Fan"
+PID:    , VID: N/A, SN: 
+
+NAME: "fan4 0/FT0/SP", DESCR: "ASR9K Generic Fan"
+PID:    , VID: N/A, SN: 
+
+NAME: "fan5 0/FT0/SP", DESCR: "ASR9K Generic Fan"
+PID:    , VID: N/A, SN: 
+
+NAME: "fantray 0/FT1/SP", DESCR: "ASR-9006 Fan Tray V2"
+PID: ASR-9006-FAN-V2, VID: V01, SN: FOC2035NS42
+
+NAME: "fan0 0/FT1/SP", DESCR: "ASR9K Generic Fan"
+PID:    , VID: N/A, SN: 
+
+NAME: "fan1 0/FT1/SP", DESCR: "ASR9K Generic Fan"
+PID:    , VID: N/A, SN: 
+
+NAME: "fan2 0/FT1/SP", DESCR: "ASR9K Generic Fan"
+PID:    , VID: N/A, SN: 
+
+NAME: "fan3 0/FT1/SP", DESCR: "ASR9K Generic Fan"
+PID:    , VID: N/A, SN: 
+
+NAME: "fan4 0/FT1/SP", DESCR: "ASR9K Generic Fan"
+PID:    , VID: N/A, SN: 
+
+NAME: "fan5 0/FT1/SP", DESCR: "ASR9K Generic Fan"
+PID:    , VID: N/A, SN: 
+
+NAME: "module 0/0/CPU0", DESCR: "20-Port, 16x1GE_4xT Packet Transport Optimized LC"
+PID: A9K-4T16GE-TR, VID: V02, SN: FOC2036NFV2
+
+NAME: "module mau GigabitEthernet0/0/CPU0/0", DESCR: "1000BASE-LX/LH SFP (DOM), SMF 10Km, MMF 550m"
+PID: SFP-GE-L           , VID: V01 , SN: FC1708064984  
+
+NAME: "module mau GigabitEthernet0/0/CPU0/1", DESCR: "Unknown pluggable optics"
+PID:    , VID: N/A, SN: S1HW3119010057
+
+NAME: "module mau GigabitEthernet0/0/CPU0/2", DESCR: "Unknown pluggable optics"
+PID:    , VID: N/A, SN: S1HW3119010057
+
+NAME: "module mau GigabitEthernet0/0/CPU0/3", DESCR: "Unknown pluggable optics"
+PID:    , VID: N/A, SN: S1HW3119010057
+
+NAME: "module mau GigabitEthernet0/0/CPU0/4", DESCR: "Unknown pluggable optics"
+PID:    , VID: N/A, SN: S1HW3119010057
+
+NAME: "module mau GigabitEthernet0/0/CPU0/5", DESCR: "Unknown pluggable optics"
+PID:    , VID: N/A, SN: S1HW3119010057
+
+NAME: "module mau GigabitEthernet0/0/CPU0/6", DESCR: "Unknown pluggable optics"
+PID:    , VID: N/A, SN: S1HW3119010058
+
+NAME: "module mau GigabitEthernet0/0/CPU0/7", DESCR: "Unknown pluggable optics"
+PID:    , VID: N/A, SN: S1HW3119010057
+
+NAME: "module mau GigabitEthernet0/0/CPU0/8", DESCR: "Unknown pluggable optics"
+PID:    , VID: N/A, SN: S1HW3119010057
+
+NAME: "module mau GigabitEthernet0/0/CPU0/9", DESCR: "Unknown pluggable optics"
+PID:    , VID: N/A, SN: S1HW3119010057
+
+NAME: "module mau GigabitEthernet0/0/CPU0/10", DESCR: "Unknown pluggable optics"
+PID:    , VID: N/A, SN: S1HW3119010057
+
+NAME: "module mau GigabitEthernet0/0/CPU0/11", DESCR: "1000BASE-LX/LH SFP (DOM), SMF 10Km, MMF 550m"
+PID: SFP-GE-L           , VID: V01 , SN: FC1711186528  
+
+NAME: "module mau GigabitEthernet0/0/CPU0/14", DESCR: "Unknown or Unsupported SFP Module"
+PID: SFP-1G-10KM        , VID: V01 , SN: C202101291217 
+
+NAME: "module mau GigabitEthernet0/0/CPU0/15", DESCR: "Unknown or Unsupported SFP Module"
+PID: SFP-1G-10KM        , VID: V01 , SN: C202101291216 
+
+NAME: "module mau TenGigE0/0/CPU0/16", DESCR: "10GBASE-LR SFP+ Module for SMF"
+PID: SFP-10G-LR         , VID: V03 , SN: FC1711192388  
+
+NAME: "module mau TenGigE0/0/CPU0/17", DESCR: "10GBASE-LR SFP+ Module for SMF"
+PID: SFP-10G-LR         , VID: V03 , SN: FC1711192382  
+
+NAME: "module mau TenGigE0/0/CPU0/18", DESCR: "10GBASE-LR SFP+ Module for SMF"
+PID: SFP-10G-LR         , VID: V03 , SN: FC1711192381  
+
+NAME: "module mau TenGigE0/0/CPU0/19", DESCR: "10GBASE-LR SFP+ Module for SMF"
+PID: SFP-10G-LR         , VID: V03 , SN: FC1711192945  
+
+NAME: "module 0/1/CPU0", DESCR: "20-Port, 16x1GE_4xT Packet Transport Optimized LC"
+PID: A9K-4T16GE-TR, VID: V03, SN: FOC2123NL6S
+
+NAME: "module mau GigabitEthernet0/1/CPU0/0", DESCR: "Unknown pluggable optics"
+PID:    , VID: N/A, SN: S1HW3119010050
+
+NAME: "module mau GigabitEthernet0/1/CPU0/1", DESCR: "Unknown pluggable optics"
+PID:    , VID: N/A, SN: S1HW3119010050
+
+NAME: "module mau GigabitEthernet0/1/CPU0/2", DESCR: "Unknown pluggable optics"
+PID:    , VID: N/A, SN: S1HW3119010051
+
+NAME: "module mau GigabitEthernet0/1/CPU0/3", DESCR: "Unknown pluggable optics"
+PID:    , VID: N/A, SN: S1HW3119010050
+
+NAME: "module mau GigabitEthernet0/1/CPU0/4", DESCR: "Unknown pluggable optics"
+PID:    , VID: N/A, SN: S1HW3119010053
+
+NAME: "module mau GigabitEthernet0/1/CPU0/5", DESCR: "Unknown pluggable optics"
+PID:    , VID: N/A, SN: S1HW3119010050
+
+NAME: "module mau GigabitEthernet0/1/CPU0/6", DESCR: "Unknown pluggable optics"
+PID:    , VID: N/A, SN: S1HW3119010053
+
+NAME: "module mau GigabitEthernet0/1/CPU0/7", DESCR: "Unknown pluggable optics"
+PID:    , VID: N/A, SN: S1HW3119010050
+
+NAME: "module mau GigabitEthernet0/1/CPU0/8", DESCR: "Unknown pluggable optics"
+PID:    , VID: N/A, SN: S1HW3119010050
+
+NAME: "module mau GigabitEthernet0/1/CPU0/9", DESCR: "Unknown pluggable optics"
+PID:    , VID: N/A, SN: S1HW3119010050
+
+NAME: "module mau GigabitEthernet0/1/CPU0/10", DESCR: "Unknown pluggable optics"
+PID:    , VID: N/A, SN: S1HW3119010050
+
+NAME: "module mau GigabitEthernet0/1/CPU0/11", DESCR: "Unknown pluggable optics"
+PID:    , VID: N/A, SN: S1HW3119010050
+
+NAME: "module mau GigabitEthernet0/1/CPU0/14", DESCR: "Unknown or Unsupported SFP Module"
+PID: SFP-1G-10KM        , VID: V01 , SN: C202101291219 
+
+NAME: "module mau GigabitEthernet0/1/CPU0/15", DESCR: "Unknown or Unsupported SFP Module"
+PID: SFP-1G-10KM        , VID: V01 , SN: C202101291218 
+
+NAME: "module 0/2/CPU0", DESCR: "20-Port, 16x1GE_4xT Packet Transport Optimized LC"
+PID: A9K-4T16GE-TR, VID: V03, SN: FOC2140N0CA
+
+NAME: "module mau GigabitEthernet0/2/CPU0/0", DESCR: "Unknown or Unsupported SFP Module"
+PID: SFP-1G-10KM        , VID: V01 , SN: C202101291231 
+
+NAME: "module mau GigabitEthernet0/2/CPU0/1", DESCR: "Unknown or Unsupported SFP Module"
+PID: SFP-1G-10KM        , VID: V01 , SN: C202101291234 
+
+NAME: "module mau GigabitEthernet0/2/CPU0/2", DESCR: "Unknown or Unsupported SFP Module"
+PID: SFP-1G-10KM        , VID: V01 , SN: C202101291233 
+
+NAME: "module mau GigabitEthernet0/2/CPU0/3", DESCR: "Unknown or Unsupported SFP Module"
+PID: SFP-1G-10KM        , VID: V01 , SN: C202101291235 
+
+NAME: "module mau GigabitEthernet0/2/CPU0/4", DESCR: "Unknown or Unsupported SFP Module"
+PID: SFP-1G-10KM        , VID: V01 , SN: C202101291232 
+
+NAME: "module mau GigabitEthernet0/2/CPU0/5", DESCR: "Unknown or Unsupported SFP Module"
+PID: SFP-1G-10KM        , VID: V01 , SN: C202101291238 
+
+NAME: "module mau GigabitEthernet0/2/CPU0/6", DESCR: "Unknown or Unsupported SFP Module"
+PID: SFP-1G-10KM        , VID: V01 , SN: C202101291236 
+
+NAME: "module mau GigabitEthernet0/2/CPU0/7", DESCR: "Unknown or Unsupported SFP Module"
+PID: SFP-1G-10KM        , VID: V01 , SN: C202101291237 
+
+NAME: "module mau GigabitEthernet0/2/CPU0/8", DESCR: "Unknown or Unsupported SFP Module"
+PID: SFP-1G-10KM        , VID: V01 , SN: C202101291240 
+
+NAME: "module mau GigabitEthernet0/2/CPU0/9", DESCR: "Unknown or Unsupported SFP Module"
+PID: SFP-1G-10KM        , VID: V01 , SN: C202101291224 
+
+NAME: "module mau GigabitEthernet0/2/CPU0/10", DESCR: "Unknown or Unsupported SFP Module"
+PID: SFP-1G-10KM        , VID: V01 , SN: C202101291239 
+
+NAME: "module mau GigabitEthernet0/2/CPU0/11", DESCR: "Unknown or Unsupported SFP Module"
+PID: SFP-1G-10KM        , VID: V01 , SN: C202101291225 
+
+NAME: "power-module 0/PS0/M0/SP", DESCR: "2kW DC V2 Power Module"
+PID: PWR-2KW-DC-V2, VID: V03, SN: ART2132Y03T
+
+NAME: "power-module 0/PS0/M1/SP", DESCR: "2kW DC V2 Power Module"
+PID: PWR-2KW-DC-V2, VID: V03, SN: DTM202501KN
+
+NAME: "power-module 0/PS0/M2/SP", DESCR: "2kW DC V2 Power Module"
+PID: PWR-2KW-DC-V2, VID: V03, SN: ART2132Y049
+
+NAME: "chassis ASR-9006-DC-V2", DESCR: "ASR 9006 4 Line Card Slot Chassis with V2 DC PEM"
+PID: ASR-9006-DC-V2, VID: V02, SN: FOX2038G7GS
+
+RP/0/RSP1/CPU0:PE-ASR9006KGG02C#
+RP/0/RSP1/CPU0:PE-ASR9006KGG02C#

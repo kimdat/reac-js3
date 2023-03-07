@@ -1,0 +1,41 @@
+RP/0/RSP0/CPU0:DCGW_ASR9010CTO01C#show intvsdss
+
+
+
+THIETBI19#show inven asd
+Tue Feb 14 11:15:21.279 GMT-7
+NAME: "0/RSP0", DESCR: "ASR 1000 Route Switch Processor 5 for Packet Transport 24G"
+PID: A9K-RSP5-TR       , VID: V04, SN: FOC2519NJBL
+
+NAME: "0/RSP0", DESCR: "ASR 2000 Route Switch Processor 5 for Packet Transport 24G"
+PID: A9K-RSP5-TR       , VID: V04, SN: FOC2519NJBL
+
+
+
+THIETBI20#show inventory
+Tue Feb 14 11:15:21.279 GMT-7
+NAME: "0/RSP0", DESCR: "ASR 1000 Route Switch Processor 5 for Packet Transport 24G"
+PID: A9K-RSP5-TR       , VID: V04, SN: FOC2519NJBL
+
+NAME: "0/RSP0", DESCR: "ASR 2000 Route Switch Processor 5 for Packet Transport 24G"
+PID: A9K-RSP5-TR       , VID: V04, SN: FOC2519NJBL
+
+
+
+
+THIETBI21#show invent asd
+Tue Feb 14 11:15:21.279 GMT-7
+NAME: "0/RSP0", DESCR: "ASR 1000 Route Switch Processor 5 for Packet Transport 24G"
+PID: A9K-RSP5-TR       , VID: V04, SN: FOC2519NJBL
+
+NAME: "0/RSP0", DESCR: "ASR 2000 Route Switch Processor 5 for Packet Transport 24G"
+PID: A9K-RSP5-TR       , VID: V04, SN: FOC2519NJBL
+
+THIETBI214#show invenT
+Tue Feb 14 11:15:21.279 GMT-7
+NAME: "0/RSP0", DESCR: "ASR 1000 Route Switch Processor 5 for Packet Transport 24G"
+PID: A9K-RSP5-TR       , VID: V04, SN: FOC2519NJBL
+
+NAME: "0/RSP0", DESCR: "ASR 2000 Route Switch Processor 5 for Packet Transport 24G"
+PID: A9K-RSP5-TR       , VID: V04, SN: FOC2519NJBL
+

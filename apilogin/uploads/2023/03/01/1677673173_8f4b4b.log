@@ -1,0 +1,122 @@
+
+RP/0/RSP1/CPU0:PE_ASR9006LDG01C#admin show invent
+Tue Sep 20 10:02:37.342 UTC
+NAME: "module 0/RSP0/CPU0", DESCR: "ASR9K Route Switch Processor with 880G/slot Fabric and 16GB"
+PID: A9K-RSP880-TR, VID: V05, SN: FOC2141P2RJ
+
+NAME: "module 0/RSP1/CPU0", DESCR: "ASR9K Route Switch Processor with 880G/slot Fabric and 16GB"
+PID: A9K-RSP880-TR, VID: V05, SN: FOC2141P2RN
+
+NAME: "fantray 0/FT0/SP", DESCR: "ASR-9006 Fan Tray V2"
+PID: ASR-9006-FAN-V2, VID: V01, SN: FOC2141N9Y3
+
+NAME: "fan0 0/FT0/SP", DESCR: "ASR9K Generic Fan"
+PID:    , VID: N/A, SN: 
+
+NAME: "fan1 0/FT0/SP", DESCR: "ASR9K Generic Fan"
+PID:    , VID: N/A, SN: 
+
+NAME: "fan2 0/FT0/SP", DESCR: "ASR9K Generic Fan"
+PID:    , VID: N/A, SN: 
+
+NAME: "fan3 0/FT0/SP", DESCR: "ASR9K Generic Fan"
+PID:    , VID: N/A, SN: 
+
+NAME: "fan4 0/FT0/SP", DESCR: "ASR9K Generic Fan"
+PID:    , VID: N/A, SN: 
+
+NAME: "fan5 0/FT0/SP", DESCR: "ASR9K Generic Fan"
+PID:    , VID: N/A, SN: 
+
+NAME: "fantray 0/FT1/SP", DESCR: "ASR-9006 Fan Tray V2"
+PID: ASR-9006-FAN-V2, VID: V01, SN: FOC2141N9X1
+
+NAME: "fan0 0/FT1/SP", DESCR: "ASR9K Generic Fan"
+PID:    , VID: N/A, SN: 
+
+NAME: "fan1 0/FT1/SP", DESCR: "ASR9K Generic Fan"
+PID:    , VID: N/A, SN: 
+
+NAME: "fan2 0/FT1/SP", DESCR: "ASR9K Generic Fan"
+PID:    , VID: N/A, SN: 
+
+NAME: "fan3 0/FT1/SP", DESCR: "ASR9K Generic Fan"
+PID:    , VID: N/A, SN: 
+
+NAME: "fan4 0/FT1/SP", DESCR: "ASR9K Generic Fan"
+PID:    , VID: N/A, SN: 
+
+NAME: "fan5 0/FT1/SP", DESCR: "ASR9K Generic Fan"
+PID:    , VID: N/A, SN: 
+
+NAME: "module 0/0/CPU0", DESCR: "160G Modular Linecard, Packet Transport Optimized"
+PID: A9K-MOD160-TR, VID: V10, SN: FOC2123N1RE
+
+NAME: "module 0/0/0", DESCR: "ASR 9000 20-port 1GE Modular Port Adapter"
+PID: A9K-MPA-20X1GE, VID: V04, SN: FOC2036NG89
+
+NAME: "module mau 0/0/0/0", DESCR: "1000BASE-LX/LH SFP transceiver module, MMF/SMF, 1310nm, DOM"
+PID: GLC-LH-SMD          , VID: V01 , SN: CLS1909051716   
+
+NAME: "module mau 0/0/0/1", DESCR: "1000BASE-LX/LH SFP transceiver module, MMF/SMF, 1310nm, DOM"
+PID: GLC-LH-SMD          , VID: V01 , SN: CLS1909051460   
+
+NAME: "module mau 0/0/0/2", DESCR: "1000BASE-LX/LH SFP transceiver module, MMF/SMF, 1310nm, DOM"
+PID: GLC-LH-SMD          , VID: V01 , SN: CLS1909051451   
+
+NAME: "module mau 0/0/0/3", DESCR: ""
+PID:    , VID: N/A, SN: 092904100614    
+
+NAME: "module mau 0/0/0/4", DESCR: ""
+PID:    , VID: N/A, SN: 093604102135    
+
+NAME: "module mau 0/0/0/5", DESCR: ""
+PID:    , VID: N/A, SN: PGL199F         
+
+NAME: "module mau 0/0/0/6", DESCR: ""
+PID:    , VID: N/A, SN: PJ31GWV         
+
+NAME: "module 0/0/1", DESCR: "ASR 9000 8-port 10GE Modular Port Adapter"
+PID: A9K-MPA-8X10GE, VID: V03, SN: FOC2123NHVL
+
+NAME: "module mau 0/0/1/0", DESCR: ""
+PID:    , VID: 0599, SN: Z161804S1       
+
+NAME: "module mau 0/0/1/1", DESCR: ""
+PID:    , VID: N/A, SN: STHW31174400012 
+
+NAME: "module mau 0/0/1/2", DESCR: ""
+PID:    , VID: N/A, SN: STHW31174400056 
+
+NAME: "module mau 0/0/1/3", DESCR: ""
+PID:    , VID: N/A, SN: STHW31174400054 
+
+NAME: "module mau 0/0/1/4", DESCR: ""
+PID:    , VID: 0599, SN: Z161805G7       
+
+NAME: "module mau 0/0/1/5", DESCR: ""
+PID:    , VID: 0599, SN: Z161804RT       
+
+NAME: "module mau 0/0/1/6", DESCR: ""
+PID:    , VID: 0599, SN: Z16380N3A       
+
+NAME: "module mau 0/0/1/7", DESCR: ""
+PID:    , VID: 8170, SN: INGBO0654679    
+
+NAME: "power-module 0/PS0/M0/SP", DESCR: "2kW DC V2 Power Module"
+PID: PWR-2KW-DC-V2, VID: V03, SN: ART2136Y01R
+
+NAME: "power-module 0/PS0/M1/SP", DESCR: "2kW DC V2 Power Module"
+PID: PWR-2KW-DC-V2, VID: V03, SN: ART2136Y01C
+
+NAME: "power-module 0/PS0/M2/SP", DESCR: "2kW DC V2 Power Module"
+PID: PWR-2KW-DC-V2, VID: V03, SN: ART2136Y019
+
+NAME: "power-module 0/PS0/M3/SP", DESCR: "2kW DC V2 Power Module"
+PID: PWR-2KW-DC-V2, VID: V03, SN: ART2136Y01V
+
+NAME: "chassis ASR-9006-DC-V2", DESCR: "ASR 9006 4 Line Card Slot Chassis with V2 DC PEM"
+PID: ASR-9006-DC-V2, VID: V02, SN: FOX2139P860
+
+RP/0/RSP1/CPU0:PE_ASR9006LDG01C#
+RP/0/RSP1/CPU0:PE_ASR9006LDG01C#

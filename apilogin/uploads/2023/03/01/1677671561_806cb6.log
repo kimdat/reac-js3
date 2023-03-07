@@ -1,0 +1,179 @@
+
+RP/0/RSP1/CPU0:DCGW_ASR9006BPC02C#admin show invent
+Tue Sep 20 17:02:37.680 GMT
+NAME: "module 0/RSP0/CPU0", DESCR: "ASR9K Route Switch Processor with 880G/slot Fabric and 16GB"
+PID: A9K-RSP880-TR, VID: V05, SN: FOC2141P2TW
+
+NAME: "module 0/RSP1/CPU0", DESCR: "ASR9K Route Switch Processor with 880G/slot Fabric and 16GB"
+PID: A9K-RSP880-TR, VID: V05, SN: FOC2141P2NU
+
+NAME: "fantray 0/FT0/SP", DESCR: "ASR-9006 Fan Tray V2"
+PID: ASR-9006-FAN-V2, VID: V01, SN: FOC2141N9Z0
+
+NAME: "fan0 0/FT0/SP", DESCR: "ASR9K Generic Fan"
+PID: N/A, VID: N/A, SN: 
+
+NAME: "fan1 0/FT0/SP", DESCR: "ASR9K Generic Fan"
+PID: N/A, VID: N/A, SN: 
+
+NAME: "fan2 0/FT0/SP", DESCR: "ASR9K Generic Fan"
+PID: N/A, VID: N/A, SN: 
+
+NAME: "fan3 0/FT0/SP", DESCR: "ASR9K Generic Fan"
+PID: N/A, VID: N/A, SN: 
+
+NAME: "fan4 0/FT0/SP", DESCR: "ASR9K Generic Fan"
+PID: N/A, VID: N/A, SN: 
+
+NAME: "fan5 0/FT0/SP", DESCR: "ASR9K Generic Fan"
+PID: N/A, VID: N/A, SN: 
+
+NAME: "fantray 0/FT1/SP", DESCR: "ASR-9006 Fan Tray V2"
+PID: ASR-9006-FAN-V2, VID: V01, SN: FOC2141N9VR
+
+NAME: "fan0 0/FT1/SP", DESCR: "ASR9K Generic Fan"
+PID: N/A, VID: N/A, SN: 
+
+NAME: "fan1 0/FT1/SP", DESCR: "ASR9K Generic Fan"
+PID: N/A, VID: N/A, SN: 
+
+NAME: "fan2 0/FT1/SP", DESCR: "ASR9K Generic Fan"
+PID: N/A, VID: N/A, SN: 
+
+NAME: "fan3 0/FT1/SP", DESCR: "ASR9K Generic Fan"
+PID: N/A, VID: N/A, SN: 
+
+NAME: "fan4 0/FT1/SP", DESCR: "ASR9K Generic Fan"
+PID: N/A, VID: N/A, SN: 
+
+NAME: "fan5 0/FT1/SP", DESCR: "ASR9K Generic Fan"
+PID: N/A, VID: N/A, SN: 
+
+NAME: "module 0/0/CPU0", DESCR: "24X10G/1G Packet Transport Optimized LC"
+PID: A9K-24X10GE-1G-TR, VID: V04, SN: FOC2449N4E8
+
+NAME: "TenGigE0/0/0/0", DESCR: "Non-Cisco OEM SFP+ 10G Pluggable Optics Module"
+PID: TSPLXG40D, VID: B, SN: CI2110220048    
+
+NAME: "TenGigE0/0/0/1", DESCR: "Non-Cisco OEM SFP+ 10G Pluggable Optics Module"
+PID: TSPLXG10D, VID: 2., SN: CI2110220530    
+
+NAME: "TenGigE0/0/0/2", DESCR: "Non-Cisco OEM SFP+ 10G Pluggable Optics Module"
+PID: TSPLXG10D, VID: 2., SN: CI2110220490    
+
+NAME: "GigabitEthernet0/0/0/5", DESCR: "Non-Cisco OEM SFP 1G Pluggable Optics Module"
+PID: TSPL1G10D, VID: A, SN: CI2110300169    
+
+NAME: "GigabitEthernet0/0/0/7", DESCR: "Non-Cisco OEM SFP 1G Pluggable Optics Module"
+PID: TSPL1G10D, VID: N/A, SN: CI2010300493    
+
+NAME: "GigabitEthernet0/0/0/8", DESCR: "Non-Cisco OEM SFP 1G Pluggable Optics Module"
+PID: TSPL1G10D, VID: A, SN: CI2110300483    
+
+NAME: "GigabitEthernet0/0/0/9", DESCR: "Non-Cisco OEM SFP 1G Pluggable Optics Module"
+PID: TSPL1G10D, VID: A, SN: CI2110300482    
+
+NAME: "GigabitEthernet0/0/0/10", DESCR: "Non-Cisco OEM SFP 1G Pluggable Optics Module"
+PID: TSPL1G10D, VID: A, SN: CI2110300481    
+
+NAME: "GigabitEthernet0/0/0/11", DESCR: "Non-Cisco OEM SFP 1G Pluggable Optics Module"
+PID: TSPL1G10D, VID: A, SN: CI2110300487    
+
+NAME: "GigabitEthernet0/0/0/12", DESCR: "Non-Cisco OEM SFP 1G Pluggable Optics Module"
+PID: TSPL1G10D, VID: A, SN: CI2110300194    
+
+NAME: "GigabitEthernet0/0/0/13", DESCR: "Non-Cisco OEM SFP 1G Pluggable Optics Module"
+PID: TSPL1G10D, VID: A, SN: CI2110300192    
+
+NAME: "GigabitEthernet0/0/0/14", DESCR: "Non-Cisco OEM SFP 1G Pluggable Optics Module"
+PID: TSPL1G10D, VID: A, SN: CI2110300191    
+
+NAME: "GigabitEthernet0/0/0/15", DESCR: "Non-Cisco OEM SFP 1G Pluggable Optics Module"
+PID: TSPL1G10D, VID: A, SN: CI2110300196    
+
+NAME: "GigabitEthernet0/0/0/17", DESCR: "Non-Cisco OEM SFP 1G Pluggable Optics Module"
+PID: TSPL1G10D, VID: N/A, SN: CI2010300496    
+
+NAME: "GigabitEthernet0/0/0/18", DESCR: "Non-Cisco OEM SFP 1G Pluggable Optics Module"
+PID: TSPL1G10D, VID: N/A, SN: CI2010300494    
+
+NAME: "GigabitEthernet0/0/0/21", DESCR: "Non-Cisco OEM SFP 1G Pluggable Optics Module"
+PID: TSPL1G10D, VID: A, SN: CI2110300488    
+
+NAME: "GigabitEthernet0/0/0/22", DESCR: "Non-Cisco OEM SFP 1G Pluggable Optics Module"
+PID: TSPL1G10D, VID: A, SN: CI2110300197    
+
+NAME: "GigabitEthernet0/0/0/23", DESCR: "Non-Cisco OEM SFP 1G Pluggable Optics Module"
+PID: TSPL1G10D, VID: A, SN: CI2110300486    
+
+NAME: "module 0/3/CPU0", DESCR: "24X10G/1G Packet Transport Optimized LC"
+PID: A9K-24X10GE-1G-TR, VID: V04, SN: FOC2449P5EM
+
+NAME: "TenGigE0/3/0/0", DESCR: "Non-Cisco OEM SFP+ 10G Pluggable Optics Module"
+PID: TSPLXG10D, VID: 2., SN: CI2110220489    
+
+NAME: "TenGigE0/3/0/1", DESCR: "Non-Cisco OEM SFP+ 10G Pluggable Optics Module"
+PID: TSPLXG10D, VID: 2., SN: CI2110220522    
+
+NAME: "GigabitEthernet0/3/0/6", DESCR: "Non-Cisco ModuleTek SFP 1G Pluggable Optics Module"
+PID: GLC-LH-SMD, VID: v3, SN: 1GLR20054993    
+
+NAME: "GigabitEthernet0/3/0/7", DESCR: "Non-Cisco OEM SFP 1G Pluggable Optics Module"
+PID: TSPL1G10D, VID: N/A, SN: CI2010300495    
+
+NAME: "GigabitEthernet0/3/0/8", DESCR: "Non-Cisco OEM SFP 1G Pluggable Optics Module"
+PID: TSPL1G10D, VID: A, SN: CI2110300484    
+
+NAME: "GigabitEthernet0/3/0/9", DESCR: "Non-Cisco OEM SFP 1G Pluggable Optics Module"
+PID: TSPL1G10D, VID: A, SN: CI2110300485    
+
+NAME: "GigabitEthernet0/3/0/10", DESCR: "Non-Cisco OEM SFP 1G Pluggable Optics Module"
+PID: TSPL1G10D, VID: A, SN: CI2110300489    
+
+NAME: "GigabitEthernet0/3/0/11", DESCR: "Non-Cisco OEM SFP 1G Pluggable Optics Module"
+PID: TSPL1G10D, VID: A, SN: CI2110300490    
+
+NAME: "GigabitEthernet0/3/0/12", DESCR: "Non-Cisco OEM SFP 1G Pluggable Optics Module"
+PID: TSPL1G10D, VID: A, SN: CI2110300195    
+
+NAME: "GigabitEthernet0/3/0/13", DESCR: "Non-Cisco OEM SFP 1G Pluggable Optics Module"
+PID: TSPL1G10D, VID: A, SN: CI2110300193    
+
+NAME: "GigabitEthernet0/3/0/14", DESCR: "Non-Cisco OEM SFP 1G Pluggable Optics Module"
+PID: TSPL1G10D, VID: A, SN: CI2110300198    
+
+NAME: "GigabitEthernet0/3/0/15", DESCR: "Non-Cisco OEM SFP 1G Pluggable Optics Module"
+PID: TSPL1G10D, VID: A, SN: CI2110300199    
+
+NAME: "GigabitEthernet0/3/0/17", DESCR: "Non-Cisco OEM SFP 1G Pluggable Optics Module"
+PID: TSPL1G10D, VID: N/A, SN: CI2010300491    
+
+NAME: "GigabitEthernet0/3/0/18", DESCR: "Non-Cisco OEM SFP 1G Pluggable Optics Module"
+PID: TSPL1G10D, VID: N/A, SN: CI2010300497    
+
+NAME: "GigabitEthernet0/3/0/21", DESCR: "Non-Cisco OEM SFP 1G Pluggable Optics Module"
+PID: TSPL1G10D, VID: N/A, SN: CI2010300498    
+
+NAME: "GigabitEthernet0/3/0/22", DESCR: "Non-Cisco OEM SFP 1G Pluggable Optics Module"
+PID: TSPL1G10D, VID: N/A, SN: CI2010300500    
+
+NAME: "GigabitEthernet0/3/0/23", DESCR: "Non-Cisco OEM SFP 1G Pluggable Optics Module"
+PID: TSPL1G10D, VID: A, SN: CI2110300200    
+
+NAME: "power-module 0/PS0/M0/SP", DESCR: "2kW DC V2 Power Module"
+PID: PWR-2KW-DC-V2, VID: V03, SN: ART2133Y01S
+
+NAME: "power-module 0/PS0/M1/SP", DESCR: "2kW DC V2 Power Module"
+PID: PWR-2KW-DC-V2, VID: V03, SN: ART2136Y043
+
+NAME: "power-module 0/PS0/M2/SP", DESCR: "2kW DC V2 Power Module"
+PID: PWR-2KW-DC-V2, VID: V03, SN: ART2436Y01R
+
+NAME: "power-module 0/PS0/M3/SP", DESCR: "2kW DC V2 Power Module"
+PID: PWR-2KW-DC-V2, VID: V03, SN: ART2432Y015
+
+NAME: "chassis ASR-9006-DC-V2", DESCR: "ASR 9006 4 Line Card Slot Chassis with V2 DC PEM"
+PID: ASR-9006-DC-V2, VID: V02, SN: FOX2142P0F3
+
+RP/0/RSP1/CPU0:DCGW_ASR9006BPC02C#
+RP/0/RSP1/CPU0:DCGW_ASR9006BPC02C#

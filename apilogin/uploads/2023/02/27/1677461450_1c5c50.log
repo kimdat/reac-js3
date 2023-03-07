@@ -1,0 +1,11 @@
+RP/0/RSP0/CPU0:DCGW_ASR9010CTO01C#show intvsdss
+
+
+RP/0/RSP0/CPU0:DCGW_ASR901s0CTO0126C#show inventor
+Tue Feb 14 11:15:21.279 GMT-7
+NAME: "0/RSP0", DESCR: "ASR 1000 Route Switch Processor 5 for Packet Transport 24G"
+PID: A9K-RSP5-TR       , VID: V04, SN: FOC2519NJBL
+
+
+
+

@@ -1,0 +1,107 @@
+
+RP/0/RSP1/CPU0:PE_ASR9006NTN02C#admin show invent
+Tue Sep 20 17:02:37.238 GMT
+NAME: "module 0/RSP0/CPU0", DESCR: "ASR9K Route Switch Processor with 440G/slot Fabric and 6GB"
+PID: A9K-RSP440-TR, VID: V08, SN: FOC1949NCSY
+
+NAME: "module 0/RSP1/CPU0", DESCR: "ASR9K Route Switch Processor with 440G/slot Fabric and 6GB"
+PID: A9K-RSP440-TR, VID: V08, SN: FOC1949NCT8
+
+NAME: "fantray 0/FT0/SP", DESCR: "ASR-9006 Fan Tray V2"
+PID: ASR-9006-FAN-V2, VID: V01, SN: FOC1952N7CK
+
+NAME: "fan0 0/FT0/SP", DESCR: "ASR9K Generic Fan"
+PID:    , VID: N/A, SN: 
+
+NAME: "fan1 0/FT0/SP", DESCR: "ASR9K Generic Fan"
+PID:    , VID: N/A, SN: 
+
+NAME: "fan2 0/FT0/SP", DESCR: "ASR9K Generic Fan"
+PID:    , VID: N/A, SN: 
+
+NAME: "fan3 0/FT0/SP", DESCR: "ASR9K Generic Fan"
+PID:    , VID: N/A, SN: 
+
+NAME: "fan4 0/FT0/SP", DESCR: "ASR9K Generic Fan"
+PID:    , VID: N/A, SN: 
+
+NAME: "fan5 0/FT0/SP", DESCR: "ASR9K Generic Fan"
+PID:    , VID: N/A, SN: 
+
+NAME: "fantray 0/FT1/SP", DESCR: "ASR-9006 Fan Tray V2"
+PID: ASR-9006-FAN-V2, VID: V01, SN: FOC1952N7CJ
+
+NAME: "fan0 0/FT1/SP", DESCR: "ASR9K Generic Fan"
+PID:    , VID: N/A, SN: 
+
+NAME: "fan1 0/FT1/SP", DESCR: "ASR9K Generic Fan"
+PID:    , VID: N/A, SN: 
+
+NAME: "fan2 0/FT1/SP", DESCR: "ASR9K Generic Fan"
+PID:    , VID: N/A, SN: 
+
+NAME: "fan3 0/FT1/SP", DESCR: "ASR9K Generic Fan"
+PID:    , VID: N/A, SN: 
+
+NAME: "fan4 0/FT1/SP", DESCR: "ASR9K Generic Fan"
+PID:    , VID: N/A, SN: 
+
+NAME: "fan5 0/FT1/SP", DESCR: "ASR9K Generic Fan"
+PID:    , VID: N/A, SN: 
+
+NAME: "module 0/2/CPU0", DESCR: "20-Port, 16x1GE_4xT Packet Transport Optimized LC"
+PID: A9K-4T16GE-TR, VID: V02, SN: FOC2036NFV8
+
+NAME: "module mau GigabitEthernet0/2/CPU0/0", DESCR: "Unknown pluggable optics"
+PID:    , VID: N/A, SN: WX18031510178 
+
+NAME: "module mau GigabitEthernet0/2/CPU0/1", DESCR: "Unknown pluggable optics"
+PID:    , VID: N/A, SN: WX18031511029 
+
+NAME: "module mau GigabitEthernet0/2/CPU0/2", DESCR: "Unknown pluggable optics"
+PID:    , VID: N/A, SN: S1AP3118160024
+
+NAME: "module mau GigabitEthernet0/2/CPU0/3", DESCR: "1000BASE-LX/LH SFP transceiver module, MMF/SMF, 1310nm, DOM"
+PID: GLC-LH-SMD         , VID: V01 , SN: CLS1909051465 
+
+NAME: "module mau GigabitEthernet0/2/CPU0/4", DESCR: "Unknown pluggable optics"
+PID:    , VID: N/A, SN: WX18031511206 
+
+NAME: "module mau GigabitEthernet0/2/CPU0/5", DESCR: "Unknown pluggable optics"
+PID:    , VID: N/A, SN: WX18031510546 
+
+NAME: "module mau GigabitEthernet0/2/CPU0/6", DESCR: "1000BASE-LX/LH SFP transceiver module, MMF/SMF, 1310nm, DOM"
+PID: GLC-LH-SMD         , VID: V01 , SN: CLS1909051477 
+
+NAME: "module mau GigabitEthernet0/2/CPU0/7", DESCR: "Unknown pluggable optics"
+PID:    , VID: N/A, SN: WX17121203248 
+
+NAME: "module mau GigabitEthernet0/2/CPU0/8", DESCR: "Unknown pluggable optics"
+PID:    , VID: N/A, SN: WX18031511469 
+
+NAME: "module mau GigabitEthernet0/2/CPU0/10", DESCR: "Unknown pluggable optics"
+PID:    , VID: N/A, SN: MA18451531689 
+
+NAME: "module mau GigabitEthernet0/2/CPU0/11", DESCR: "1000BASE-LX/LH SFP transceiver module, MMF/SMF, 1310nm, DOM"
+PID: GLC-LH-SMD         , VID: V01 , SN: FC1907284998  
+
+NAME: "module mau GigabitEthernet0/2/CPU0/12", DESCR: "1000BASE-LX/LH SFP transceiver module, MMF/SMF, 1310nm, DOM"
+PID: GLC-LH-SMD         , VID: V01 , SN: FC1907282377  
+
+NAME: "module mau GigabitEthernet0/2/CPU0/13", DESCR: "1000BASE-LX/LH SFP transceiver module, MMF/SMF, 1310nm, DOM"
+PID: GLC-LH-SMD         , VID: V01 , SN: FC1907282374  
+
+NAME: "module mau GigabitEthernet0/2/CPU0/15", DESCR: "Unknown pluggable optics"
+PID:    , VID: N/A, SN: WX18031511586 
+
+NAME: "power-module 0/PM0/0/SP", DESCR: "2kW DC V2 Power Module"
+PID: PWR-2KW-DC-V2, VID: V03, SN: ART1950Y006
+
+NAME: "power-module 0/PM0/1/SP", DESCR: "2kW DC V2 Power Module"
+PID: PWR-2KW-DC-V2, VID: V03, SN: ART1949Y0DV
+
+NAME: "chassis ASR-9006-DC-V2", DESCR: "ASR 9006 4 Line Card Slot Chassis with V2 DC PEM"
+PID: ASR-9006-DC-V2, VID: V02, SN: FOX1952G3CQ
+
+RP/0/RSP1/CPU0:PE_ASR9006NTN02C#
+RP/0/RSP1/CPU0:PE_ASR9006NTN02C#

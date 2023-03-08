@@ -7,28 +7,23 @@ function insertDataUpload()
 {
     global $conn;
     try {
-
         $fileuploadContents = $_POST['fileUploadContents'];
-        $pathArray = [];
-        $pathArray = json_decode($_POST['pathArray']);
-
         $duplicateDeviesName = [];
         $file_err = [];
-        //Số lượng phần tử trong fileuploadContens tương ứng file_content
+        //Nội dung file upload
         $file_content = json_decode($fileuploadContents);
+        //kiểm tra xem có update thiết bị trùng
         if (isset($_POST['duplicateDevicesName'])) {
             $duplicateDeviesName = json_decode($_POST['duplicateDevicesName']);
         }
-
-
-        $arrIndexesSuccess = json_decode($_POST['arrIndexesSuccess']); // Chuyển đổi sang mảng
-
-
+        //Mess khi upload file
+        $messUpload = json_decode($_POST['messUpload']); // Chuyển đổi sang mảng
         for ($i = 0; $i < sizeof($file_content); $i++) {
-            //nếu như errorFileIndex lỗi
             try {
-                if (!in_array($i, $arrIndexesSuccess)) {
-                    throw new Error("Loi khi uploadfile at $i ");
+                //nếu phần tử upload file đó bị lỗi
+                if (isset($messUpload[$i]->Error)) {
+                    throw new Error(("Error from fileupload.php." . $messUpload[$i]->Error));
+                    // throw new Error(json_encode((array("Error" => $messUpload[$i]->Error, "ErrorShow" => "Error uploadFile at i"))));
                 }
                 $conn->beginTransaction();
                 if (isset($duplicateDeviesName->$i)) {
@@ -37,12 +32,20 @@ function insertDataUpload()
                 insertData($conn, $file_content[$i]);
                 $conn->commit();
             } catch (Error $th) {
-                $file_err[] = catchInserData($conn, $pathArray[$i], $th, $i);
+                //Đường dẫn cần xóa khi insert lỗi
+                $pathArrayToDelete = "";
+                if (isset($messUpload[$i]->path)) {
+                    $pathArrayToDelete = $messUpload[$i]->path;
+                }
+                $file_err[] = catchInserData($conn, $pathArrayToDelete, $th, $i);
             } catch (Exception $th) {
-                $file_err[] = catchInserData($conn, $pathArray[$i], $th, $i);
+                $pathArrayToDelete = "";
+                if (isset($messUpload[$i]->path)) {
+                    $pathArrayToDelete = $messUpload[$i]->path;
+                }
+                $file_err[] = catchInserData($conn, $pathArrayToDelete, $th, $i);
             }
         }
-
         if (sizeof($file_err) != 0)
             return json_encode(array("Error" => $file_err));
         return "";
@@ -52,13 +55,13 @@ function insertDataUpload()
     }
 }
 
-function catchInserData($conn, $pathArray, $th, $i)
+function catchInserData($conn, $pathArrayToDelete, $th, $i)
 {
     if ($conn->inTransaction()) {
         $conn->rollBack();
     }
-    if (isset($pathArray->path)) {
-        deleteFile($pathArray->path);
+    if (isset($pathArrayToDelete)) {
+        deleteFile($pathArrayToDelete);
     }
     return array("ErrorMess" => $th->getMessage(), "FileErrorIndex" => $i);
 }
@@ -89,7 +92,6 @@ function deleteFile($pathToDelete)
 }
 function insertData($conn, $file_content)
 {
-
     try {
         $currentFile = basename(__FILE__);
         $currentFunction = __FUNCTION__;
@@ -97,14 +99,19 @@ function insertData($conn, $file_content)
         $deviceNames = $file_content->deviceNames;
         //Số lượng deviceNames tương ứng với số lượng devicsDatas và mỗi phần tử trong devicedatas lưu mảng data thiết bị con
         for ($j = 0; $j < sizeof($deviceNames); $j++) {
+
+            $timestamp = time();
+            $random_string = uniqid('rd', true);
+            $device_id = $timestamp . $random_string;
             $deviceName = $deviceNames[$j];
             $deviceData = $deviceDatas[$j];
             //insert cha
-            $sqlParent = "INSERT INTO " . TABLE_DEVICES . " (" . COLUMN_Devices_NAME . ") VALUES (?)";
+            $sqlParent = "INSERT INTO " . TABLE_DEVICES . " (" . COLUMN_Devices_NAME . "," . COLUMN_Devices_ID . ") VALUES (?,?)";
             $stmtParent = $conn->prepare($sqlParent);
             $stmtParent->bindParam(1, $deviceName);
+            $stmtParent->bindParam(2, $device_id);
             $stmtParent->execute();
-            $device_id = $conn->lastInsertId();
+            //$device_id = $conn->lastInsertId();
             // Chuyển đổi mảng JSON thành mảng PHP
             $values = array();
             foreach ($deviceData as $item) {
@@ -133,10 +140,10 @@ function insertData($conn, $file_content)
             $stmt->execute($values_flat);
         }
     } catch (PDOException $e) {
-        throw new Error("Error $currentFunction in $currentFile " . $e->getMessage());
+        throw new Error("Error $currentFunction in $currentFile ." . $e->getMessage());
     } catch (Error $e) {
-        throw new Error("Error $currentFunction in $currentFile " . $e->getMessage());
+        throw new Error("Error $currentFunction in $currentFile ." . $e->getMessage());
     } catch (Exception $e) {
-        throw new Error("Error $currentFunction in $currentFile " . $e->getMessage());
+        throw new Error("Error $currentFunction in $currentFile ." . $e->getMessage());
     }
 }

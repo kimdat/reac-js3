@@ -9,6 +9,7 @@ function sqlGetData($valueSearch, $valueColumn,)
         $where2 = "1=1";
         $params = [];
         if ($valueSearch != "") {
+            $valueSearch = trim($valueSearch);
             $where1 .= ' AND (Devices.' . COLUMN_Devices_NAME . '  LIKE :valueSearch or inventories.'
                 . COLUMN_INVENTORIES_NAME . ' LIKE  :valueSearch OR inventories.'
                 . COLUMN_INVENTORIES_PID . ' LIKE :valueSearch  OR inventories.'
@@ -18,6 +19,7 @@ function sqlGetData($valueSearch, $valueColumn,)
             $params = [':valueSearch' => '%' . $valueSearch . '%'];
         }
         foreach ($valueColumn as $column => $value) {
+            $value = trim($value);
             if (!empty($value)) {
                 //nếu column là name thì map devices name hoặc inventories name
                 if ($column == "Name") {
@@ -80,7 +82,8 @@ function sqlGetData($valueSearch, $valueColumn,)
     }
 }
 
-function getData($inventories, $flagShowChild, $currentPage, $rowsPerPage)
+function getData($inventories, $flagShowChild, $c
+                 urrentPage, $rowsPerPage)
 {
     $currentFunction = __FUNCTION__;
     if (sizeof($inventories) == 0) {

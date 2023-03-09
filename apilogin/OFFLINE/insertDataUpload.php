@@ -1,8 +1,5 @@
 <?php
 
-
-$path = 'uploads/';
-
 namespace Offline;
 
 use Error;

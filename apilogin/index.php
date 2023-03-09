@@ -2,35 +2,18 @@
 
 require __DIR__ . '/vendor/autoload.php';
 
-
-
-
-
-
-
-
 use Slim\Psr7\Response;
 use Slim\Psr7\Request;
 use Slim\Factory\AppFactory;
 
 try {
-
     include 'DbConnect.php';
     include 'config.php';
-    include 'OFFILE/getAllId.php';
-    include 'OFFILE/exportFileExcel.php';
-    include 'OFFILE/login.php';
+    include 'bootstrap.php';
     include 'middleware.php';
-    include 'OFFILE/insertDataUpload.php';
-    include 'OFFILE/devices.php';
-    include 'OFFILE/childDevice.php';
-    include 'OFFILE/getexpandall.php';
-    include 'OFFILE/filterData.php';
-    include 'OFFILE/deleteRow.php';
-    include 'OFFILE/getDataTrung.php';
-    include 'OFFILE/fileupload.php';
     header('Access-Control-Allow-Origin: *');
     header('Access-Control-Allow-Headers: *');
+    $app = AppFactory::create();
     $app = AppFactory::create();
     $app->setBasePath(BASE_PATH);
     $app->addBodyParsingMiddleware();
@@ -47,22 +30,33 @@ try {
         $response->getBody()->write(json_encode($responseErr));
         return $response->withStatus(500)->withHeader('Content-Type', 'application/json');
     }
+
+    //offline
     $app->post('/login', function (Request $request, Response $response, array $args) use ($app) {
         try {
 
-            $loginResponse = login();
-            return writeSucces(json_encode($loginResponse));
+            $login = new Offline\login;
+            return writeSucces(json_encode($login->login()));
         } catch (Error $e) {
             return writeErr($e);
         }
     })->add('checkToken');
 
 
+    //online
+    $app->get('/createOnline', function (Request $request, Response $response, $args) {
+        // sử dụng class Offline\Login
+        $login = new Online\createOnline;
+        $login->createOnline();
+        // ...
+        return $response;
+    })->add('checkToken');
+    //get taất cả devices
     $app->get('/devices', function (Request $request, Response $response, array $args) use ($app) {
         try {
 
-            $devices = getAllDevices();
-            return writeSucces($devices);
+            $devices = new Offline\devices;
+            return writeSucces($devices->getAllDevices());
         } catch (Error $e) {
             return writeErr($e);
         }
@@ -70,8 +64,8 @@ try {
     $app->get('/childDevice', function (Request $request, Response $response, array $args) use ($app) {
         try {
 
-            $childDevice = getChildDevice();
-            return writeSucces($childDevice);
+            $childDevice = new Offline\childDevice;
+            return writeSucces($childDevice->getChildDevice());
         } catch (Error $e) {
             return writeErr($e);
         }
@@ -79,8 +73,8 @@ try {
     $app->post('/expandAll', function (Request $request, Response $response, array $args) use ($app) {
         try {
 
-            $getExpandAll = getExpandAll();
-            return writeSucces($getExpandAll);
+            $getExpandAll = new Offline\getexpandall;
+            return writeSucces($getExpandAll->getExpandAll());
         } catch (Error $e) {
             return writeErr($e);
         }
@@ -88,8 +82,8 @@ try {
     $app->get('/deleteRow', function (Request $request, Response $response, array $args) use ($app) {
         try {
 
-            $deleteRow = deleteRow();
-            return writeSucces($deleteRow);
+            $deleteRow = new Offline\deleteRow;
+            return writeSucces($deleteRow->deleteRow());
         } catch (Error $e) {
             return writeErr($e);
         }
@@ -97,16 +91,16 @@ try {
     $app->get('/filterData', function (Request $request, Response $response, array $args) use ($app) {
         try {
 
-            $filterData = filterData();
-            return writeSucces($filterData);
+            $filterData = new Offline\filterData;
+            return writeSucces($filterData->filterData());
         } catch (Error $e) {
             return writeErr($e);
         }
     })->add('checkToken');
     $app->post('/exportFileExcel', function (Request $request, Response $response, array $args) use ($app) {
         try {
-            $downloadFileExcel = downExcel();
-            return $downloadFileExcel;
+            $downloadFileExcel = new Offline\exportFileExcel();
+            return $downloadFileExcel->downExcel();
         } catch (Error $e) {
             $response = new Response();
             $response->getBody()->write(json_encode(['error' => $e->getMessage()]));
@@ -115,16 +109,16 @@ try {
     })->add('checkToken');
     $app->post('/getDataTrung', function (Request $request, Response $response, array $args) use ($app) {
         try {
-            $getDataTrung = getDataTrung();
-            return writeSucces($getDataTrung);
+            $getDataTrung = new Offline\getDataTrung();
+            return writeSucces($getDataTrung->getDataTrung());
         } catch (Error $e) {
             return writeErr($e);
         }
     })->add('checkToken');
     $app->post('/fileupload', function (Request $request, Response $response, array $args) use ($app) {
         try {
-            $fileupload = fileupload();
-            return writeSucces($fileupload);
+            $fileupload = new Offline\fileupload();
+            return writeSucces($fileupload->fileUpload());
         } catch (Error $e) {
             return writeErr($e);
         }
@@ -132,17 +126,8 @@ try {
 
     $app->post('/insertDataUpload', function (Request $request, Response $response, array $args) use ($app) {
         try {
-            $insertDataUpload = insertDataUpload();
-            return writeSucces($insertDataUpload);
-        } catch (Error $e) {
-            return writeErr($e);
-        }
-    })->add('checkToken');
-
-    $app->get('/getAllId', function (Request $request, Response $response, array $args) use ($app) {
-        try {
-            $getAllId = getAllId();
-            return writeSucces($getAllId);
+            $insertDataUpload = new Offline\insertDataUpload();
+            return writeSucces($insertDataUpload->insertDataUpload());
         } catch (Error $e) {
             return writeErr($e);
         }

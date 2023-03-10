@@ -88,18 +88,18 @@ class createOnline
     function insertParentOnline($conn, $deviceName, $ip, $status)
     {
         try {
-
+            global $devicesDefine;
             $currentFile = basename(__FILE__);
             $currentFunction = __FUNCTION__;
             $timestamp = time();
             $random_string = uniqid('rd', true);
             $device_id = $timestamp . $random_string;
 
-            $sqlParent = "INSERT INTO " . TABLE_DEVICES_ONLINE
-                . " (" . COLUMN_DEVICES_ONLINE_NAME
-                . "," . COLUMN_DEVICES_ONLINE_IP
-                . "," . COLUMN_DEVICES_ONLINE_ID
-                . "," . COLUMN_DEVICES_ONLINE_STATUS
+            $sqlParent = "INSERT INTO " .  $devicesDefine::TABLE_DEVICES
+                . " (" . $devicesDefine::COLUMN_DEVICES_NAME
+                . "," .  $devicesDefine::COLUMN_DEVICES_IP
+                . "," . $devicesDefine::COLUMN_DEVICES_ID
+                . "," . $devicesDefine::COLUMN_DEVICES_STATUS
                 . ") VALUES (?,?,?,?)";
             $stmtParent = $conn->prepare($sqlParent);
             $stmtParent->bindParam(1, $deviceName);
@@ -121,7 +121,7 @@ class createOnline
     {
         $currentFile = basename(__FILE__);
         $currentFunction = __FUNCTION__;
-
+        global $inventoriesDefine;
         try {
 
             $currentFile = basename(__FILE__);
@@ -143,12 +143,13 @@ class createOnline
             foreach ($values as $row) {
                 $values_flat = array_merge($values_flat, array_values($row));
             }
-            $sql = "INSERT INTO " . TABLE_INVENTORIES_ONLINE . " (" . COLUMN_INVENTORIES_ONLINE_NAME . ", "
-                . COLUMN_INVENTORIES_ONLINE_CDESC . ","
-                . COLUMN_INVENTORIES_ONLINE_PID . ","
-                . COLUMN_INVENTORIES_ONLINE_VID . ","
-                . COLUMN_INVENTORIES_ONLINE_SERIAL . ","
-                . COLUMN_INVENTORIES_ONLINE_PARENTID .
+            $sql = "INSERT INTO " . $inventoriesDefine::TABLE_INVENTORIES . " ("
+                . $inventoriesDefine::COLUMN_INVENTORIES_NAME . ", "
+                . $inventoriesDefine::COLUMN_INVENTORIES_CDESC . ","
+                . $inventoriesDefine::COLUMN_INVENTORIES_PID . ","
+                . $inventoriesDefine::COLUMN_INVENTORIES_VID . ","
+                . $inventoriesDefine::COLUMN_INVENTORIES_SERIAL . ","
+                . $inventoriesDefine::COLUMN_INVENTORIES_PARENTID .
                 ") VALUES " . implode(',', $placeholders);
             $stmt = $conn->prepare($sql);
             $stmt->execute($values_flat);
@@ -185,8 +186,11 @@ class createOnline
     {
 
         $currentFunction = __FUNCTION__;
+        global $devicesDefine;
         try {
-            $sql = "UPDATE " . TABLE_DEVICES_ONLINE . " SET " . COLUMN_DEVICES_ONLINE_STATUS . " = '0' WHERE " . COLUMN_DEVICES_ONLINE_ID . "=:id";
+            $sql = "UPDATE " . $devicesDefine::TABLE_DEVICES . " SET " .
+                $devicesDefine::COLUMN_DEVICES_STATUS . " = '0' WHERE "
+                .   $devicesDefine::COLUMN_DEVICES_ID . "=:id";
             $stmt = $conn->prepare($sql);
             $stmt->bindParam(':id', $device_id);
             $stmt->execute();

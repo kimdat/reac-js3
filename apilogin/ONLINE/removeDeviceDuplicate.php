@@ -11,10 +11,14 @@ class  removeDeviceDuplicate
     //xóa 1 ip
     function removeDeviceDuplicate($conn, $device_ip)
     {
+        global $devicesDefine;
         $currentFile = basename(__FILE__);
         $currentFunction = __FUNCTION__;
         try {
-            $sql = "UPDATE " . TABLE_DEVICES_ONLINE . " SET " . COLUMN_DEVICES_ONLINE_STATUS . " = 'D', " . COLUMN_DEVICES_ONLINE_TIME_DELETED . " = NOW() WHERE STATUS <>'D' AND " . COLUMN_DEVICES_ONLINE_IP . "=:ip";
+            $sql = "UPDATE " . $devicesDefine::TABLE_DEVICES . " SET "
+                . $devicesDefine::COLUMN_DEVICES_STATUS . " = 'D', "
+                . $devicesDefine::COLUMN_DEVICES_TIME_DELETED . " = NOW() WHERE STATUS <>'D' AND "
+                . $devicesDefine::COLUMN_DEVICES_IP . "=:ip";
             $stmt = $conn->prepare($sql);
             $stmt->bindParam(':ip', $device_ip);
             $stmt->execute();
@@ -29,13 +33,15 @@ class  removeDeviceDuplicate
     //xoá array ip
     function removeDeviceDuplicateArr($conn, $devices_ip)
     {
+        global $devicesDefine;
         $currentFile = basename(__FILE__);
         $currentFunction = __FUNCTION__;
         try {
             $placeholders = implode(',', array_fill(0, count($devices_ip), '?'));
-            $sql = "UPDATE " . TABLE_DEVICES_ONLINE . " SET " . COLUMN_DEVICES_ONLINE_STATUS
-                . " = 'D', " . COLUMN_DEVICES_ONLINE_TIME_DELETED
-                . " = NOW() WHERE STATUS <>'D' AND " . COLUMN_DEVICES_ONLINE_IP . " IN ($placeholders)";
+            $sql = "UPDATE " . $devicesDefine::TABLE_DEVICES . " SET "
+                . $devicesDefine::COLUMN_DEVICES_STATUS . " = 'D', "
+                . $devicesDefine::COLUMN_DEVICES_TIME_DELETED . " = NOW() WHERE STATUS <>'D' AND "
+                . $devicesDefine::COLUMN_DEVICES_IP  . " IN ($placeholders)";
             $stmt = $conn->prepare($sql);
 
             $stmt->execute($devices_ip);

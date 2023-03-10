@@ -11,16 +11,17 @@ class getDataTrung
     function checkDataTrung($conn, $parentNames)
     {
 
+        global $devicesDefine;
         $currentFunction = __FUNCTION__;
         try {
 
             $parentNames = array_unique(array_merge(...$parentNames));
+            $sqlCheckParents = "SELECT " . $devicesDefine::COLUMN_DEVICES_NAME
 
-
-            $sqlCheckParents = "SELECT " . COLUMN_Devices_NAME . " FROM " . TABLE_DEVICES . " WHERE " . COLUMN_STATUS . " <> 'D'AND " . COLUMN_Devices_NAME . " IN (" . implode(",", array_fill(0, count($parentNames), "?")) . ")";
+                . " FROM " . $devicesDefine::TABLE_DEVICES . " WHERE " . $devicesDefine::COLUMN_DEVICES_STATUS . " <> 'D
+                'AND " . $devicesDefine::COLUMN_DEVICES_NAME . " IN (" . implode(",", array_fill(0, count($parentNames), "?")) . ")";
             $stmtCheckParents = $conn->prepare($sqlCheckParents);
             $stmtCheckParents->execute($parentNames);
-
             if ($stmtCheckParents->rowCount() > 0) {
                 return array_column($stmtCheckParents->fetchAll(), 'Name');
             }

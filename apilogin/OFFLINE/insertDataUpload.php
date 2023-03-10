@@ -6,6 +6,7 @@ use Error;
 use Exception;
 use PDOException;
 
+
 class insertDataUpload
 {
     function insertDataUpload()
@@ -75,11 +76,15 @@ class insertDataUpload
     function updateDataTrung($conn, $duplicateDeviesName)
     {
         try {
+            global $devicesDefine;
             $currentFunction = __FUNCTION__;
-            global $currentFile;
+            $currentFile = basename(__FILE__);
             $placeholders = implode(',', array_fill(0, count($duplicateDeviesName), '?'));
             //  $placeholders = rtrim(str_repeat('?,', count($duplicaeDeviesName)), ',');
-            $sql = "UPDATE " . TABLE_DEVICES . " SET " . COLUMN_STATUS . " = 'D', " . COLUMN_DEVICES_TIME_DELETE . " = NOW() WHERE STATUS <>'D' AND " . COLUMN_Devices_NAME . " IN ($placeholders)";
+            $sql = "UPDATE " . $devicesDefine::TABLE_DEVICES . " SET "
+                . $devicesDefine::COLUMN_DEVICES_STATUS . " = 'D', 
+            " . $devicesDefine::COLUMN_DEVICES_TIME_DELETED . " = NOW() 
+            WHERE STATUS <>'D' AND " . $devicesDefine::COLUMN_DEVICES_NAME . " IN ($placeholders)";
             $stmt = $conn->prepare($sql);
             $stmt->execute($duplicateDeviesName);
         } catch (PDOException $e) {
@@ -98,6 +103,7 @@ class insertDataUpload
     function insertData($conn, $file_content)
     {
         try {
+            global $devicesDefine, $inventoriesDefine;
             $currentFile = basename(__FILE__);
             $currentFunction = __FUNCTION__;
             $deviceDatas = $file_content->deviceDatas;
@@ -111,7 +117,8 @@ class insertDataUpload
                 $deviceName = $deviceNames[$j];
                 $deviceData = $deviceDatas[$j];
                 //insert cha
-                $sqlParent = "INSERT INTO " . TABLE_DEVICES . " (" . COLUMN_Devices_NAME . "," . COLUMN_Devices_ID . ") VALUES (?,?)";
+                $sqlParent = "INSERT INTO " . $devicesDefine::TABLE_DEVICES
+                    . " (" . $devicesDefine::COLUMN_DEVICES_NAME . "," . $devicesDefine::COLUMN_DEVICES_ID . ") VALUES (?,?)";
                 $stmtParent = $conn->prepare($sqlParent);
                 $stmtParent->bindParam(1, $deviceName);
                 $stmtParent->bindParam(2, $device_id);
@@ -134,12 +141,13 @@ class insertDataUpload
                 foreach ($values as $row) {
                     $values_flat = array_merge($values_flat, array_values($row));
                 }
-                $sql = "INSERT INTO " . TABLE_INVENTORIES . " (" . COLUMN_INVENTORIES_NAME . ", "
-                    . COLUMN_INVENTORIES_CDESC . ","
-                    . COLUMN_INVENTORIES_PID . ","
-                    . COLUMN_INVENTORIES_VID . ","
-                    . COLUMN_INVENTORIES_SERIAL . ","
-                    . COLUMN_INVENTORIES_PARENTID .
+                $sql = "INSERT INTO " . $inventoriesDefine::TABLE_INVENTORIES
+                    . " (" . $inventoriesDefine::COLUMN_INVENTORIES_NAME . ", "
+                    . $inventoriesDefine::COLUMN_INVENTORIES_CDESC . ","
+                    . $inventoriesDefine::COLUMN_INVENTORIES_PID . ","
+                    . $inventoriesDefine::COLUMN_INVENTORIES_VID . ","
+                    . $inventoriesDefine::COLUMN_INVENTORIES_SERIAL . ","
+                    . $inventoriesDefine::COLUMN_INVENTORIES_PARENTID .
                     ") VALUES " . implode(',', $placeholders);
                 $stmt = $conn->prepare($sql);
                 $stmt->execute($values_flat);

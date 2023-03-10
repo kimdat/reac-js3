@@ -16,7 +16,8 @@ function myAutoloader($className)
 {
     $prefixes = array(
         "Offline\\" => "./OFFLINE/",
-        "Online\\" => "./ONLINE/"
+        "Online\\" => "./ONLINE/",
+        "ManageInventories\\" => "./ManageInventories/"
         // add more namespaces and directories as needed
     );
 

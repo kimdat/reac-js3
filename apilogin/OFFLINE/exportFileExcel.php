@@ -1,7 +1,7 @@
 <?php
 // Load the PHPExcel classes
 
-namespace Offline;
+namespace ManageInventories;
 
 use Error;
 use Exception;
@@ -15,6 +15,7 @@ class exportFileExcel
 {
     function downExcel()
     {
+
         $currentFile = basename(__FILE__);
         $currentFunction = __FUNCTION__;
         try {
@@ -38,25 +39,25 @@ class exportFileExcel
     }
     function setDataExcel($datas)
     {
-        global $currentFile;
+        global $currentFile, $devicesDefine, $inventoriesDefine;
         $currentFunction = __FUNCTION__;
         try {
             // Create a new spreadsheet object
             $spreadsheet = new Spreadsheet();
             // Set the active sheet
             $sheet = $spreadsheet->getActiveSheet();
-            $data_array[] = ['STT', 'Device Name', 'Module Name', 'VID', 'Serial', 'PID', 'CDESC'];
+            $data_array[] = ['STT', 'Device Name', 'Slot', 'PID', 'Serial', 'Description'];
             $currentParentId = "";
             $stt = 1;
             foreach ($datas as $data) {
                 //Tạo row cha
-                if ($currentParentId != $data[COLUMN_INVENTORIES_PARENTID]) {
-                    $currentParentId = $data[COLUMN_INVENTORIES_PARENTID];
+                if ($currentParentId != $data[$inventoriesDefine::COLUMN_INVENTORIES_PARENTID]) {
+                    $currentParentId = $data[$inventoriesDefine::COLUMN_INVENTORIES_PARENTID];
                     $data_array[] = [$stt++, $data['ParentName'], '', '', '', ''];
                 }
                 $data_array[] = [
-                    '', '', $data[COLUMN_INVENTORIES_NAME], $data[COLUMN_INVENTORIES_VID],
-                    $data[COLUMN_INVENTORIES_SERIAL], $data[COLUMN_INVENTORIES_PID], $data[COLUMN_INVENTORIES_CDESC]
+                    '', '', $data[$inventoriesDefine::COLUMN_INVENTORIES_NAME], $data[$inventoriesDefine::COLUMN_INVENTORIES_PID],
+                    $data[$inventoriesDefine::COLUMN_INVENTORIES_SERIAL],  $data[$inventoriesDefine::COLUMN_INVENTORIES_CDESC]
                 ];
             }
             $sheet->fromArray($data_array);
@@ -78,17 +79,18 @@ class exportFileExcel
         $currentFunction = __FUNCTION__;
 
         try {
-            global $conn, $currentFile;
-
+            global $conn, $currentFile, $devicesDefine, $inventoriesDefine;
 
             //điều kiện filter theo id
-            $where = sizeof($idToGet) > 0 ? " WHERE i." . COLUMN_INVENTORIES_PARENTID . " IN (" . implode(',', array_fill(0, count($idToGet), '?')) . ")" : "";
-            $sql = "SELECT i." . COLUMN_INVENTORIES_ID . ", i." . COLUMN_INVENTORIES_NAME
-                . ", i." . COLUMN_INVENTORIES_PID . ", i." . COLUMN_INVENTORIES_VID
-                . ", i." . COLUMN_INVENTORIES_SERIAL . ", i." . COLUMN_INVENTORIES_CDESC
-                . ", i." . COLUMN_INVENTORIES_PARENTID . ",d." . COLUMN_Devices_NAME . " as ParentName
-        FROM " . TABLE_INVENTORIES . " i
-        INNER JOIN " . TABLE_DEVICES . " d on d." . COLUMN_Devices_ID . "=i." . COLUMN_INVENTORIES_PARENTID .
+            $where = sizeof($idToGet) > 0 ? " WHERE i." . $inventoriesDefine::COLUMN_INVENTORIES_PARENTID . " IN (" . implode(',', array_fill(0, count($idToGet), '?')) . ")" : "";
+            $sql = "SELECT i." . $inventoriesDefine::COLUMN_INVENTORIES_ID . ", i." . $inventoriesDefine::COLUMN_INVENTORIES_NAME
+                . ", i." . $inventoriesDefine::COLUMN_INVENTORIES_PID . ", i." . $inventoriesDefine::COLUMN_INVENTORIES_VID
+                . ", i." . $inventoriesDefine::COLUMN_INVENTORIES_SERIAL . ", i." . $inventoriesDefine::COLUMN_INVENTORIES_CDESC
+                . ", i." . $inventoriesDefine::COLUMN_INVENTORIES_PARENTID . ",d." . $devicesDefine::COLUMN_DEVICES_NAME . " as ParentName
+        FROM " . $inventoriesDefine::TABLE_INVENTORIES . " i
+        INNER JOIN " . $devicesDefine::TABLE_DEVICES . " d on d."
+                . $devicesDefine::COLUMN_DEVICES_ID . "=i."
+                . $inventoriesDefine::COLUMN_INVENTORIES_PARENTID .
                 $where;
             $stmt = $conn->prepare($sql);
             //NẾU có mảng id thì param id

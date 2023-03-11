@@ -33,15 +33,13 @@ class filterData
                     //nếu column là name thì map devices name hoặc inventories name
                     if ($column == "Name") {
                         $columnDevices = $devicesDefine::COLUMN_DEVICES_NAME;
-                        $where2 .= " AND  (devices.$columnDevices Like :Name ) ";
-                        $params[":Name"] = '%' . $value . '%';
-                    } else if ($column == "SLOT") {
-
-                        $columnInventories = $inventoriesDefine::COLUMN_INVENTORIES_NAME;
-                        $where2 .= " AND  (inventories.$columnInventories Like :Name) ";
-                        $params[":Name"] = '%' . $value . '%';
+                        $where2 .= " AND  (devices.$columnDevices Like :ParentName ) ";
+                        $params[":ParentName"] = '%' . $value . '%';
                     } else {
                         switch ($column) {
+                            case "InventoriesName":
+                                $column = $inventoriesDefine::COLUMN_INVENTORIES_NAME;
+                                break;
                             case "VID":
                                 $column = $inventoriesDefine::COLUMN_INVENTORIES_VID;
                                 break;
@@ -79,6 +77,7 @@ class filterData
         ON devices." . $devicesDefine::COLUMN_DEVICES_ID . " = inventories." . $inventoriesDefine::COLUMN_INVENTORIES_PARENTID . "
         WHERE " . $devicesDefine::COLUMN_DEVICES_STATUS . " <> 'D' AND $where1 AND $where2 
         ORDER BY devices." . $devicesDefine::COLUMN_DEVICES_NAME . ", inventories." . $inventoriesDefine::COLUMN_INVENTORIES_ID;
+
             // Liên kết giá trị của các tham số với câu lệnh SQL
             $stmt = $conn->prepare($sql);
             if (sizeof($params) > 0) {

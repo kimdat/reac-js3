@@ -1,22 +1,22 @@
 <?php
 
-/**
- * Database Connection
- */
+
+
 class DbConnect
 {
-    private $server = 'localhost';
+    private $server = null;
     private $dbname = 'ctindatabase';
-    private $user = 'root';
+    private $user = null;
     private $pass = '';
     private static $instance = null;
     private $conn = null;
-    private $pdo = null;
+
 
     private function __construct()
     {
 
-        session_start();
+        $this->server = getenv('DB_HOST');
+        $this->user = getenv('DB_USERNAME');
 
         // Nếu chưa tồn tại, tạo mới object và lưu vào Redis
         try {
@@ -24,23 +24,6 @@ class DbConnect
             $dsn  = 'mysql:host=' . $this->server . ';dbname=' . $this->dbname . ';charset=utf8mb4';
             $this->conn = new PDO($dsn, $this->user, $this->pass);
             $this->conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-            /*
-            if (!isset($_SESSION['pdo45'])) {
-                echo "123";
-                $pdo = new PDO($dsn, $this->user, $this->pass);
-
-                $_SESSION['pdo5'] = $pdo;
-            } else {
-                echo "124";
-                $pdo = $_SESSION['pdo4'];
-            }
-          */
-
-            // $this->conn = new PDO('mysql:host=' . $this->server . ';dbname=' . $this->dbname, $this->user, $this->pass);
-            // $this->conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-
-            // Lưu kết nối PDO vào phiên
-
         } catch (\Exception $e) {
             echo "Database Error: " . $e->getMessage();
         }
@@ -49,6 +32,7 @@ class DbConnect
 
     public static function getInstance()
     {
+
         if (self::$instance === null) {
 
             self::$instance = new DbConnect();

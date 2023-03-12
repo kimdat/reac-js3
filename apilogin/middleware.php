@@ -19,12 +19,12 @@ function checkToken($request, $handler)
             $response->getBody()->write(json_encode(['error' => 'Authorization header is missing']));
             return $response->withStatus(401)->withHeader('Content-Type', 'application/json');
         }
-        $keyJwt = KEY_JWT; // Key JWT đã được định nghĩa trước
+        $keyJwt = getenv('KEY_JWT'); // Key JWT đã được định nghĩa trước
         // Giải mã JWT token
         $decoded = decodeToken($jwtToken, $keyJwt);
         // Giải mã dữ liệu AES
-        $keyAes = KEY_AES; // Key AES đã được định nghĩa trước
-        $iv = IV_AES;
+        $keyAes = getenv('KEY_AES'); // Key AES đã được định nghĩa trước
+        $iv = getenv('IV_AES');
         //Lấy chuỗi mã hóa
         $encrypted_data = $decoded->key;
         $encrypted_data = base64_decode($encrypted_data); // Giải mã chuỗi sau khi mã hóa và vector khởi tạo
@@ -32,7 +32,7 @@ function checkToken($request, $handler)
         $ciphertext = substr($encrypted_data, 16);
         $decrypted_data = openssl_decrypt($ciphertext, 'AES-256-CBC', $keyAes, OPENSSL_RAW_DATA, $iv);
         // Kiểm tra tính hợp lệ của key
-        if ($decrypted_data !== KEY_API) {
+        if ($decrypted_data !== getenv('KEY_API')) {
             $response = new Response();
             $response->getBody()->write(json_encode(['error' => 'Invalid AES key']));
             return $response->withStatus(401)->withHeader('Content-Type', 'application/json');

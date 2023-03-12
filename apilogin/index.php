@@ -2,11 +2,18 @@
 
 require __DIR__ . '/vendor/autoload.php';
 
-use PhpParser\Node\Expr\Isset_;
+
 use Slim\Psr7\Response;
 use Slim\Psr7\Request;
 use Slim\Factory\AppFactory;
 
+use SecureEnvPHP\SecureEnvPHP;
+
+(new SecureEnvPHP())->parse('.env.enc', '.env.key');
+
+
+header('Access-Control-Allow-Origin: *');
+header('Access-Control-Allow-Headers: *');
 
 try {
     include 'DbConnect.php';
@@ -15,15 +22,13 @@ try {
     include 'middleware.php';
     include 'classOnline.php';
     include 'classOffline.php';
-    header('Access-Control-Allow-Origin: *');
-    header('Access-Control-Allow-Headers: *');
 
     $devicesDefine = new DevicesOnline();
     $inventoriesDefine = new InventoriesOnline();
     // $flagOnline = $_SERVER['HTTP_FLAGONLINE'];
 
     //Nếu là online
-    if (!isset($_SERVER['HTTP_FLAGONLINE'])) {
+    if (isset($_SERVER['HTTP_FLAGOFFLINE'])) {
 
         $devicesDefine = new DevicesOffline();
         $inventoriesDefine = new InventoriesOffline();
@@ -51,7 +56,6 @@ try {
     //offline
     $app->post('/login', function (Request $request, Response $response, array $args) use ($app) {
         try {
-
             $login = new Offline\login;
             return writeSucces(json_encode($login->login()));
         } catch (Error $e) {

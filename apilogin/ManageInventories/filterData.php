@@ -5,13 +5,14 @@ namespace ManageInventories;
 use Error;
 use Exception;
 use PDO;
+use Throwable;
 
 class filterData
 {
     function sqlGetData($valueSearch, $valueColumn,)
     {
         global $conn, $devicesDefine, $inventoriesDefine;
-        $currentFunction = __FUNCTION__;
+
         try {
             $where1 = "1=1";
             $where2 = "1=1";
@@ -78,6 +79,7 @@ class filterData
         WHERE " . $devicesDefine::COLUMN_DEVICES_STATUS . " <> 'D' AND $where1 AND $where2 
         ORDER BY devices." . $devicesDefine::COLUMN_DEVICES_NAME . ", inventories." . $inventoriesDefine::COLUMN_INVENTORIES_ID;
 
+
             // Liên kết giá trị của các tham số với câu lệnh SQL
             $stmt = $conn->prepare($sql);
             if (sizeof($params) > 0) {
@@ -88,90 +90,89 @@ class filterData
             $stmt->execute();
             $inventories = $stmt->fetchAll(PDO::FETCH_ASSOC);
             return $inventories;
-        } catch (Error $th) {
-            throw new Error("Error  $currentFunction ()  " . $th->getMessage());
-        } catch (Exception $th) {
-            throw new Error("Error  $currentFunction () " . $th->getMessage());
+        } catch (Throwable $e) {
+
+            $currentFunction = __FUNCTION__;
+            throw new Error("Error   in $currentFunction ->" . $e->getMessage());
         }
     }
 
     function getData($inventories, $flagShowChild, $currentPage, $rowsPerPage)
     {
-        $currentFunction = __FUNCTION__;
-        if (sizeof($inventories) == 0) {
-            return array(
-                'searchapidata' => [array('statusNotFound' => true)],
+        try {
+            if (sizeof($inventories) == 0) {
+                return array(
+                    'searchapidata' => [array('statusNotFound' => true)],
+
+                );
+            }
+            //inventories phân trang
+            $filtered_inventories = [];
+            //tất cả id inventories
+            $all_inventories = [];
+            //id cha
+            $parent_row = [];
+
+            $start = ($currentPage - 1) * $rowsPerPage + 1;
+            $end = $start + $rowsPerPage - 1;
+
+            foreach ($inventories as $item) {
+                if ($item["device_rank"] >= $start && $item["device_rank"] <= $end) {
+                    $parentId = $item['parentId'];
+                    $parentName = $item['parentName'];
+                    $stt = 0;
+                    if (!isset($filtered_inventories[$parentId])) {
+                        $filtered_inventories[$parentId] = array(
+                            'STT' => $stt++,
+                            'id' => $parentId,
+                            'Name' => $parentName,
+                            'showChild' => $flagShowChild
+                        );
+                    }
+                    $childId = $item['childId'];
+                    $childName = $item['childName'];
+                    $pid = $item['PID'];
+                    $vid = $item['VID'];
+                    $serial = $item['Serial'];
+                    $cdesc = $item['CDESC'];
+                    $filtered_inventories[$parentId]['children'][] = array(
+                        'id' => $childId,
+                        'Name' => $childName,
+                        'VID' => $vid,
+                        'PID' => $pid,
+                        'Serial' => $serial,
+                        'CDESC' => $cdesc,
+                        'ParentId' => $parentId
+                    ) ?? [];
+                }
+                if (!in_array($item["parentId"], $parent_row)) {
+                    $parent_row[] = $item["parentId"];
+                    $all_inventories[] = [
+                        "id" => $item["parentId"],
+                        "name" => $item["parentName"]
+                    ];
+                }
+            }
+            $total_row = count($parent_row);
+            $total_page = ceil($total_row / $rowsPerPage);
+            $response = array(
+                'searchapidata' => array_values($filtered_inventories),
+                'total_records' => $total_row,
+                'total_pages' => $total_page,
+                'row_expand' => $parent_row,
+                'devices' => $all_inventories
 
             );
-        }
-        //inventories phân trang
-        $filtered_inventories = [];
-        //tất cả id inventories
-        $all_inventories = [];
-        //id cha
-        $parent_row = [];
+            return $response;
+        } catch (Throwable $e) {
 
-        $start = ($currentPage - 1) * $rowsPerPage + 1;
-        $end = $start + $rowsPerPage - 1;
-
-        foreach ($inventories as $item) {
-            if ($item["device_rank"] >= $start && $item["device_rank"] <= $end) {
-                $parentId = $item['parentId'];
-                $parentName = $item['parentName'];
-                $stt = 0;
-                if (!isset($filtered_inventories[$parentId])) {
-                    $filtered_inventories[$parentId] = array(
-                        'STT' => $stt++,
-                        'id' => $parentId,
-                        'Name' => $parentName,
-                        'showChild' => $flagShowChild
-                    );
-                }
-                $childId = $item['childId'];
-                $childName = $item['childName'];
-                $pid = $item['PID'];
-                $vid = $item['VID'];
-                $serial = $item['Serial'];
-                $cdesc = $item['CDESC'];
-                $filtered_inventories[$parentId]['children'][] = array(
-                    'id' => $childId,
-                    'Name' => $childName,
-                    'VID' => $vid,
-                    'PID' => $pid,
-                    'Serial' => $serial,
-                    'CDESC' => $cdesc,
-                    'ParentId' => $parentId
-                ) ?? [];
-            }
-            if (!in_array($item["parentId"], $parent_row)) {
-                $parent_row[] = $item["parentId"];
-                $all_inventories[] = [
-                    "id" => $item["parentId"],
-                    "name" => $item["parentName"]
-                ];
-            }
-        }
-        $total_row = count($parent_row);
-        $total_page = ceil($total_row / $rowsPerPage);
-        $response = array(
-            'searchapidata' => array_values($filtered_inventories),
-            'total_records' => $total_row,
-            'total_pages' => $total_page,
-            'row_expand' => $parent_row,
-            'devices' => $all_inventories
-
-        );
-        return $response;
-        try {
-        } catch (Error $th) {
-            throw new Error("Error  $currentFunction ()  " . $th->getMessage());
-        } catch (Exception $th) {
-            throw new Error("Error  $currentFunction ()  " . $th->getMessage());
+            $currentFunction = __FUNCTION__;
+            throw new Error("Error  in $currentFunction ->" . $e->getMessage());
         }
     }
     function filterData()
     {
-        $currentFile = basename(__FILE__);
+
         try {
             $valueSearch = $_GET['valueSearch'] ?? '';
             $valueColumn = json_decode($_GET['valueColumn'] ?? '{}', true);
@@ -187,10 +188,10 @@ class filterData
 
             $response = self::getData($data, $flagShowChild, $currentpage, $rowsPerPage);
             return json_encode($response);
-        } catch (Error $e) {
-            throw new Error("Error in $currentFile ->" . $e->getMessage());
-        } catch (Exception $e) {
-            throw new Error("Error in $currentFile ->" . $e->getMessage());
+        } catch (Throwable $e) {
+            $currentFile = basename(__FILE__);
+            $currentFunction = __FUNCTION__;
+            throw new Error("Error in $currentFile  in $currentFunction ->" . $e->getMessage());
         }
     }
 }

@@ -6,6 +6,7 @@ use Error;
 use Exception;
 use PDO;
 use PDOException;
+use Throwable;
 
 class getexpandall
 {
@@ -17,17 +18,14 @@ class getexpandall
                 return;
             $response = self::getDataChildren($searchapidata);
             return json_encode($response);
-        } catch (Error $e) {
-            throw new Error("Error  ->" . $e->getMessage());
-        } catch (Exception $e) {
-            throw new Error("Error ->" . $e->getMessage());
+        } catch (Throwable $e) {
+            $currentFunction = __FUNCTION__;
+            throw new Error("Error in $currentFunction ->" . $e->getMessage());
         }
     }
 
     function sqlGetDataChildren($idToGet)
     {
-
-        $currentFunction = __FUNCTION__;
         try {
             global $conn, $inventoriesDefine;
             $sql = "SELECT CONCAT('CHILD',i." . $inventoriesDefine::COLUMN_INVENTORIES_ID . ") as id," .
@@ -45,12 +43,9 @@ class getexpandall
             $stmt = $conn->prepare($sql);
             $stmt->execute(array_values($idToGet));
             return $stmt;
-        } catch (PDOException $th) {
-            throw new Error("Sql Error $currentFunction () " . $th->getMessage());
-        } catch (Error $th) {
-            throw new Error("Error  $currentFunction ()  " . $th->getMessage());
-        } catch (Exception $th) {
-            throw new Error("Error  $currentFunction ()  " . $th->getMessage());
+        } catch (Throwable $th) {
+            $currentFunction = __FUNCTION__;
+            throw new Error("Error $currentFunction () " . $th->getMessage());
         }
     }
 
@@ -78,9 +73,7 @@ class getexpandall
                 }
             }
             return array_values($itemsById);
-        } catch (Error $th) {
-            throw new Error("Error  $currentFunction ()" . $th->getMessage());
-        } catch (Exception $th) {
+        } catch (Throwable $th) {
             throw new Error("Error  $currentFunction ()" . $th->getMessage());
         }
     }
@@ -92,11 +85,7 @@ class getexpandall
     }
     function getDataChildren($searchapidata)
     {
-
-        $currentFile = basename(__FILE__);
-        $currentFunction = __FUNCTION__;
         try {
-
             // Lấy các id của searchData không có key children,phải thêm self do class gọi hàm chính nó
             $searchapidataFilter = array_filter($searchapidata, 'self::hasNoChildren');
             $searchDataIds = array_column($searchapidataFilter, 'id');
@@ -106,13 +95,10 @@ class getexpandall
             } else {
                 return $searchapidata;
             }
-
-
             return $response;
-        } catch (Error $e) {
-            throw new Error("Error in $currentFunction in $currentFile ->" . $e->getMessage());
-        } catch (Exception $e) {
-            throw new Error("Error in $currentFunction in $currentFile ->" . $e->getMessage());
+        } catch (Throwable $e) {
+            $currentFunction = __FUNCTION__;
+            throw new Error("Error in $currentFunction  ->" . $e->getMessage());
         }
     }
 }

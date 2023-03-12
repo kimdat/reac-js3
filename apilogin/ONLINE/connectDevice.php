@@ -4,6 +4,7 @@ namespace Online;
 
 use Error;
 use Exception;
+use Throwable;
 
 class connectDevice
 {
@@ -11,7 +12,6 @@ class connectDevice
     {
         try {
             $currentFile = basename(__FILE__);
-            $currentFunction = __FUNCTION__;
             // Tạo một mảng chứa URL của các API cần gọi
             $url = "http://localhost/NETMIKO/home.py";
             // Tạo một curl handler
@@ -37,9 +37,8 @@ class connectDevice
             // Đóng curl handler
             curl_close($ch);
             return $response;
-        } catch (Error $th) {
-            throw new Error("Error in $currentFunction in $currentFile ->" . $th->getMessage());
-        } catch (Exception $th) {
+        } catch (Throwable $th) {
+            $currentFunction = __FUNCTION__;
             throw new Error("Error in $currentFunction in $currentFile ->" . $th->getMessage());
         }
     }

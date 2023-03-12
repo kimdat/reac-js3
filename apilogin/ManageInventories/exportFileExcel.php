@@ -10,6 +10,7 @@ use PDOException;
 use PhpOffice\PhpSpreadsheet\spreadsheet;
 use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 use Slim\Psr7\Response;
+use Throwable;
 
 class exportFileExcel
 {
@@ -17,30 +18,27 @@ class exportFileExcel
     {
 
         $currentFile = basename(__FILE__);
-        $currentFunction = __FUNCTION__;
+
         try {
             $rowId = json_decode($_POST['rowId']) ?? [];
             // filter value dựa trên valuesearch và value column trong file getAllId.php
             $smtDataExport = self::sqlGetDataExport($rowId);
             $dataExport = $smtDataExport->fetchAll(PDO::FETCH_ASSOC);
-
-
             $writer = new Xlsx(self::setDataExcel($dataExport));
             $response = new Response();
             $writer->save('php://output');
             $response->getBody()->write(file_get_contents('php://output'));
 
             return $response;
-        } catch (Exception $th) {
-            throw new Error("Err in $currentFunction in $currentFile ->" . $th->getMessage());
-        } catch (Error $th) {
+        } catch (Throwable $th) {
+            $currentFunction = __FUNCTION__;
             throw new Error("Err in $currentFunction in $currentFile ->" . $th->getMessage());
         }
     }
     function setDataExcel($datas)
     {
-        global $currentFile, $devicesDefine, $inventoriesDefine;
-        $currentFunction = __FUNCTION__;
+        global $currentFile, $inventoriesDefine;
+
         try {
             // Create a new spreadsheet object
             $spreadsheet = new Spreadsheet();
@@ -56,7 +54,7 @@ class exportFileExcel
                     $data_array[] = [$stt++, $data['ParentName'], '', '', '', ''];
                 }
                 $data_array[] = [
-                    '', '', $data[$inventoriesDefine::COLUMN_INVENTORIES_NAME], $data[COLUMN_INVENTORIES_PID],
+                    '', '', $data[$inventoriesDefine::COLUMN_INVENTORIES_NAME], $data[$inventoriesDefine::COLUMN_INVENTORIES_PID],
                     $data[$inventoriesDefine::COLUMN_INVENTORIES_SERIAL],  $data[$inventoriesDefine::COLUMN_INVENTORIES_CDESC]
                 ];
             }
@@ -68,16 +66,13 @@ class exportFileExcel
                 $sheet->getColumnDimension($title)->setWidth(15);
             }
             return $spreadsheet;
-        } catch (Error $th) {
-            throw new Error("Error  $currentFunction () in $currentFile" . $th->getMessage());
-        } catch (Exception $th) {
+        } catch (Throwable $th) {
+            $currentFunction = __FUNCTION__;
             throw new Error("Error  $currentFunction () in $currentFile" . $th->getMessage());
         }
     }
     function sqlGetDataExport($idToGet)
     {
-        $currentFunction = __FUNCTION__;
-
         try {
             global $conn, $currentFile, $devicesDefine, $inventoriesDefine;
 
@@ -96,12 +91,9 @@ class exportFileExcel
             //NẾU có mảng id thì param id
             $stmt->execute(sizeof($idToGet) > 0 ? array_values($idToGet) : "");
             return $stmt;
-        } catch (PDOException $th) {
+        } catch (Throwable $th) {
+            $currentFunction = __FUNCTION__;
             throw new Error("Sql Error $currentFunction () in $currentFile " . $th->getMessage());
-        } catch (Error $th) {
-            throw new Error("Error  $currentFunction () in $currentFile" . $th->getMessage());
-        } catch (Exception $th) {
-            throw new Error("Error  $currentFunction () in $currentFile " . $th->getMessage());
         }
     }
 }

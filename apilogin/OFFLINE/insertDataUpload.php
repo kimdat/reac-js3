@@ -5,7 +5,7 @@ namespace Offline;
 use Error;
 use Exception;
 use PDOException;
-
+use Throwable;
 
 class insertDataUpload
 {
@@ -55,9 +55,10 @@ class insertDataUpload
             if (sizeof($file_err) != 0)
                 return json_encode(array("Error" => $file_err));
             return "";
-        } catch (Error $e) {
-
-            throw new Error("Error  ->" . $e->getMessage());
+        } catch (Throwable $e) {
+            $currentFunction = __FUNCTION__;
+            $currentFile = basename(__FILE__);
+            throw new Error("Error in $currentFunction in $currentFile ->" . $e->getMessage());
         }
     }
 
@@ -77,8 +78,6 @@ class insertDataUpload
     {
         try {
             global $devicesDefine;
-            $currentFunction = __FUNCTION__;
-            $currentFile = basename(__FILE__);
             $placeholders = implode(',', array_fill(0, count($duplicateDeviesName), '?'));
             //  $placeholders = rtrim(str_repeat('?,', count($duplicaeDeviesName)), ',');
             $sql = "UPDATE " . $devicesDefine::TABLE_DEVICES . " SET "
@@ -87,10 +86,9 @@ class insertDataUpload
             WHERE STATUS <>'D' AND " . $devicesDefine::COLUMN_DEVICES_NAME . " IN ($placeholders)";
             $stmt = $conn->prepare($sql);
             $stmt->execute($duplicateDeviesName);
-        } catch (PDOException $e) {
-            throw new Error("Error in $currentFunction in $currentFile " . $e->getMessage());
-        } catch (Exception $e) {
-            throw new Error("Error in $currentFunction  in $currentFile " . $e->getMessage());
+        } catch (Throwable $e) {
+            $currentFunction = __FUNCTION__;
+            throw new Error("Error in $currentFunction  " . $e->getMessage());
         }
     }
     function deleteFile($pathToDelete)
@@ -104,8 +102,7 @@ class insertDataUpload
     {
         try {
             global $devicesDefine, $inventoriesDefine;
-            $currentFile = basename(__FILE__);
-            $currentFunction = __FUNCTION__;
+
             $deviceDatas = $file_content->deviceDatas;
             $deviceNames = $file_content->deviceNames;
             //Số lượng deviceNames tương ứng với số lượng devicsDatas và mỗi phần tử trong devicedatas lưu mảng data thiết bị con
@@ -152,12 +149,9 @@ class insertDataUpload
                 $stmt = $conn->prepare($sql);
                 $stmt->execute($values_flat);
             }
-        } catch (PDOException $e) {
-            throw new Error("Error $currentFunction in $currentFile ." . $e->getMessage());
-        } catch (Error $e) {
-            throw new Error("Error $currentFunction in $currentFile ." . $e->getMessage());
-        } catch (Exception $e) {
-            throw new Error("Error $currentFunction in $currentFile ." . $e->getMessage());
+        } catch (Throwable $e) {
+            $currentFunction = __FUNCTION__;
+            throw new Error("Error $currentFunction ." . $e->getMessage());
         }
     }
 }

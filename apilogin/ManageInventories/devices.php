@@ -6,13 +6,14 @@ use Error;
 use Exception;
 use PDO;
 use PDOException;
+use Throwable;
 
 class devices
 {
     function getAllDevices()
     {
         global  $devicesDefine;
-        $currentFile = basename(__FILE__);
+
         global $conn;
         // Khởi tạo giá trị ban đầu cho biến @rownum
         try {
@@ -21,7 +22,6 @@ class devices
         false as showChild, (@rownum := @rownum + 1) as STT
         FROM " .  $devicesDefine::TABLE_DEVICES . " d 
         WHERE d." .  $devicesDefine::COLUMN_DEVICES_STATUS . " NOT IN('0','D')
-       
         ORDER BY d." . $devicesDefine::COLUMN_DEVICES_NAME . "
         LIMIT 10;
         ";
@@ -47,11 +47,8 @@ class devices
                 "devices" => $idNameFilter
             );
             return json_encode($data);
-        } catch (PDOException $th) {
-            throw new Error("Error in $currentFile ->" . $th->getMessage());
-        } catch (Exception $th) {
-            throw new Error("Error in $currentFile ->" . $th->getMessage());
-        } catch (Error $th) {
+        } catch (Throwable $th) {
+            $currentFile = basename(__FILE__);
             throw new Error("Error in $currentFile ->" . $th->getMessage());
         }
     }

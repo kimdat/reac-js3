@@ -6,13 +6,14 @@ use Error;
 use Exception;
 use PDO;
 use PDOException;
+use Throwable;
 
 class childDevice
 {
 
     function getChildDevice()
     {
-        $currentFile = basename(__FILE__);
+
         global $conn, $inventoriesDefine;
         try {
             $id = $_GET['id'];
@@ -31,12 +32,10 @@ class childDevice
             $stmt->execute();
             $inventories = $stmt->fetchAll(PDO::FETCH_ASSOC);
             return json_encode($inventories);
-        } catch (PDOException $th) {
-            throw new Error("Error in $currentFile ->" . $th->getMessage());
-        } catch (Exception $th) {
-            throw new Error("Error in $currentFile ->" . $th->getMessage());
-        } catch (Error $th) {
-            throw new Error("Error in $currentFile ->" . $th->getMessage());
+        } catch (Throwable $th) {
+            $currentFile = basename(__FILE__);
+            $currentFuncton = __FUNCTION__;
+            throw new Error("Error in $currentFile  in $currentFuncton->" . $th->getMessage());
         }
     }
 }

@@ -4,13 +4,13 @@ namespace Offline;
 
 use Error;
 use Exception;
+use Throwable;
 
 $path = 'uploads/';
 class fileupload
 {
   function fileUpload()
   {
-    $currentFile = basename(__FILE__);
     try {
       if (isset($_FILES['files'])) {
         $files = $_FILES['files'];
@@ -29,9 +29,8 @@ class fileupload
         }
         return json_encode($pathFile);
       }
-    } catch (Error $e) {
-      throw new Error("Error in $currentFile ->" . $e->getMessage());
-    } catch (Exception $e) {
+    } catch (Throwable $e) {
+      $currentFile = basename(__FILE__);
       throw new Error("Error in $currentFile ->" . $e->getMessage());
     }
   }
@@ -40,7 +39,6 @@ class fileupload
   {
     try {
       global $path;
-
       $upload_dir = $path . date('Y/m/d') . '/';
       if (!is_dir($upload_dir)) {
         mkdir($upload_dir, 0755, true);
@@ -55,9 +53,7 @@ class fileupload
         // Error uploading file
         return array("Error" => "Error when move_upload_file at " . $indexFile, "indexPath" => $indexFile);
       }
-    } catch (Error $e) {
-      return array("Error" => "Error when save file at " . $indexFile . " ." . $e->getMessage(), "indexPath" => $indexFile);
-    } catch (Exception $e) {
+    } catch (Throwable $e) {
       return array("Error" => "Error when save file at " . $indexFile . " ." . $e->getMessage(), "indexPath" => $indexFile);
     }
   }

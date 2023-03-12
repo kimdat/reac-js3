@@ -4,6 +4,7 @@ namespace Offline;
 
 use Error;
 use Exception;
+use Throwable;
 
 class login
 {
@@ -20,7 +21,7 @@ class login
             $stmt->execute();
             if ($stmt->rowCount() > 0) {
                 $result = $stmt->fetch();
-                if (strcmp($password, md5($result['PassWord'])) == 0) {
+                if (strcmp($password, $result['PassWord']) == 0) {
                     $response = ['status' => 1, 'mess' => "Login succesfully"];
                 } else {
                     $response = ['status' => 0, 'mess' => "PassWord wrong"];
@@ -30,9 +31,7 @@ class login
             }
 
             return $response;
-        } catch (Error $th) {
-            throw new Error($th->getMessage());
-        } catch (Exception $th) {
+        } catch (Throwable $th) {
             throw new Error($th->getMessage());
         }
     }

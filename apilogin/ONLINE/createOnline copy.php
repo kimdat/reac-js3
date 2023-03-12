@@ -8,15 +8,15 @@ use Exception;
 use PDOException;
 use Online\connectDevice;
 use Online\removeDeviceDuplicate;
-use Throwable;
 
-use function PHPUnit\Framework\equalTo;
 
 class createOnline
 {
     function createOnline()
     {
-        global $conn;
+        global $conn, $devicesDefine;
+        $currentFile = basename(__FILE__);
+        $currentFunction = __FUNCTION__;
         $status = 0;
         $device_id = null;
         $deviceName = "";
@@ -38,6 +38,13 @@ class createOnline
             $res = json_decode($res);
             //check và xóa device cũ nếu trùng ip
             $remove_device_dup = new removeDeviceDuplicate();
+            /*check xem ip có phải array
+            if (!is_array($devices_ip)) {
+                $remove_device_dup->removeDeviceDuplicate($conn, $devices_ip);
+            } else {
+                //trim khoảng trắng
+                $remove_device_dup->removeDeviceDuplicateArr($conn, $devices_ip);
+            }*/
             $inventory = $res->deviceData;
             $inventory = json_decode($inventory);
             $devicesName = $res->deviceName;
@@ -55,7 +62,6 @@ class createOnline
                     if (!isset($dataInventory[0]->Err)) {
                         $status = 1;
                     }
-
                     $device_id = self::insertParentOnline($conn, $deviceName, $ip, $status);
                     //Nếu không lỗi khi connect thì insertData
                     $children = [];
@@ -66,20 +72,16 @@ class createOnline
                         $dataFail[] = array("ip" => $ip, "id" => $device_id, "Name" => $deviceName, "children" => $children);
                     }
                     $conn->commit();
-                } catch (Throwable $th) {
-                    $mess = self::rollBackData($conn, $th->getMessage() . " at $ip", $device_id, $status);
-                    //nếu không có lỗi
-                    if ($mess != null) {
-                        $err[] = $mess;
-                    } else {
-                        $dataFail[] = array("ip" => $ip, "id" => $device_id, "Name" => $deviceName, "children" => $children);
-                    }
+                } catch (Error $th) {
+                    $err[] = self::rollBackData($conn, $th->getMessage() . " at $ip", $device_id, $status);
+                } catch (Exception $th) {
+                    $err[] = self::rollBackData($conn, $th->getMessage() . " at $ip", $device_id, $status);
                 }
             }
             return json_encode(array("success" => $dataSuccess, "Err" => $err, "fail" => $dataFail));
-        } catch (Throwable $th) {
-            $currentFile = basename(__FILE__);
-            $currentFunction = __FUNCTION__;
+        } catch (Error $th) {
+            throw new  Error("Err in $currentFunction in $currentFile" . $th->getMessage());
+        } catch (Exception $th) {
             throw new  Error("Err in $currentFunction in $currentFile" . $th->getMessage());
         }
     }
@@ -87,7 +89,8 @@ class createOnline
     {
         try {
             global $devicesDefine;
-
+            $currentFile = basename(__FILE__);
+            $currentFunction = __FUNCTION__;
             $timestamp = time();
             $random_string = uniqid('rd', true);
             $device_id = $timestamp . $random_string;
@@ -106,18 +109,23 @@ class createOnline
             $stmtParent->execute();
 
             return $device_id;
-        } catch (Throwable $e) {
-            $currentFile = basename(__FILE__);
-            $currentFunction = __FUNCTION__;
+        } catch (PDOException $e) {
+            throw new Error("Error $currentFunction in $currentFile ." . $e->getMessage());
+        } catch (Error $e) {
+            throw new Error("Error $currentFunction in $currentFile ." . $e->getMessage());
+        } catch (Exception $e) {
             throw new Error("Error $currentFunction in $currentFile ." . $e->getMessage());
         }
     }
     function insertDataOnline($conn,  $inventory, $device_id)
     {
-
+        $currentFile = basename(__FILE__);
+        $currentFunction = __FUNCTION__;
         global $inventoriesDefine;
         try {
 
+            $currentFile = basename(__FILE__);
+            $currentFunction = __FUNCTION__;
             // Chuyển đổi mảng JSON thành mảng PHP
             $values = array();
             foreach ($inventory as $item) {
@@ -146,13 +154,15 @@ class createOnline
             $stmt = $conn->prepare($sql);
             $stmt->execute($values_flat);
             return $values;
-        } catch (Throwable $e) {
-            $currentFile = basename(__FILE__);
-            $currentFunction = __FUNCTION__;
+        } catch (PDOException $e) {
+            throw new Error("Error $currentFunction in $currentFile ." . $e->getMessage());
+        } catch (Error $e) {
+            throw new Error("Error $currentFunction in $currentFile ." . $e->getMessage());
+        } catch (Exception $e) {
             throw new Error("Error $currentFunction in $currentFile ." . $e->getMessage());
         }
         return;
-    }
+    }   
     //rollback khi lỗi
     public   function rollBackData($conn, $mess, $device_id, $status)
     {
@@ -163,16 +173,19 @@ class createOnline
             }
             return array("Err" => $mess);
         }
-        //nếu đã có device_id rồi thì commit luôn
+
+        //insert cha thành công nhưng con fail thì cũng commit
         if ($status === 0) {
             $conn->commit();
-            return;
+            return array("Err" => $mess);;
         }
         //uplại status cha là 0
         self::updateStatusParent($conn, $device_id);
     }
     public function updateStatusParent($conn, $device_id)
     {
+
+        $currentFunction = __FUNCTION__;
         global $devicesDefine;
         try {
             $sql = "UPDATE " . $devicesDefine::TABLE_DEVICES . " SET " .
@@ -182,9 +195,17 @@ class createOnline
             $stmt->bindParam(':id', $device_id);
             $stmt->execute();
             $conn->commit();
-            return;
-        } catch (Throwable $e) {
-            $currentFunction = __FUNCTION__;
+        } catch (PDOException $e) {
+            if ($conn->inTransaction()) {
+                $conn->rollBack();
+            }
+            return array("Err" => "Err $currentFunction" . $e->getMessage());
+        } catch (Error $e) {
+            if ($conn->inTransaction()) {
+                $conn->rollBack();
+            }
+            return array("Err" => "Err $currentFunction" . $e->getMessage());
+        } catch (Exception $e) {
             if ($conn->inTransaction()) {
                 $conn->rollBack();
             }

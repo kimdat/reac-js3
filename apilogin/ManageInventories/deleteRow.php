@@ -5,12 +5,13 @@ namespace ManageInventories;
 use Error;
 use Exception;
 use PDOException;
+use Throwable;
 
 class deleteRow
 {
     function deleteRow()
     {
-        $currentFile = basename(__FILE__);
+
         global $conn, $devicesDefine;
         // Khởi tạo giá trị ban đầu cho biến @rownum
         try {
@@ -24,12 +25,10 @@ class deleteRow
             $stmt->execute($rowsId);
 
             return "";
-        } catch (PDOException $th) {
-            throw new Error("Error in $currentFile ->" . $th->getMessage());
-        } catch (Exception $th) {
-            throw new Error("Error in $currentFile ->" . $th->getMessage());
-        } catch (Error $th) {
-            throw new Error("Error in $currentFile ->" . $th->getMessage());
+        } catch (Throwable $th) {
+            $currentFile = basename(__FILE__);
+            $currentFunction = __FUNCTION__;
+            throw new Error("Error in $currentFile in $currentFunction->" . $th->getMessage());
         }
     }
 }

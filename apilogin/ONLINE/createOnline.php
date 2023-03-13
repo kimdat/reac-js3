@@ -10,7 +10,7 @@ use Online\connectDevice;
 use Online\removeDeviceDuplicate;
 use Throwable;
 
-use function PHPUnit\Framework\equalTo;
+use function PHPUnit\Framework\throwException;
 
 class createOnline
 {
@@ -20,22 +20,35 @@ class createOnline
         $status = 0;
         $device_id = null;
         $deviceName = "";
-        $devices_ip = "";
         try {
-            if (!isset($_POST["ip"]) || empty($_POST["ip"])) {
+            if (!isset($_POST["device_list"]) || empty($_POST["device_list"])) {
                 return;
             }
-            $devices_ip = json_decode($_POST["ip"]);
-            if (is_array($devices_ip)) {
-                $devices_ip = array_map('trim', $devices_ip);
+            $devices_list = json_decode($_POST["device_list"]);
+
+            if (is_array($devices_list)) {
+                $devices_list = array_map(function ($device) {
+                    $device->device_type = "cisco_xr";
+                    $device->ip = trim($device->ip);
+                    $device->username = trim($device->username);
+                    $device->password = trim($device->password);
+                    $device->port = "22";
+                    return $device;
+                }, $devices_list);
             } else {
-                $devices_ip = trim($devices_ip);
+                $devices_list->device_type = "cisco_xr";
+                $devices_list->ip = trim($devices_list->ip);
+                $devices_list->username = trim($devices_list->username);
+                $devices_list->password = trim($devices_list->password);
+                $devices_list->port = "22";
             }
             //connect thiết bị để lấy thông tin thiết bị con
             $connectDevice = new connectDevice();
-            $res =  $connectDevice->connectDevice($devices_ip);
+            $res =  $connectDevice->connectDevice($devices_list);
             //Gía trị trả về là mảng json với key là ip
             $res = json_decode($res);
+
+
             //check và xóa device cũ nếu trùng ip
             $remove_device_dup = new removeDeviceDuplicate();
             $inventory = $res->deviceData;
@@ -50,6 +63,8 @@ class createOnline
                 try {
                     $conn->beginTransaction();
                     $dataInventory = $inventory->$ip;
+
+
                     $remove_device_dup->removeDeviceDuplicate($conn, $ip);
                     //nếu không có lỗi thì status là 1
                     if (!isset($dataInventory[0]->Err)) {
@@ -65,22 +80,23 @@ class createOnline
                     } else {
                         $dataFail[] = array("ip" => $ip, "id" => $device_id, "Name" => $deviceName, "children" => $children);
                     }
+
                     $conn->commit();
                 } catch (Throwable $th) {
                     $mess = self::rollBackData($conn, $th->getMessage() . " at $ip", $device_id, $status);
                     //nếu không có lỗi
-                    if ($mess != null) {
-                        $err[] = $mess;
-                    } else {
+                    if ($mess == null  || isset($mess["DataFail"])) {
                         $dataFail[] = array("ip" => $ip, "id" => $device_id, "Name" => $deviceName, "children" => $children);
                     }
+                    if (isset($mess["Err"]))
+                        $err[] = array($ip => $mess["Err"]);
                 }
             }
             return json_encode(array("success" => $dataSuccess, "Err" => $err, "fail" => $dataFail));
         } catch (Throwable $th) {
             $currentFile = basename(__FILE__);
             $currentFunction = __FUNCTION__;
-            throw new  Error("Err in $currentFunction in $currentFile" . $th->getMessage());
+            throw new  Error("Err in $currentFunction in $currentFile " . $th->getMessage());
         }
     }
     function insertParentOnline($conn, $deviceName, $ip, $status)
@@ -117,9 +133,9 @@ class createOnline
 
         global $inventoriesDefine;
         try {
-
             // Chuyển đổi mảng JSON thành mảng PHP
             $values = array();
+            throw new Exception("123");
             foreach ($inventory as $item) {
                 $values[] = array(
                     'Name' => $item->NAME,
@@ -166,7 +182,7 @@ class createOnline
         //nếu đã có device_id rồi thì commit luôn
         if ($status === 0) {
             $conn->commit();
-            return;
+            return array("Err" => $mess, "FAIL" => "DataFail");
         }
         //uplại status cha là 0
         self::updateStatusParent($conn, $device_id);

@@ -2,41 +2,30 @@
 
 require __DIR__ . '/vendor/autoload.php';
 
-
 use Slim\Psr7\Response;
 use Slim\Psr7\Request;
 use Slim\Factory\AppFactory;
 
-use SecureEnvPHP\SecureEnvPHP;
-
-(new SecureEnvPHP())->parse('.env.enc', '.env.key');
-
-
-header('Access-Control-Allow-Origin: *');
-header('Access-Control-Allow-Headers: *');
-
 try {
-    include 'DbConnect.php';
-    include 'config.php';
-    include 'bootstrap.php';
-    include 'middleware.php';
-    include 'classOnline.php';
-    include 'classOffline.php';
-
+    header('Access-Control-Allow-Origin: *');
+    header('Access-Control-Allow-Headers: *');
+    require_once 'bootstrap.php';
+    require_once 'config.php';
+    require_once 'classOnline.php';
+    require_once 'classOffline.php';
+    require_once 'middleware.php';
     $devicesDefine = new DevicesOnline();
     $inventoriesDefine = new InventoriesOnline();
-    // $flagOnline = $_SERVER['HTTP_FLAGONLINE'];
-
-    //Nếu là online
+    $currentURL =  $_SERVER['REQUEST_URI'];
+    $currentURL = basename($currentURL);
+    if ($currentURL !== "fileupload") {
+        require_once 'DbConnect.php';
+    }
     if (isset($_SERVER['HTTP_FLAGOFFLINE'])) {
-
         $devicesDefine = new DevicesOffline();
         $inventoriesDefine = new InventoriesOffline();
     }
-
-
     $app = AppFactory::create();
-
     $app->setBasePath(BASE_PATH);
     $app->addBodyParsingMiddleware();
     function writeSucces($data)
@@ -64,6 +53,7 @@ try {
     })->add('checkToken');
 
 
+
     //online
     $app->post('/createOnline', function (Request $request, Response $response, $args) {
 
@@ -81,9 +71,6 @@ try {
         try {
 
             $devices = new ManageInventories\devices;
-
-
-
             return writeSucces($devices->getAllDevices());
         } catch (Error $e) {
             return writeErr($e);
@@ -146,6 +133,7 @@ try {
     $app->post('/fileupload', function (Request $request, Response $response, array $args) use ($app) {
         try {
             $fileupload = new Offline\fileupload();
+
             return writeSucces($fileupload->fileUpload());
         } catch (Error $e) {
             return writeErr($e);

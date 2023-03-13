@@ -27,7 +27,7 @@ class createOnline
             $devices_list = json_decode($_POST["device_list"]);
             if (is_array($devices_list)) {
                 $devices_list = array_map(function ($device) {
-                    $device->device_type = "cisco_xr";
+                    $device->device_type = trim($device->device_type);
                     $device->ip = trim($device->ip);
                     $device->username = trim($device->username);
                     $device->password = trim($device->password);
@@ -35,9 +35,7 @@ class createOnline
                     return $device;
                 }, $devices_list);
             } else {
-
-
-                $devices_list->device_type = "cisco_xr";
+                $devices_list->device_type = trim($devices_list->device_type);
                 $devices_list->ip = trim($devices_list->ip);
                 $devices_list->username = trim($devices_list->username);
                 $devices_list->password = trim($devices_list->password);

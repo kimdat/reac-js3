@@ -21,7 +21,6 @@ class connectDevice
                 $data = array($data);
             }
 
-
             $dataConnect = array(
                 "ip" => json_encode($data)
             );

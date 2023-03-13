@@ -17,9 +17,11 @@ class connectDevice
             // Tạo một curl handler
             $ch = curl_init();
             //Nếu là string thì convernt sang array
-            if (is_string($data)) {
+            if (is_object($data)) {
                 $data = array($data);
             }
+
+
             $dataConnect = array(
                 "ip" => json_encode($data)
             );

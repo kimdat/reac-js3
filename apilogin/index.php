@@ -20,7 +20,8 @@ try {
     $inventoriesDefine = new InventoriesOnline();
     $currentURL =  $_SERVER['REQUEST_URI'];
     $currentURL = basename($currentURL);
-    if ($currentURL !== "fileupload") {
+    $url_not_requied = ["fileupload", "executeOnline", "exportFileExcelSSH"];
+    if (!in_array($currentURL, $url_not_requied)) {
         require_once 'DbConnect.php';
     }
     if (isset($_SERVER['HTTP_FLAGOFFLINE'])) {

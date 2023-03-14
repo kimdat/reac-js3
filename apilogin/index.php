@@ -178,6 +178,14 @@ try {
             return $response->withStatus(500)->withHeader('Content-Type', 'application/json');
         }
     })->add('checkToken');
+    $app->post('/checkDuplicate', function (Request $request, Response $response, array $args) use ($app) {
+        try {
+            $checkDuplicate = new Online\CheckDuplicate();
+            return writeSucces($checkDuplicate->CheckDuplicate());
+        } catch (Error $e) {
+            return writeErr($e);
+        }
+    })->add('checkToken');
     $app->run();
 } catch (Error $e) {
     throw new Error($e->getMessage());

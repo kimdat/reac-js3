@@ -13,7 +13,9 @@ try {
     require_once 'config.php';
     require_once 'classOnline.php';
     require_once 'classOffline.php';
+    require_once 'DeviceInfor.php';
     require_once 'middleware.php';
+    $deviceInfor = new DevicesInfor();
     $devicesDefine = new DevicesOnline();
     $inventoriesDefine = new InventoriesOnline();
     $currentURL =  $_SERVER['REQUEST_URI'];
@@ -146,6 +148,33 @@ try {
             return writeSucces($insertDataUpload->insertDataUpload());
         } catch (Error $e) {
             return writeErr($e);
+        }
+    })->add('checkToken');
+
+    $app->get('/devicesOnline', function (Request $request, Response $response, array $args) use ($app) {
+        try {
+            $devicesOnline = new Online\getAllDevices();
+            return writeSucces($devicesOnline->getAllDevices());
+        } catch (Error $e) {
+            return writeErr($e);
+        }
+    })->add('checkToken');
+    $app->post('/executeOnline', function (Request $request, Response $response, array $args) use ($app) {
+        try {
+            $executeOnline = new Online\ExecuteConnectDevice();
+            return writeSucces($executeOnline->ExecuteConnectDevice());
+        } catch (Error $e) {
+            return writeErr($e);
+        }
+    })->add('checkToken');
+    $app->post('/exportFileExcelSSH', function (Request $request, Response $response, array $args) use ($app) {
+        try {
+            $downloadFileExcel = new Online\exportFileExcelSSH();
+            return $downloadFileExcel->downExcel();
+        } catch (Error $e) {
+            $response = new Response();
+            $response->getBody()->write(json_encode(['error' => $e->getMessage()]));
+            return $response->withStatus(500)->withHeader('Content-Type', 'application/json');
         }
     })->add('checkToken');
     $app->run();

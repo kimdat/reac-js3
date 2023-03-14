@@ -3,11 +3,11 @@
 // Đường dẫn đến file autoload.php của Composer
 $composerAutoloadFile = __DIR__ . '/vendor/autoload.php';
 
+
 // Kiểm tra xem file autoload.php có tồn tại không
 if (!file_exists($composerAutoloadFile)) {
     die('Composer autoloader file not found.');
 }
-
 // Đăng ký file autoload.php của Composer
 require_once $composerAutoloadFile;
 
@@ -26,11 +26,13 @@ function myAutoloader($className)
             $classFile = $directory . str_replace('\\', '/', substr($className, strlen($prefix))) . '.php';
 
             if (file_exists($classFile)) {
+
                 require $classFile;
                 return;
             }
         }
     }
 }
+
 
 spl_autoload_register('myAutoloader');

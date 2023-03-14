@@ -1,23 +1,24 @@
 <?php
 
+use SecureEnvPHP\SecureEnvPHP;
+
+//nếu chưa đọc dc biến môi trường db_host thì đọc lại
 
 
 class DbConnect
 {
+
     private $server = null;
     private $dbname = 'ctindatabase';
     private $user = null;
     private $pass = '';
     private static $instance = null;
     private $conn = null;
-
-
     private function __construct()
     {
-
+        if (getenv('DB_HOST') == false) (new SecureEnvPHP())->parse('.env.enc', '.env.key');
         $this->server = getenv('DB_HOST');
         $this->user = getenv('DB_USERNAME');
-
         // Nếu chưa tồn tại, tạo mới object và lưu vào Redis
         try {
 

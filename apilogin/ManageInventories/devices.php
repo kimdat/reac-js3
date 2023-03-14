@@ -28,6 +28,15 @@ class devices
             $stmt = $conn->prepare($sql);
             $stmt->execute();
             $inventories = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            if ($stmt->rowCount() == 0) {
+                return json_encode(array(
+                    'inventories' => array(array('statusNotFound' => true)),
+                    "total_row" => 1,
+                    "devices" =>  array('statusNotFound' => true)
+                ));
+            }
+
+
             $sql_count = "SELECT " . $devicesDefine::COLUMN_DEVICES_ID . " as id , " .  $devicesDefine::COLUMN_DEVICES_NAME  .
                 " as Name FROM " . $devicesDefine::TABLE_DEVICES  .
                 " WHERE " .  $devicesDefine::COLUMN_DEVICES_STATUS . " NOT IN('0','D') ORDER BY "

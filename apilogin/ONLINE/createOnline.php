@@ -32,6 +32,7 @@ class createOnline
                     $device->username = trim($device->username);
                     $device->password = trim($device->password);
                     $device->port = "22";
+                    $device->deviceName = trim($device->deviceName);
                     return $device;
                 }, $devices_list);
             } else {
@@ -40,8 +41,8 @@ class createOnline
                 $devices_list->username = trim($devices_list->username);
                 $devices_list->password = trim($devices_list->password);
                 $devices_list->port = "22";
+                $devices_list->deviceName = trim($devices_list->deviceName);
             }
-
             //connect thiết bị để lấy thông tin thiết bị con
             $connectDevice = new connectDevice();
             $res =  $connectDevice->connectDevice($devices_list);
@@ -57,6 +58,7 @@ class createOnline
             //data connect thất bị
             $dataFail = [];
             $err = [];
+            $step = "";
             foreach ($devicesName as $ip => $deviceName) {
                 try {
                     $status = 0;
@@ -68,9 +70,11 @@ class createOnline
                     if (!isset($dataInventoryFirst->Err)) {
                         $status = 1;
                     }
+                    $step = "insertparent";
                     $device_id = self::insertParentOnline($conn, $deviceName, $ip, $status);
                     //Nếu không lỗi khi connect thì insertData
                     $children = [];
+                    $step = "insertData";
                     if ($status == 1) {
                         $children = self::insertDataOnline($conn,  $dataInventory, $device_id);
                         $dataSuccess[] = array("ip" => $ip, "id" => $device_id, "Name" => $deviceName, "children" => $children);
@@ -79,7 +83,7 @@ class createOnline
                     }
                     $conn->commit();
                 } catch (Throwable $th) {
-                    $mess = self::rollBackData($conn, $th->getMessage() . " at $ip", $device_id, $status);
+                    $mess = self::rollBackData($conn, $th->getMessage() . " at step $step at $ip", $device_id, $status);
                     //nếu không có lỗi
                     if ($mess == null  || isset($mess["Fail"])) {
                         $dataIpFail = array("ip" => $ip, "id" => $device_id, "Name" => $deviceName, "children" => $children);
@@ -136,12 +140,13 @@ class createOnline
             $values = array();
 
             foreach ($inventory as $item) {
+
                 $values[] = array(
-                    'Name' => $item->NAME,
-                    'CDESC' => $item->DESCR,
+                    'Name' => $item->Name,
+                    'CDESC' => $item->CDESC,
                     'PID' => $item->PID,
                     'VID' => $item->VID,
-                    'Serial' => $item->SN,
+                    'Serial' => $item->Serial,
                     'ParentId' => $device_id
                 );
             }

@@ -28,10 +28,14 @@ class getexpandall
     {
         try {
             global $conn, $inventoriesDefine;
+            $where = "1=1";
+            //nếu online thì thêm điều kiện
+            if (!isset($_SERVER['HTTP_FLAGOFFLINE'])) {
+                $where = $inventoriesDefine::COLUMN_INVENTORIES_STATUS_DELETED . "<>'D'";
+            }
             $sql = "SELECT CONCAT('CHILD',i." . $inventoriesDefine::COLUMN_INVENTORIES_ID . ") as id," .
                 "i." . $inventoriesDefine::COLUMN_INVENTORIES_NAME . " as Name," .
                 $inventoriesDefine::COLUMN_INVENTORIES_PARENTID . " as ParentId," .
-
                 $inventoriesDefine::COLUMN_INVENTORIES_PID . " as PID," .
                 $inventoriesDefine::COLUMN_INVENTORIES_VID . " as VID," .
                 $inventoriesDefine::COLUMN_INVENTORIES_SERIAL . " as Serial," .
@@ -39,7 +43,7 @@ class getexpandall
                 . " FROM " . $inventoriesDefine::TABLE_INVENTORIES .
                 /* " i inner join " .
             TABLE_DEVICES . " d on i." . COLUMN_INVENTORIES_PARENTID . " = d." . COLUMN_Devices_ID .*/
-                " i WHERE " . $inventoriesDefine::COLUMN_INVENTORIES_PARENTID . " IN (" . implode(',', array_fill(0, count($idToGet), '?')) . ")";
+                " i WHERE  $where and " . $inventoriesDefine::COLUMN_INVENTORIES_PARENTID . " IN (" . implode(',', array_fill(0, count($idToGet), '?')) . ")";
             $stmt = $conn->prepare($sql);
             $stmt->execute(array_values($idToGet));
             return $stmt;

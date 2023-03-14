@@ -3,7 +3,7 @@
 namespace Offline;
 
 use Error;
-use Exception;
+
 use Throwable;
 
 $path = 'uploads/';
@@ -16,6 +16,7 @@ class fileupload
         $files = $_FILES['files'];
         $pathFile = [];
         $filesCount = count($files['name']);
+
         for ($i = 0; $i < $filesCount; $i++) {
           try {
             if (array_key_exists('name', $files) && array_key_exists($i, $files['name']) && array_key_exists('tmp_name', $files) && array_key_exists($i, $files['tmp_name'])) {

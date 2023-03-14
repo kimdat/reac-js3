@@ -17,6 +17,11 @@ class childDevice
         global $conn, $inventoriesDefine;
         try {
             $id = $_GET['id'];
+            $where = "1=1";
+            //nếu online thì thêm điều kiện
+            if (!isset($_SERVER['HTTP_FLAGOFFLINE'])) {
+                $where = $inventoriesDefine::COLUMN_INVENTORIES_STATUS_DELETED . "<>'D'";
+            }
             $sql = "SELECT CONCAT('CHILD'," .
                 $inventoriesDefine::COLUMN_INVENTORIES_ID . ") as id," .
                 $inventoriesDefine::COLUMN_INVENTORIES_NAME . " as Name," .
@@ -26,7 +31,7 @@ class childDevice
                 $inventoriesDefine::COLUMN_INVENTORIES_SERIAL . " as Serial," .
                 $inventoriesDefine::COLUMN_INVENTORIES_CDESC . " as CDESC "
                 . "FROM " .   $inventoriesDefine::TABLE_INVENTORIES .
-                "  where " .  $inventoriesDefine::COLUMN_INVENTORIES_PARENTID . " =:id";
+                "  where  $where and " .  $inventoriesDefine::COLUMN_INVENTORIES_PARENTID . " =:id";
             $stmt = $conn->prepare($sql);
             $stmt->bindParam(':id', $id);
             $stmt->execute();

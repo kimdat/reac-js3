@@ -38,7 +38,6 @@ class exportFileExcel
     function setDataExcel($datas)
     {
         global $currentFile, $inventoriesDefine;
-
         try {
             // Create a new spreadsheet object
             $spreadsheet = new Spreadsheet();
@@ -75,7 +74,11 @@ class exportFileExcel
     {
         try {
             global $conn, $currentFile, $devicesDefine, $inventoriesDefine;
-
+            $where2 = " 1=1";
+            //nếu online thì thêm điều kiện
+            if (!isset($_SERVER['HTTP_FLAGOFFLINE'])) {
+                $where2 = $inventoriesDefine::COLUMN_INVENTORIES_STATUS_DELETED . " <>'D'";
+            }
             //điều kiện filter theo id
             $where = sizeof($idToGet) > 0 ? " WHERE i." . $inventoriesDefine::COLUMN_INVENTORIES_PARENTID . " IN (" . implode(',', array_fill(0, count($idToGet), '?')) . ")" : "";
             $sql = "SELECT i." . $inventoriesDefine::COLUMN_INVENTORIES_ID . ", i." . $inventoriesDefine::COLUMN_INVENTORIES_NAME
@@ -86,7 +89,7 @@ class exportFileExcel
         INNER JOIN " . $devicesDefine::TABLE_DEVICES . " d on d."
                 . $devicesDefine::COLUMN_DEVICES_ID . "=i."
                 . $inventoriesDefine::COLUMN_INVENTORIES_PARENTID .
-                $where;
+                $where . " and " . $where2;
             $stmt = $conn->prepare($sql);
             //NẾU có mảng id thì param id
             $stmt->execute(sizeof($idToGet) > 0 ? array_values($idToGet) : "");

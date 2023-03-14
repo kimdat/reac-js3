@@ -16,6 +16,11 @@ class filterData
         try {
             $where1 = "1=1";
             $where2 = "1=1";
+            $where3 = " 1=1";
+            //nếu online thì thêm điều kiện
+            if (!isset($_SERVER['HTTP_FLAGOFFLINE'])) {
+                $where3 = $inventoriesDefine::COLUMN_INVENTORIES_STATUS_DELETED . " <>'D'";
+            }
             $params = [];
 
             if ($valueSearch != "") {
@@ -76,7 +81,7 @@ class filterData
         FROM " . $devicesDefine::TABLE_DEVICES . " devices 
         INNER JOIN " . $inventoriesDefine::TABLE_INVENTORIES . " inventories 
         ON devices." . $devicesDefine::COLUMN_DEVICES_ID . " = inventories." . $inventoriesDefine::COLUMN_INVENTORIES_PARENTID . "
-        WHERE " . $devicesDefine::COLUMN_DEVICES_STATUS . " <> 'D' AND $where1 AND $where2 
+        WHERE " . $devicesDefine::COLUMN_DEVICES_STATUS . " NOT IN('0','D') AND $where1 AND $where2  AND $where3
         ORDER BY devices." . $devicesDefine::COLUMN_DEVICES_NAME . ", inventories." . $inventoriesDefine::COLUMN_INVENTORIES_ID;
 
 
@@ -115,12 +120,12 @@ class filterData
 
             $start = ($currentPage - 1) * $rowsPerPage + 1;
             $end = $start + $rowsPerPage - 1;
-
+            $stt = 1;
             foreach ($inventories as $item) {
                 if ($item["device_rank"] >= $start && $item["device_rank"] <= $end) {
                     $parentId = $item['parentId'];
                     $parentName = $item['parentName'];
-                    $stt = 0;
+
                     if (!isset($filtered_inventories[$parentId])) {
                         $filtered_inventories[$parentId] = array(
                             'STT' => $stt++,

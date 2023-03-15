@@ -13,9 +13,9 @@ try {
     require_once 'config.php';
     require_once 'classOnline.php';
     require_once 'classOffline.php';
-    require_once 'DeviceInfor.php';
+
     require_once 'middleware.php';
-    $deviceInfor = new DevicesInfor();
+
     $devicesDefine = new DevicesOnline();
     $inventoriesDefine = new InventoriesOnline();
     $currentURL =  $_SERVER['REQUEST_URI'];
@@ -66,8 +66,6 @@ try {
         } catch (Error $e) {
             return writeErr($e);
         }
-
-        return $response;
     })->add('checkToken');
     //get taất cả devices
     $app->get('/devices', function (Request $request, Response $response, array $args) use ($app) {

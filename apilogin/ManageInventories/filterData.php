@@ -120,7 +120,7 @@ class filterData
 
             $start = ($currentPage - 1) * $rowsPerPage + 1;
             $end = $start + $rowsPerPage - 1;
-            $stt = 1;
+            $stt = $start;
             foreach ($inventories as $item) {
                 if ($item["device_rank"] >= $start && $item["device_rank"] <= $end) {
                     $parentId = $item['parentId'];

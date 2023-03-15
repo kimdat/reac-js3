@@ -20,6 +20,8 @@ class ExecuteConnectDevice
             if (!isset($_POST["device_list"]) || empty($_POST["device_list"])) {
                 return;
             }
+
+
             $devices_id = json_decode($_POST["jsonId"]);
             $devices_list = json_decode($_POST["device_list"]);
             $connectDevice = new connectDevice();

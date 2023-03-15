@@ -18,9 +18,6 @@ class  CheckDuplicate
             $device = json_decode($_POST["device"]);
             $device_ip = trim($device->ip);
             $device_name = trim($device->deviceName);
-
-
-
             $sql = "SELECT  " . $devicesDefine::COLUMN_DEVICES_IP . " FROM " . $devicesDefine::TABLE_DEVICES . " WHERE "
                 . $devicesDefine::COLUMN_DEVICES_STATUS . " <> 'D' AND ("
                 . $devicesDefine::COLUMN_DEVICES_IP . "=:ip OR "

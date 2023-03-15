@@ -17,15 +17,11 @@ class createOnline
     function trimParameter($devices_list)
     {
         if (is_array($devices_list)) {
+
             $devices_list = array_map(function ($device) {
                 //nếu không có ip thì continue
-                if (!isset($device->ip)) {
-                    $device->device_type = trim($device->device_type);
-                    $device->ip = trim($device->ip);
-                    $device->username = trim($device->username);
-                    $device->password = trim($device->password);
-                    $device->port = "22";
-                    $device->deviceName = trim($device->deviceName);
+                if (isset($device->ip)) {
+                    $device = (object) array_map('trim', (array) $device);
                     return $device;
                 }
             }, $devices_list);
@@ -36,16 +32,14 @@ class createOnline
             if (!isset($devices_list->ip)) {
                 throw new Error("ip invalid or notfound");
             } else {
-                $devices_list->device_type = trim($devices_list->device_type);
-                $devices_list->ip = trim($devices_list->ip);
-                $devices_list->username = trim($devices_list->username);
-                $devices_list->password = trim($devices_list->password);
-                $devices_list->port = "22";
-                $devices_list->deviceName = trim($devices_list->deviceName);
+                $devices_list = (object) array_map('trim', (array) $devices_list);
             }
         }
         return $devices_list;
     }
+
+
+
     function createOnline()
     {
         global $conn;
@@ -57,32 +51,37 @@ class createOnline
                 return;
             }
             $devices_list = json_decode($_POST["device_list"]);
-            //trimparemeter
             $devices_list = self::trimParameter($devices_list);
+            $flagUpDate = $_POST["flagUpdate"];
+
+
             //connect thiết bị để lấy thông tin thiết bị con
             $connectDevice = new connectDevice();
             $res =  $connectDevice->connectDevice($devices_list);
             //Gía trị trả về là mảng json với key là ip
             $res = json_decode($res);
-            //check và xóa device cũ nếu trùng ip
+            //check và xóa device cũ nếu trùng id
             $remove_device_dup = new removeDeviceDuplicate();
             //data nventory
             $inventory = $res->deviceData;
             $inventory = json_decode($inventory);
-            //devicename
-            $devicesName = $res->deviceName;
             //data connect thành công
             $dataSuccess = [];
             //data connect thất bị
             $dataFail = [];
             $err = [];
             $step = "";
-            foreach ($devicesName as $ip => $deviceName) {
+            foreach ($devices_list as $device) {
                 try {
                     $status = 0;
                     $conn->beginTransaction();
+                    $ip = $device->ip;
                     $dataInventory = $inventory->$ip;
-                    $remove_device_dup->removeDeviceDuplicate($conn, $ip);
+                    $deviceName = $device->deviceName;
+                    //nếu là update  thỉ xóa thiết bị trùng ip
+                    if ($flagUpDate) {
+                        $remove_device_dup->removeDeviceDuplicate($conn, $ip);
+                    }
                     //nếu có lỗi thì status là 0
                     $dataInventoryFirst = $dataInventory[0];
                     if (!isset($dataInventoryFirst->Err)) {

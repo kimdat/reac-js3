@@ -14,6 +14,38 @@ use function PHPUnit\Framework\throwException;
 
 class createOnline
 {
+    function trimParameter($devices_list)
+    {
+        if (is_array($devices_list)) {
+            $devices_list = array_map(function ($device) {
+                //nếu không có ip thì continue
+                if (!isset($device->ip)) {
+                    $device->device_type = trim($device->device_type);
+                    $device->ip = trim($device->ip);
+                    $device->username = trim($device->username);
+                    $device->password = trim($device->password);
+                    $device->port = "22";
+                    $device->deviceName = trim($device->deviceName);
+                    return $device;
+                }
+            }, $devices_list);
+            if (sizeof($devices_list) == 0) {
+                throw new Error("ip invalid or notfound of all device you choosed");
+            }
+        } else {
+            if (!isset($devices_list->ip)) {
+                throw new Error("ip invalid or notfound");
+            } else {
+                $devices_list->device_type = trim($devices_list->device_type);
+                $devices_list->ip = trim($devices_list->ip);
+                $devices_list->username = trim($devices_list->username);
+                $devices_list->password = trim($devices_list->password);
+                $devices_list->port = "22";
+                $devices_list->deviceName = trim($devices_list->deviceName);
+            }
+        }
+        return $devices_list;
+    }
     function createOnline()
     {
         global $conn;
@@ -25,24 +57,8 @@ class createOnline
                 return;
             }
             $devices_list = json_decode($_POST["device_list"]);
-            if (is_array($devices_list)) {
-                $devices_list = array_map(function ($device) {
-                    $device->device_type = trim($device->device_type);
-                    $device->ip = trim($device->ip);
-                    $device->username = trim($device->username);
-                    $device->password = trim($device->password);
-                    $device->port = "22";
-                    $device->deviceName = trim($device->deviceName);
-                    return $device;
-                }, $devices_list);
-            } else {
-                $devices_list->device_type = trim($devices_list->device_type);
-                $devices_list->ip = trim($devices_list->ip);
-                $devices_list->username = trim($devices_list->username);
-                $devices_list->password = trim($devices_list->password);
-                $devices_list->port = "22";
-                $devices_list->deviceName = trim($devices_list->deviceName);
-            }
+            //trimparemeter
+            $devices_list = self::trimParameter($devices_list);
             //connect thiết bị để lấy thông tin thiết bị con
             $connectDevice = new connectDevice();
             $res =  $connectDevice->connectDevice($devices_list);
@@ -50,8 +66,10 @@ class createOnline
             $res = json_decode($res);
             //check và xóa device cũ nếu trùng ip
             $remove_device_dup = new removeDeviceDuplicate();
+            //data nventory
             $inventory = $res->deviceData;
             $inventory = json_decode($inventory);
+            //devicename
             $devicesName = $res->deviceName;
             //data connect thành công
             $dataSuccess = [];
@@ -83,16 +101,20 @@ class createOnline
                     }
                     $conn->commit();
                 } catch (Throwable $th) {
-                    $mess = self::rollBackData($conn, $th->getMessage() . " at step $step at $ip", $device_id, $status);
-                    //nếu không có lỗi
-                    if ($mess == null  || isset($mess["Fail"])) {
-                        $dataIpFail = array("ip" => $ip, "id" => $device_id, "Name" => $deviceName, "children" => $children);
-                        if (!in_array($dataIpFail, $dataSuccess) && !in_array($dataIpFail, $dataFail)) {
-                            $dataFail[] = $dataIpFail;
+                    if ($ip == null || $ip == "") {
+                        $err[] = array($ip => $th->getMessage());
+                    } else {
+                        $mess = self::rollBackData($conn, $th->getMessage() . " at step $step at $ip", $device_id, $status);
+                        //nếu không có lỗi
+                        if ($mess == null  || isset($mess["Fail"])) {
+                            $dataIpFail = array("ip" => $ip, "id" => $device_id, "Name" => $deviceName, "children" => $children);
+                            if (!in_array($dataIpFail, $dataSuccess) && !in_array($dataIpFail, $dataFail)) {
+                                $dataFail[] = $dataIpFail;
+                            }
                         }
+                        if (isset($mess["Err"]))
+                            $err[] = array($ip => $mess["Err"]);
                     }
-                    if (isset($mess["Err"]))
-                        $err[] = array($ip => $mess["Err"]);
                 }
             }
             return json_encode(array("success" => $dataSuccess, "Err" => $err, "fail" => $dataFail));

@@ -8,6 +8,11 @@ class DevicesOnline
     const COLUMN_DEVICES_STATUS = 'status';
     const COLUMN_DEVICES_TIME_DELETED = 'TIME_DELETED';
     const COLUMN_DEVICES_TYPE = 'Device_Type';
+    const COLUMN_DEVICES_REGION_ID = 'region_id';
+    const COLUMN_DEVICES_PROVINCE_ID = 'province_id';
+    const COLUMN_DEVICES_LONG_DATA = 'longData';
+    const COLUMN_DEVICES_LAT = 'lat';
+    const COLUMN_DEVICES_ADDRESS = 'address';
 }
 
 class InventoriesOnline

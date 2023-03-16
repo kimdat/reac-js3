@@ -8,6 +8,7 @@ use Exception;
 use PDOException;
 use Online\connectDevice;
 use Online\removeDeviceDuplicate;
+use PhpParser\Node\Stmt\Return_;
 use Throwable;
 
 use function PHPUnit\Framework\throwException;
@@ -52,12 +53,17 @@ class createOnline
             }
             $devices_list = json_decode($_POST["device_list"]);
             $devices_list = self::trimParameter($devices_list);
-            $flagUpDate = $_POST["flagUpdate"];
+            //Mappindhardware
+            $devices_list = self::mappingHardware($devices_list);
 
+
+            $flagUpDate = $_POST["flagUpdate"];
 
             //connect thiết bị để lấy thông tin thiết bị con
             $connectDevice = new connectDevice();
+
             $res =  $connectDevice->connectDevice($devices_list);
+
             //Gía trị trả về là mảng json với key là ip
             $res = json_decode($res);
             //check và xóa device cũ nếu trùng id
@@ -76,6 +82,9 @@ class createOnline
                     $status = 0;
                     $conn->beginTransaction();
                     $ip = $device->ip;
+                    if (trim($ip) == "") {
+                        throw new Error("No have ip");
+                    }
                     $dataInventory = $inventory->$ip;
                     $deviceName = $device->deviceName;
                     //nếu là update  thỉ xóa thiết bị trùng ip
@@ -88,7 +97,7 @@ class createOnline
                         $status = 1;
                     }
                     $step = "insertparent";
-                    $device_id = self::insertParentOnline($conn, $deviceName, $ip, $status);
+                    $device_id = self::insertParentOnline($conn, $device, $status);
                     //Nếu không lỗi khi connect thì insertData
                     $children = [];
                     $step = "insertData";
@@ -123,7 +132,33 @@ class createOnline
             throw new  Error("Err in $currentFunction in $currentFile " . $th->getMessage());
         }
     }
-    function insertParentOnline($conn, $deviceName, $ip, $status)
+    function mappingHardware($devices_list)
+    {
+        $devices_list = array_map(function ($device) {
+            //nếu không có ip thì continue
+            try {
+                $device->DeviceType_S = self::getDataHardware($device->deviceType);
+
+                return $device;
+            } catch (\Throwable $th) {
+            }
+        }, $devices_list);
+
+
+        return $devices_list;
+    }
+    function getDataHardware($deviceType)
+    {
+        global $conn;
+        $sql = "SELECT " . COLUMN_DEVICETYPE_S . " FROM " . TABLE_MAPPING_HARDWARE . " WHERE " . COLUMN_DEVICETYPE_H . "=:device_type";
+        $stmt = $conn->prepare($sql);
+        $stmt->bindParam(":device_type", $deviceType);
+        $stmt->execute();
+        if ($stmt->rowCount() == 0)
+            return "";
+        return $stmt->fetchColumn(0);
+    }
+    function insertParentOnline($conn, $device, $status)
     {
         try {
             global $devicesDefine;
@@ -137,12 +172,25 @@ class createOnline
                 . "," .  $devicesDefine::COLUMN_DEVICES_IP
                 . "," . $devicesDefine::COLUMN_DEVICES_ID
                 . "," . $devicesDefine::COLUMN_DEVICES_STATUS
-                . ") VALUES (?,?,?,?)";
+                . "," . $devicesDefine::COLUMN_DEVICES_REGION_ID
+                . "," . $devicesDefine::COLUMN_DEVICES_PROVINCE_ID
+                . "," . $devicesDefine::COLUMN_DEVICES_LONG_DATA
+                . "," . $devicesDefine::COLUMN_DEVICES_LAT
+                . "," . $devicesDefine::COLUMN_DEVICES_ADDRESS
+                . "," . $devicesDefine::COLUMN_DEVICES_TYPE
+                . ") VALUES (?,?,?,?,?,?,?,?,?,?)";
+
             $stmtParent = $conn->prepare($sqlParent);
-            $stmtParent->bindParam(1, $deviceName);
-            $stmtParent->bindParam(2, $ip);
+            $stmtParent->bindParam(1, $device->deviceName);
+            $stmtParent->bindParam(2, $device->ip);
             $stmtParent->bindParam(3, $device_id);
             $stmtParent->bindParam(4, $status);
+            $stmtParent->bindParam(5, $device->region);
+            $stmtParent->bindParam(6, $device->province);
+            $stmtParent->bindParam(7, $device->long);
+            $stmtParent->bindParam(8, $device->lat);
+            $stmtParent->bindParam(9, $device->address);
+            $stmtParent->bindParam(10, $device->deviceType);
             $stmtParent->execute();
 
             return $device_id;

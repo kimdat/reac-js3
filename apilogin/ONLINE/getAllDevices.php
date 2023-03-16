@@ -22,9 +22,11 @@ class getAllDevices
             d." .  $devicesDefine::COLUMN_DEVICES_NAME . " as Name, 
             d." .  $devicesDefine::COLUMN_DEVICES_IP . " as Ip,
             d." .  $devicesDefine::COLUMN_DEVICES_TYPE . " as Device_type,
+            hard." . COLUMN_DEVICETYPE_S . " as Device_type_S,
         false as showChild, (@rownum := @rownum + 1) as STT
         FROM " .  $devicesDefine::TABLE_DEVICES . " d 
-        WHERE d." .  $devicesDefine::COLUMN_DEVICES_STATUS . " NOT IN('0','D')
+        LEFT join " . TABLE_MAPPING_HARDWARE . " hard ON d." . $devicesDefine::COLUMN_DEVICES_TYPE . "=" . COLUMN_DEVICETYPE_H . "
+        WHERE d." .  $devicesDefine::COLUMN_DEVICES_STATUS . " <> 'D'
         ORDER BY d." . $devicesDefine::COLUMN_DEVICES_NAME;
             $stmt = $conn->prepare($sql);
             $stmt->execute();

@@ -64,6 +64,7 @@ class createOnline
 
             $res =  $connectDevice->connectDevice($devices_list);
 
+
             //Gía trị trả về là mảng json với key là ip
             $res = json_decode($res);
             //check và xóa device cũ nếu trùng id
@@ -137,7 +138,7 @@ class createOnline
         $devices_list = array_map(function ($device) {
             //nếu không có ip thì continue
             try {
-                $device->DeviceType_S = self::getDataHardware($device->deviceType);
+                $device->device_type_S = self::getDataHardware($device->deviceType);
 
                 return $device;
             } catch (\Throwable $th) {
@@ -174,7 +175,7 @@ class createOnline
                 . "," . $devicesDefine::COLUMN_DEVICES_STATUS
                 . "," . $devicesDefine::COLUMN_DEVICES_REGION_ID
                 . "," . $devicesDefine::COLUMN_DEVICES_PROVINCE_ID
-                . "," . $devicesDefine::COLUMN_DEVICES_LONG_DATA
+                . ", " . $devicesDefine::COLUMN_DEVICES_LONG_DATA
                 . "," . $devicesDefine::COLUMN_DEVICES_LAT
                 . "," . $devicesDefine::COLUMN_DEVICES_ADDRESS
                 . "," . $devicesDefine::COLUMN_DEVICES_TYPE

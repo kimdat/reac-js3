@@ -3,15 +3,14 @@
 namespace Online;
 
 use Error;
-use Exception;
 
-use PDOException;
+
+
 use Online\connectDevice;
 use Online\removeDeviceDuplicate;
-use PhpParser\Node\Stmt\Return_;
 use Throwable;
 
-use function PHPUnit\Framework\throwException;
+
 
 class createOnline
 {
@@ -20,8 +19,9 @@ class createOnline
         if (is_array($devices_list)) {
 
             $devices_list = array_map(function ($device) {
+                global $devicesDefine;
                 //nếu không có ip thì continue
-                if (isset($device->ip)) {
+                if (isset($device[$devicesDefine::COLUMN_DEVICES_IP])) {
                     $device = (object) array_map('trim', (array) $device);
                     return $device;
                 }
@@ -55,21 +55,17 @@ class createOnline
             $devices_list = self::trimParameter($devices_list);
             //Mappindhardware
             $devices_list = self::mappingHardware($devices_list);
-
-
             $flagUpDate = $_POST["flagUpdate"];
-
             //connect thiết bị để lấy thông tin thiết bị con
             $connectDevice = new connectDevice();
-
             $res =  $connectDevice->connectDevice($devices_list);
-
 
             //Gía trị trả về là mảng json với key là ip
             $res = json_decode($res);
             //check và xóa device cũ nếu trùng id
             $remove_device_dup = new removeDeviceDuplicate();
             //data nventory
+
             $inventory = $res->deviceData;
             $inventory = json_decode($inventory);
             //data connect thành công
@@ -89,7 +85,9 @@ class createOnline
                     $dataInventory = $inventory->$ip;
                     $deviceName = $device->deviceName;
                     //nếu là update  thỉ xóa thiết bị trùng ip
-                    if ($flagUpDate) {
+
+                    if ($flagUpDate == "true") {
+                        $step = "remove_device_dup";
                         $remove_device_dup->removeDeviceDuplicate($conn, $ip);
                     }
                     //nếu có lỗi thì status là 0
@@ -138,7 +136,8 @@ class createOnline
         $devices_list = array_map(function ($device) {
             //nếu không có ip thì continue
             try {
-                $device->device_type_S = self::getDataHardware($device->deviceType);
+
+                $device->device_type_S = self::getDataHardware($device->Device_Type);
 
                 return $device;
             } catch (\Throwable $th) {
@@ -175,7 +174,7 @@ class createOnline
                 . "," . $devicesDefine::COLUMN_DEVICES_STATUS
                 . "," . $devicesDefine::COLUMN_DEVICES_REGION_ID
                 . "," . $devicesDefine::COLUMN_DEVICES_PROVINCE_ID
-                . ", " . $devicesDefine::COLUMN_DEVICES_LONG_DATA
+                . ", " . $devicesDefine::COLUMN_DEVICES_LONG
                 . "," . $devicesDefine::COLUMN_DEVICES_LAT
                 . "," . $devicesDefine::COLUMN_DEVICES_ADDRESS
                 . "," . $devicesDefine::COLUMN_DEVICES_TYPE

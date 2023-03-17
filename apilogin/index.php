@@ -13,7 +13,7 @@ try {
     require_once 'config.php';
     require_once 'classOnline.php';
     require_once 'classOffline.php';
-
+    require_once 'DeviceStatus.php';
     require_once 'middleware.php';
 
     $devicesDefine = new DevicesOnline();
@@ -184,6 +184,49 @@ try {
             return writeErr($e);
         }
     })->add('checkToken');
+
+    $app->get('/api/devices/{id}', function (Request $request, Response $response, array $args) use ($app) {
+        try {
+            $id = $args['id'];
+            return writeSucces(Online\Device::getDeviceById($id));
+        } catch (Error $e) {
+            return writeErr($e);
+        }
+    });
+
+    $app->get('/api/device-status', function (Request $request, Response $response, array $args) use ($app) {
+        try {
+            return writeSucces(Online\Device::getAllDeviceStatus());
+        } catch (Error $e) {
+            return writeErr($e);
+        }
+    });
+
+    $app->get('/api/provinces', function (Request $request, Response $response, array $args) use ($app) {
+        try {
+            return writeSucces(Online\Province::getAllProvinces());
+        } catch (Error $e) {
+            return writeErr($e);
+        }
+    });
+
+    $app->get('/api/regions', function (Request $request, Response $response, array $args) use ($app) {
+        try {
+            return writeSucces(Online\Region::getAllRegions());
+        } catch (Error $e) {
+            return writeErr($e);
+        }
+    });
+
+    $app->post('/api/devices', function (Request $request, Response $response, array $args) use ($app) {
+        try {
+            $a = new Online\Device();
+            return writeSucces($a->addDevice($request->getParsedBody()));
+        } catch (Error $e) {
+            return writeErr($e);
+        }
+    });
+
     $app->run();
 } catch (Error $e) {
     throw new Error($e->getMessage());

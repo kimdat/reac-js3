@@ -20,7 +20,7 @@ class Device
         // Khởi tạo giá trị ban đầu cho biến @rownum
         try {
             $conn->query("SET @rownum = 0");
-            $sql = "SELECT * FROM " . $devicesDefine::TABLE_DEVICES;
+            $sql = "SELECT * FROM " . $devicesDefine::TABLE_DEVICES . " WHERE " . $devicesDefine::COLUMN_DEVICES_STATUS . " <>'D'";
             $stmt = $conn->prepare($sql);
             $stmt->execute();
             $devices = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -137,9 +137,10 @@ class Device
 
             $timestamp = time();
             $random_string = uniqid('rd', true);
+            $device_id = $timestamp . $random_string;
             $stmt->execute(
                 array(
-                    $devicesDefine::COLUMN_DEVICES_ID => $timestamp . $random_string,
+                    $devicesDefine::COLUMN_DEVICES_ID => $device_id,
                     $devicesDefine::COLUMN_DEVICES_TYPE => $device[$devicesDefine::COLUMN_DEVICES_TYPE],
                     $devicesDefine::COLUMN_DEVICES_NAME => $device[$devicesDefine::COLUMN_DEVICES_NAME],
                     $devicesDefine::COLUMN_DEVICES_IP => $device[$devicesDefine::COLUMN_DEVICES_IP],
@@ -152,7 +153,7 @@ class Device
                 )
             );
 
-            return $random_string;
+            return $device_id;
         } catch (Throwable $th) {
             $currentFile = basename(__FILE__);
             throw new Error("Error in $currentFile ->" . $th->getMessage());
@@ -219,6 +220,7 @@ class Device
                     }
                     $step = "insertparent";
                     $device_id = self::addDevice1(get_object_vars($device), $status);
+
                     //Nếu không lỗi khi connect thì insertData
                     $children = [];
                     $step = "insertData";
@@ -251,6 +253,29 @@ class Device
             $currentFile = basename(__FILE__);
             $currentFunction = __FUNCTION__;
             throw new  Error("Err in $currentFunction in $currentFile " . $th->getMessage());
+        }
+    }
+    public static function deleteDevices($deviceIdList)
+    {
+        global $conn;
+        global $devicesDefine;
+        $deviceIdList = array_map(function ($string) {
+            return "'" . $string . "'";
+        }, $deviceIdList);
+        try {
+            $sql = "UPDATE "
+                . $devicesDefine::TABLE_DEVICES
+                . " SET " . $devicesDefine::COLUMN_DEVICES_STATUS . " = 'D'"
+                . " WHERE " . $devicesDefine::COLUMN_DEVICES_ID
+                . " IN (" . implode(",", $deviceIdList) . ")";
+            var_dump($sql);
+            $stmt = $conn->prepare($sql);
+            $stmt->execute();
+
+            return json_encode(array('status' => true));
+        } catch (Throwable $th) {
+            $currentFile = basename(__FILE__);
+            throw new Error("Error in $currentFile ->" . $th->getMessage());
         }
     }
 }

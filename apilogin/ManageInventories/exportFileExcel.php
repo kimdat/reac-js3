@@ -9,7 +9,9 @@ use PDO;
 use PDOException;
 use PhpOffice\PhpSpreadsheet\spreadsheet;
 use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
+use PhpParser\Node\Stmt\Return_;
 use Slim\Psr7\Response;
+use stdClass;
 use Throwable;
 
 class exportFileExcel
@@ -20,22 +22,41 @@ class exportFileExcel
         $currentFile = basename(__FILE__);
 
         try {
-            $rowId = json_decode($_POST['rowId']) ?? [];
+            $rows = json_decode($_POST['row']) ?? [];
+            $rowId = [];
+            $objNo = new stdClass();
+            foreach ($rows as $row) {
+                $id = $row->id;
+                $objNo->$id = $row->No;
+                # code...
+                $rowId[] = $id;
+            }
             // filter value dựa trên valuesearch và value column trong file getAllId.php
             $smtDataExport = self::sqlGetDataExport($rowId);
-            $dataExport = $smtDataExport->fetchAll(PDO::FETCH_ASSOC);
-            $writer = new Xlsx(self::setDataExcel($dataExport));
-            $response = new Response();
-            $writer->save('php://output');
-            $response->getBody()->write(file_get_contents('php://output'));
 
-            return $response;
+
+            $dataExport = $smtDataExport->fetchAll(PDO::FETCH_ASSOC);
+            return self::writeFileExcel($dataExport, $objNo);
         } catch (Throwable $th) {
             $currentFunction = __FUNCTION__;
             throw new Error("Err in $currentFunction in $currentFile ->" . $th->getMessage());
         }
     }
-    function setDataExcel($datas)
+    function writeFileExcel($dataExport, $objNo)
+    {
+        try {
+
+            $writer = new Xlsx(self::setDataExcel($dataExport, $objNo));
+            $response = new Response();
+            $writer->save('php://output');
+            $response->getBody()->write(file_get_contents('php://output'));
+            return $response;
+        } catch (\Throwable $th) {
+            $currentFunction = __FUNCTION__;
+            throw new Error("Err in $currentFunction ->" . $th->getMessage());
+        }
+    }
+    function setDataExcel($datas, $objNo)
     {
         global $currentFile, $inventoriesDefine;
         try {
@@ -43,14 +64,13 @@ class exportFileExcel
             $spreadsheet = new Spreadsheet();
             // Set the active sheet
             $sheet = $spreadsheet->getActiveSheet();
-            $data_array[] = ['STT', 'Device Name', 'Slot', 'PID', 'Serial', 'Description'];
+            $data_array[] = ['No', 'Device Name', 'Slot', 'PID', 'Serial', 'Description'];
             $currentParentId = "";
-            $stt = 1;
             foreach ($datas as $data) {
                 //Tạo row cha
                 if ($currentParentId != $data[$inventoriesDefine::COLUMN_INVENTORIES_PARENTID]) {
                     $currentParentId = $data[$inventoriesDefine::COLUMN_INVENTORIES_PARENTID];
-                    $data_array[] = [$stt++, $data['ParentName'], '', '', '', ''];
+                    $data_array[] = [$objNo->$currentParentId, $data['ParentName'], '', '', '', ''];
                 }
                 $data_array[] = [
                     '', '', $data[$inventoriesDefine::COLUMN_INVENTORIES_NAME], $data[$inventoriesDefine::COLUMN_INVENTORIES_PID],
@@ -67,7 +87,7 @@ class exportFileExcel
             return $spreadsheet;
         } catch (Throwable $th) {
             $currentFunction = __FUNCTION__;
-            throw new Error("Error  $currentFunction () in $currentFile" . $th->getMessage());
+            throw new Error("Error  $currentFunction () " . $th->getMessage());
         }
     }
     function sqlGetDataExport($idToGet)
@@ -89,7 +109,8 @@ class exportFileExcel
         INNER JOIN " . $devicesDefine::TABLE_DEVICES . " d on d."
                 . $devicesDefine::COLUMN_DEVICES_ID . "=i."
                 . $inventoriesDefine::COLUMN_INVENTORIES_PARENTID .
-                $where . " and " . $where2;
+                $where . " and " . $where2 . "  ORDER BY d." .
+                $devicesDefine::COLUMN_DEVICES_NAME . ",i." . $inventoriesDefine::COLUMN_INVENTORIES_ID;;
             $stmt = $conn->prepare($sql);
             //NẾU có mảng id thì param id
             $stmt->execute(sizeof($idToGet) > 0 ? array_values($idToGet) : "");

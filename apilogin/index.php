@@ -184,7 +184,13 @@ try {
             return writeErr($e);
         }
     })->add('checkToken');
-
+    $app->get('/api/devices', function (Request $request, Response $response, array $args) use ($app) {
+        try {
+            return writeSucces(Online\Device::getAllDevices());
+        } catch (Error $e) {
+            return writeErr($e);
+        }
+    });
     $app->get('/api/devices/{id}', function (Request $request, Response $response, array $args) use ($app) {
         try {
             $id = $args['id'];
@@ -226,7 +232,13 @@ try {
             return writeErr($e);
         }
     });
-
+    $app->post('/api/devices/delete', function (Request $request, Response $response, array $args) use ($app) {
+        try {
+            return writeSucces(Online\Device::deleteDevices($request->getParsedBody()["list"]));
+        } catch (Error $e) {
+            return writeErr($e);
+        }
+    });
     $app->run();
 } catch (Error $e) {
     throw new Error($e->getMessage());

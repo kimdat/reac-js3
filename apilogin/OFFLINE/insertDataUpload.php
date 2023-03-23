@@ -110,6 +110,7 @@ class insertDataUpload
 
                 $timestamp = time();
                 $random_string = uniqid('rd', true);
+                
                 $device_id = $timestamp . $random_string;
                 $deviceName = $deviceNames[$j];
                 $deviceData = $deviceDatas[$j];

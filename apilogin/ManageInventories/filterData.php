@@ -127,7 +127,7 @@ class filterData
             //id cha
             $parent_row = [];
             $start = ($currentPage - 1) * $rowsPerPage;
-            $end = $start + $rowsPerPage;
+
 
 
             while ($item = $stmt->fetch(PDO::FETCH_ASSOC)) {
@@ -170,7 +170,7 @@ class filterData
                 ) ?? [];
             } //ko có dữ liệu
             $all_inventories = array_values($all_inventories);
-            $filtered_inventories = array_slice($all_inventories, $start, $end);
+            $filtered_inventories = array_slice($all_inventories, $start, $rowsPerPage);
             if ($stmt->rowCount() == 0 || sizeof($filtered_inventories) == 0) {
                 return array(
                     'searchapidata' => [array('statusNotFound' => true)],
@@ -183,7 +183,7 @@ class filterData
                 'searchapidata' => $filtered_inventories,
                 'total_records' => $total_row,
                 'total_pages' => $total_page,
-                'row_expand' => array_slice($parent_row, $start, $end),
+                'row_expand' => array_slice($parent_row, $start, $rowsPerPage),
                 'devices' => $all_inventories
 
             );

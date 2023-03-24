@@ -13,7 +13,7 @@ class connectDevice
         try {
             $currentFile = basename(__FILE__);
             // Tạo một mảng chứa URL của các API cần gọi
-            $url = "http://localhost/NETMIKO/home.py";
+            $url = "http://localhost/NETMIKO/homeData.py";
             // Tạo một curl handler
             $ch = curl_init();
             //Nếu là string thì convernt sang array

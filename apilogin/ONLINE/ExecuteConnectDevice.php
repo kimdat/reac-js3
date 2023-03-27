@@ -38,7 +38,6 @@ class ExecuteConnectDevice
             foreach ($devicesName as $ip => $deviceName) {
                 try {
                     $dataInventory = $inventory->$ip;
-
                     $dataInventoryFirst = $dataInventory[0];
                     $children = [];
                     //nếu không có lỗi

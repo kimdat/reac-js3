@@ -12,7 +12,7 @@ use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 use Slim\Psr7\Response;
 use Throwable;
 
-class exportFileExcelSSH
+class exportFileExcelSSH1
 {
     function downExcel()
     {
@@ -21,8 +21,6 @@ class exportFileExcelSSH
 
         try {
             $rowId = json_decode($_POST['row']) ?? [];
-
-
             // filter value dựa trên valuesearch và value column trong file getAllId.php
 
             $dataExport = $rowId;
@@ -51,6 +49,8 @@ class exportFileExcelSSH
             $data_array[] = ['No', 'Device Name', 'Slot', 'PID', 'Serial', 'Description'];
             $currentParentId = "";
             $stt = 1;
+
+
             foreach ($datas as $data) {
 
                 //Tạo row cha

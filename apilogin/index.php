@@ -13,7 +13,7 @@ try {
     require_once 'config.php';
     require_once 'classOnline.php';
     require_once 'classOffline.php';
-
+    require_once 'DeviceStatus.php';
     require_once 'middleware.php';
 
     $devicesDefine = new DevicesOnline();
@@ -231,7 +231,7 @@ try {
         }
     });
 
-    $app->post('/api/devices/delete', function (Request $request, Response $response, array $args) {
+    $app->post('/api/devices/delete', function (Request $request, Response $response, array $args) use ($app) {
         try {
             return writeSucces(Online\Device::deleteDevices($request->getParsedBody()["list"]));
         } catch (Error $e) {
@@ -253,6 +253,15 @@ try {
                 ]));
                 return writeBadRequest($response);
             }
+        } catch (Error $e) {
+            return writeErr($e);
+        }
+    });
+
+    $app->post('/updateInventories', function (Request $request, Response $response, array $args) use ($app) {
+        try {
+            $instantaneouscheck = new Online\INSTANTANEOUSCHECK();
+            return writeSucces($instantaneouscheck->updateInventories());
         } catch (Error $e) {
             return writeErr($e);
         }

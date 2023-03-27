@@ -126,9 +126,9 @@ class filterData
             $all_inventories = [];
             //id cha
             $parent_row = [];
-            $start = ($currentPage - 1) * $rowsPerPage;
-
-
+            $start = ($currentPage - 1) * $rowsPerPage + 1;
+            $end = $start + $rowsPerPage - 1;
+            $indexParentItem = 0;
 
             while ($item = $stmt->fetch(PDO::FETCH_ASSOC)) {
 
@@ -141,25 +141,37 @@ class filterData
                 $vid = $item['VID'];
                 $serial = $item['Serial'];
                 $cdesc = $item['CDESC'];
-                $valueItem = "{$parentName}|{$childName}|" . ($pid ? $pid : "$") . "|" . ($vid ? $vid : "$") . "|" . ($serial ? $serial : "$") . "|{$cdesc}";
+                $valueItem = $parentName . "|" . $childName . "|" . ($pid == "" ? "$" : $pid) . "|" . ($vid == "" ? "$" : $vid) . "|"
+                    . ($serial == "" ? "$" : $serial) . "|" . $cdesc;
                 $valueSearch = strtolower($valueSearch);
                 $valueItem = strtolower($valueItem);
 
                 if ($valueSearch != "" && str_contains($valueItem, $valueSearch) == false) {
                     continue;
                 }
-
                 if (!in_array($parentId, $parent_row)) {
-
+                    $indexParentItem++;
                     $parent_row[] = $parentId;
-                    $all_inventories[$parentId] = [
+                    $all_inventories[] = [
                         "id" => $parentId,
-                        "Name" => $parentName,
-                        "showChild" => $flagShowChild,
+                        "name" => $parentName,
                         "No" => $No
                     ];
                 }
-                $all_inventories[$parentId]['children'][] = array(
+                if ($indexParentItem < $start || $indexParentItem > $end) {
+                    continue;
+                }
+
+                if (!isset($filtered_inventories[$parentId])) {
+                    $filtered_inventories[$parentId] = array(
+                        'id' => $parentId,
+                        'Name' => $parentName,
+                        'showChild' => $flagShowChild,
+                        'No' => $No
+                    );
+                }
+
+                $filtered_inventories[$parentId]['children'][] = array(
                     'id' => $childId,
                     'Name' => $childName,
                     'VID' => $vid,
@@ -169,8 +181,6 @@ class filterData
                     'ParentId' => $parentId
                 ) ?? [];
             } //ko có dữ liệu
-            $all_inventories = array_values($all_inventories);
-            $filtered_inventories = array_slice($all_inventories, $start, $rowsPerPage);
             if ($stmt->rowCount() == 0 || sizeof($filtered_inventories) == 0) {
                 return array(
                     'searchapidata' => [array('statusNotFound' => true)],
@@ -180,10 +190,10 @@ class filterData
             $total_row = count($parent_row);
             $total_page = ceil($total_row / $rowsPerPage);
             $response = array(
-                'searchapidata' => $filtered_inventories,
+                'searchapidata' => array_values($filtered_inventories),
                 'total_records' => $total_row,
                 'total_pages' => $total_page,
-                'row_expand' => array_slice($parent_row, $start, $rowsPerPage),
+                'row_expand' => array_slice($parent_row, $start - 1, $end),
                 'devices' => $all_inventories
 
             );

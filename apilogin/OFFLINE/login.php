@@ -21,7 +21,7 @@ class login
             $stmt->execute();
             if ($stmt->rowCount() > 0) {
                 $result = $stmt->fetch();
-                if (strcmp($password, $result['PassWord']) == 0) {
+                if (strcmp(md5($password), $result['PassWord']) == 0) {
                     $response = ['status' => 1, 'mess' => "Login succesfully"];
                 } else {
                     $response = ['status' => 0, 'mess' => "PassWord wrong"];

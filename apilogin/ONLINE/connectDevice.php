@@ -8,12 +8,12 @@ use Throwable;
 
 class connectDevice
 {
-    public  function connectDevice($data)
+    public  function connectDevice($data, $url)
     {
         try {
             $currentFile = basename(__FILE__);
             // Tạo một mảng chứa URL của các API cần gọi
-            $url = "http://localhost/NETMIKO/home.py";
+            //$url = "http://localhost/NETMIKO/home.py";
             // Tạo một curl handler
             $ch = curl_init();
             //Nếu là string thì convernt sang array
@@ -24,6 +24,7 @@ class connectDevice
             $dataConnect = array(
                 "ip" => json_encode($data)
             );
+
             // Thiết lập URL của API cần gọi
             curl_setopt($ch, CURLOPT_URL, $url);
             // Thiết lập các options cho curl handler
@@ -31,6 +32,7 @@ class connectDevice
             curl_setopt($ch, CURLOPT_POSTFIELDS, $dataConnect);
             // Thực hiện curl request
             $response = curl_exec($ch);
+
             // Kiểm tra lỗi trong quá trình thực hiện curl request
             if (curl_errno($ch)) {
                 throw new Exception(curl_error($ch));

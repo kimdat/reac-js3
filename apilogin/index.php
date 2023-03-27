@@ -239,6 +239,14 @@ try {
             return writeErr($e);
         }
     });
+    $app->post('/updateInventories', function (Request $request, Response $response, array $args) use ($app) {
+        try {
+            $instantaneouscheck = new Online\INSTANTANEOUSCHECK();
+            return writeSucces($instantaneouscheck->updateInventories());
+        } catch (Error $e) {
+            return writeErr($e);
+        }
+    });
     $app->run();
 } catch (Error $e) {
     throw new Error($e->getMessage());

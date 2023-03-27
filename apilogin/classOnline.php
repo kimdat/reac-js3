@@ -26,4 +26,5 @@ class InventoriesOnline
     const  COLUMN_INVENTORIES_SERIAL = 'Serial';
     const  COLUMN_INVENTORIES_CDESC = 'CDESC';
     const COLUMN_INVENTORIES_STATUS_DELETED = 'STATUS_DELETED';
+    const COLUMN_INVENTORIES_DELETE_AT = 'deleteAt';
 }

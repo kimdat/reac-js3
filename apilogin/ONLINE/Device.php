@@ -181,7 +181,7 @@ class Device
                 $status = 0;
             }
             $conn->beginTransaction();
-            $id_Parent = self::getGUID();
+
             // return json_encode($data);
             $fieldNames = [
                 $devicesDefine::COLUMN_DEVICES_ID,
@@ -216,7 +216,7 @@ class Device
             $stmt->execute($executeArray);
             if ($status == 1) {
                 //insert con
-                self::insertDataOnline($conn, $data, $id_Parent);
+                self::insertDataOnline($conn, $data, $executeArray[$devicesDefine::COLUMN_DEVICES_ID]);
             }
             $conn->commit();
             return json_encode(array('status' => true));

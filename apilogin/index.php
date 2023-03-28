@@ -44,6 +44,10 @@ try {
         $response->getBody()->write(json_encode($responseErr));
         return $response->withStatus(500)->withHeader('Content-Type', 'application/json');
     }
+    function writeBadRequest(Response $response)
+    {
+        return $response->withStatus(404)->withHeader('Content-Type', 'application/json');
+    }
 
     //offline
     $app->post('/login', function (Request $request, Response $response, array $args) use ($app) {
@@ -54,8 +58,6 @@ try {
             return writeErr($e);
         }
     })->add('checkToken');
-
-
 
     //online
     $app->post('/createOnline', function (Request $request, Response $response, $args) {
@@ -183,24 +185,23 @@ try {
         } catch (Error $e) {
             return writeErr($e);
         }
-    })->add('checkToken');
-    $app->get('/api/devices', function (Request $request, Response $response, array $args) use ($app) {
-        try {
-            return writeSucces(Online\Device::getAllDevices());
-        } catch (Error $e) {
-            return writeErr($e);
-        }
     });
-    $app->get('/api/devices/{id}', function (Request $request, Response $response, array $args) use ($app) {
+    // ->add('checkToken');
+
+    $app->get('/api/devices', function (Request $request, Response $response, array $args) {
         try {
-            $id = $args['id'];
-            return writeSucces(Online\Device::getDeviceById($id));
+            $filters = $request->getQueryParams();
+            if ($filters) {
+                return writeSucces(Online\Device::getFilteredDevices($filters));
+            } else {
+                return writeSucces(Online\Device::getAllDevices());
+            }
         } catch (Error $e) {
             return writeErr($e);
         }
     });
 
-    $app->get('/api/device-status', function (Request $request, Response $response, array $args) use ($app) {
+    $app->get('/api/device-status', function (Request $request, Response $response, array $args) {
         try {
             return writeSucces(Online\Device::getAllDeviceStatus());
         } catch (Error $e) {
@@ -208,15 +209,21 @@ try {
         }
     });
 
-    $app->get('/api/provinces', function (Request $request, Response $response, array $args) use ($app) {
+    $app->get('/api/provinces', function (Request $request, Response $response, array $args) {
+        $filters = $request->getQueryParams();
         try {
-            return writeSucces(Online\Province::getAllProvinces());
+            if (isset($filters['region_id'])) {
+                $regionId = $filters['region_id'];
+                return writeSucces(Online\Province::getProvincesByRegionId($regionId));
+            } else {
+                return writeSucces(Online\Province::getAllProvinces());
+            }
         } catch (Error $e) {
             return writeErr($e);
         }
     });
 
-    $app->get('/api/regions', function (Request $request, Response $response, array $args) use ($app) {
+    $app->get('/api/regions', function (Request $request, Response $response, array $args) {
         try {
             return writeSucces(Online\Region::getAllRegions());
         } catch (Error $e) {
@@ -224,14 +231,6 @@ try {
         }
     });
 
-    $app->post('/api/devices', function (Request $request, Response $response, array $args) use ($app) {
-        try {
-            $a = new Online\Device();
-            return writeSucces($a->addDevice($request->getParsedBody()));
-        } catch (Error $e) {
-            return writeErr($e);
-        }
-    });
     $app->post('/api/devices/delete', function (Request $request, Response $response, array $args) use ($app) {
         try {
             return writeSucces(Online\Device::deleteDevices($request->getParsedBody()["list"]));
@@ -239,6 +238,26 @@ try {
             return writeErr($e);
         }
     });
+
+    $app->post('/api/devices/{id}', function (Request $request, Response $response, array $args) {
+        $id = $args['id'];
+        try {
+            $result = Online\Device::modifyDevice($id, $request->getParsedBody());
+            if ($result == true) {
+                return writeSucces(json_encode([
+                    'message' => "This device has been updated successfully."
+                ]));
+            } else {
+                $response->getBody()->write(json_encode([
+                    "message" => "There was an error updating the device."
+                ]));
+                return writeBadRequest($response);
+            }
+        } catch (Error $e) {
+            return writeErr($e);
+        }
+    });
+
     $app->post('/updateInventories', function (Request $request, Response $response, array $args) use ($app) {
         try {
             $instantaneouscheck = new Online\INSTANTANEOUSCHECK();
@@ -246,7 +265,16 @@ try {
         } catch (Error $e) {
             return writeErr($e);
         }
+    })->add('checkToken');
+
+    $app->post('/api/devices', function (Request $request, Response $response, array $args) {
+        try {
+            return writeSucces(Online\Device::addDevice($request->getParsedBody()));
+        } catch (Error $e) {
+            return writeErr($e);
+        }
     });
+
     $app->run();
 } catch (Error $e) {
     throw new Error($e->getMessage());

@@ -43,7 +43,7 @@ class  CheckDuplicate
         try {
 
             if (!isset($_POST["name"])) {
-                return;
+                return "";
             }
             $name = $_POST["name"];
             $value = $_POST["value"];

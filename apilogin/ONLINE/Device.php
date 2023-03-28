@@ -6,7 +6,7 @@ use DeviceStatus;
 use Error;
 use Exception;
 use PDO;
-
+use PhpParser\Node\Stmt\Return_;
 use Throwable;
 
 class Device
@@ -165,18 +165,24 @@ class Device
         global $conn;
         global $devicesDefine;
 
-
-
-
         try {
 
             $device = self::mappingHardware($device);
-
             $connectDevice = new connectDevice();
 
-            $res =  $connectDevice->connectDevice($device);
-            return json_encode($res);
+            // $ip = $device[$devicesDefine::COLUMN_DEVICES_IP];
+            $res =  $connectDevice->connectDevice($device, "http://localhost/NETMIKO/netmikoIndex.py");
+            $data = json_decode($res);
 
+
+            $status = 1;
+            //khi ket noi that bai
+            if (isset($data->Err)) {
+                $status = 0;
+            }
+            $conn->beginTransaction();
+            $id_Parent = self::getGUID();
+            // return json_encode($data);
             $fieldNames = [
                 $devicesDefine::COLUMN_DEVICES_ID,
                 $devicesDefine::COLUMN_DEVICES_TYPE,
@@ -186,9 +192,10 @@ class Device
                 $devicesDefine::COLUMN_DEVICES_PROVINCE_ID,
                 $devicesDefine::COLUMN_DEVICES_LONG,
                 $devicesDefine::COLUMN_DEVICES_LAT,
-                $devicesDefine::COLUMN_DEVICES_ADDRESS
+                $devicesDefine::COLUMN_DEVICES_ADDRESS,
+                $devicesDefine::COLUMN_DEVICES_STATUS
             ];
-            $conn->query("SET @rownum = 0");
+
             $query = "INSERT INTO " . $devicesDefine::TABLE_DEVICES
                 . "(" . implode(",", array_map(fn ($fieldName): string => "`$fieldName`", $fieldNames)) . ")"
                 . " VALUES "
@@ -205,16 +212,64 @@ class Device
                 }
                 return $result;
             }, array());
-
+            $executeArray[$devicesDefine::COLUMN_DEVICES_STATUS] = $status;
             $stmt->execute($executeArray);
-
+            if ($status == 1) {
+                //insert con
+                self::insertDataOnline($conn, $data, $id_Parent);
+            }
+            $conn->commit();
             return json_encode(array('status' => true));
         } catch (Throwable $th) {
+            if ($conn->inTransaction()) {
+                $conn->rollBack();
+            }
             $currentFile = basename(__FILE__);
             throw new Error("Error in $currentFile ->" . $th->getMessage());
         }
     }
+    public static function insertDataOnline($conn,  $inventory, $device_id)
+    {
 
+        global $inventoriesDefine;
+        try {
+            // Chuyển đổi mảng JSON thành mảng PHP
+            $values = array();
+
+            foreach ($inventory as $item) {
+
+                $values[] = array(
+                    'Name' => $item->Name,
+                    'CDESC' => $item->CDESC,
+                    'PID' => $item->PID,
+                    'VID' => $item->VID,
+                    'Serial' => $item->Serial,
+                    'ParentId' => $device_id
+                );
+            }
+            $placeholders = array_fill(0, count($values), "(?, ?, ?, ?, ?,?)");
+            $values_flat = array();
+            foreach ($values as $row) {
+                $values_flat = array_merge($values_flat, array_values($row));
+            }
+            $sql = "INSERT INTO " . $inventoriesDefine::TABLE_INVENTORIES . " ("
+                . $inventoriesDefine::COLUMN_INVENTORIES_NAME . ", "
+                . $inventoriesDefine::COLUMN_INVENTORIES_CDESC . ","
+                . $inventoriesDefine::COLUMN_INVENTORIES_PID . ","
+                . $inventoriesDefine::COLUMN_INVENTORIES_VID . ","
+                . $inventoriesDefine::COLUMN_INVENTORIES_SERIAL . ","
+                . $inventoriesDefine::COLUMN_INVENTORIES_PARENTID .
+                ") VALUES " . implode(',', $placeholders);
+            $stmt = $conn->prepare($sql);
+            $stmt->execute($values_flat);
+            return $values;
+        } catch (Throwable $e) {
+            $currentFile = basename(__FILE__);
+            $currentFunction = __FUNCTION__;
+            throw new Error("Error $currentFunction in $currentFile ." . $e->getMessage());
+        }
+        return;
+    }
     public static function modifyDevice($id, $device)
     {
         global $conn;

@@ -8,11 +8,20 @@ use Throwable;
 
 class connectDevice
 {
+<<<<<<< HEAD
     public  function connectDevice($data, $url = "http://localhost/NETMIKO/homeData.py")
     {
         try {
             $currentFile = basename(__FILE__);
             echo $url;
+=======
+    public  function connectDevice($data, $url)
+    {
+        try {
+            $currentFile = basename(__FILE__);
+            // Tạo một mảng chứa URL của các API cần gọi
+
+>>>>>>> a855a2cdb0c0ba9487e3933a493e48f0d1bedc91
             // Tạo một curl handler
             $ch = curl_init();
             //Nếu là string thì convernt sang array

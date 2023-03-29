@@ -265,8 +265,17 @@ try {
         } catch (Error $e) {
             return writeErr($e);
         }
+    })->add('checkToken');
+
+    $app->post('/api/devices', function (Request $request, Response $response, array $args) {
+        try {
+            return writeSucces(Online\Device::addDevice($request->getParsedBody()));
+        } catch (Error $e) {
+            return writeErr($e);
+        }
     });
 
+<<<<<<< HEAD
     $app->post('/api/devices', function (Request $request, Response $response, array $args) {
         try {
             return writeSucces(Online\Device::addDevice($request->getParsedBody()));
@@ -284,6 +293,8 @@ try {
         }
     });
 
+=======
+>>>>>>> a855a2cdb0c0ba9487e3933a493e48f0d1bedc91
     $app->run();
 } catch (Error $e) {
     throw new Error($e->getMessage());

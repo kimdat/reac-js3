@@ -6,6 +6,10 @@ use DeviceStatus;
 use Error;
 use Exception;
 use PDO;
+<<<<<<< HEAD
+=======
+use PhpParser\Node\Stmt\Return_;
+>>>>>>> a855a2cdb0c0ba9487e3933a493e48f0d1bedc91
 use Throwable;
 use PhpOffice\PhpSpreadsheet\Reader\Xlsx;
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
@@ -169,9 +173,9 @@ class Device
         try {
 
             $device = self::mappingHardware($device);
-
             $connectDevice = new connectDevice();
 
+<<<<<<< HEAD
             $res =  $connectDevice->connectDevice($device, "http://localhost/NETMIKO/netmikoIndex.py");
 
             $data = json_decode($res);
@@ -188,7 +192,21 @@ class Device
                 //insert con
                 self::insertDataOnline($conn, $data, $id_Parent);
             }
+=======
+            // $ip = $device[$devicesDefine::COLUMN_DEVICES_IP];
+            $res =  $connectDevice->connectDevice($device, "http://localhost/NETMIKO/netmikoIndex.py");
+            $data = json_decode($res);
+>>>>>>> a855a2cdb0c0ba9487e3933a493e48f0d1bedc91
 
+
+            $status = 1;
+            //khi ket noi that bai
+            if (isset($data->Err)) {
+                $status = 0;
+            }
+            $conn->beginTransaction();
+
+            // return json_encode($data);
             $fieldNames = [
                 $devicesDefine::COLUMN_DEVICES_ID,
                 $devicesDefine::COLUMN_DEVICES_TYPE,
@@ -199,9 +217,10 @@ class Device
                 $devicesDefine::COLUMN_DEVICES_PROVINCE_ID,
                 $devicesDefine::COLUMN_DEVICES_LONG,
                 $devicesDefine::COLUMN_DEVICES_LAT,
-                $devicesDefine::COLUMN_DEVICES_ADDRESS
+                $devicesDefine::COLUMN_DEVICES_ADDRESS,
+                $devicesDefine::COLUMN_DEVICES_STATUS
             ];
-            $conn->query("SET @rownum = 0");
+
             $query = "INSERT INTO " . $devicesDefine::TABLE_DEVICES
                 . "(" . implode(",", array_map(fn ($fieldName): string => "`$fieldName`", $fieldNames)) . ")"
                 . " VALUES "
@@ -221,10 +240,21 @@ class Device
                 }
                 return $result;
             }, array());
-
+            $executeArray[$devicesDefine::COLUMN_DEVICES_STATUS] = $status;
             $stmt->execute($executeArray);
+<<<<<<< HEAD
+=======
+            if ($status == 1) {
+                //insert con
+                self::insertDataOnline($conn, $data, $executeArray[$devicesDefine::COLUMN_DEVICES_ID]);
+            }
+            $conn->commit();
+>>>>>>> a855a2cdb0c0ba9487e3933a493e48f0d1bedc91
             return json_encode(array('status' => true));
         } catch (Throwable $th) {
+            if ($conn->inTransaction()) {
+                $conn->rollBack();
+            }
             $currentFile = basename(__FILE__);
             throw new Error("Error in $currentFile ->" . $th->getMessage());
         }
@@ -236,6 +266,10 @@ class Device
         try {
             // Chuyển đổi mảng JSON thành mảng PHP
             $values = array();
+<<<<<<< HEAD
+=======
+
+>>>>>>> a855a2cdb0c0ba9487e3933a493e48f0d1bedc91
             foreach ($inventory as $item) {
 
                 $values[] = array(

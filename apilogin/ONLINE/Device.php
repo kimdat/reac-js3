@@ -6,8 +6,9 @@ use DeviceStatus;
 use Error;
 use Exception;
 use PDO;
-use PhpParser\Node\Stmt\Return_;
 use Throwable;
+use PhpOffice\PhpSpreadsheet\Reader\Xlsx;
+use PhpOffice\PhpSpreadsheet\Spreadsheet;
 
 class Device
 {
@@ -86,13 +87,13 @@ class Device
 
             //get row count without pagination
             $rowCoutnWithoutPaginationQuery =
-                Device::queryBuilder("SELECT count(*) FROM " . $devicesDefine::TABLE_DEVICES, $conditions);
+                self::queryBuilder("SELECT count(*) FROM " . $devicesDefine::TABLE_DEVICES, $conditions);
             $stmt = $conn->prepare($rowCoutnWithoutPaginationQuery);
             $stmt->execute();
             $rowCountWithoutPagination = $stmt->fetchColumn();
 
             //building query
-            $query = Device::queryBuilder("SELECT * FROM " . $devicesDefine::TABLE_DEVICES, $conditions);
+            $query = self::queryBuilder("SELECT * FROM " . $devicesDefine::TABLE_DEVICES, $conditions);
 
             //add pagination to query
             if (isset($filters["currentPage"]) && isset($filters["rowsPerPage"])) {
@@ -167,34 +168,32 @@ class Device
 
         try {
 
-            // $device = self::mappingHardware($device);
+            $device = self::mappingHardware($device);
 
-            // $connectDevice = new connectDevice();
-            // $ip = $device[$devicesDefine::COLUMN_DEVICES_IP];
+            $connectDevice = new connectDevice();
 
-            // $res =  $connectDevice->connectDevice($device, "http://localhost/NETMIKO/netmikoIndex.py");
+            $res =  $connectDevice->connectDevice($device, "http://localhost/NETMIKO/netmikoIndex.py");
 
-            // $data = json_decode($res);
+            $data = json_decode($res);
 
-            // $status = 1;
+            $status = 1;
 
-            // //khi ket noi that bai
-            // if (isset($data->Err)) {
-            //     $status = 0;
-            // }
+            //khi ket noi that bai
+            if (isset($data->Err)) {
+                $status = 0;
+            }
 
-            // $id_Parent = self::getGUID();
-            // if ($status == 1) {
-            //     //insert con
-            //     self::insertDataOnline($conn, $data, $id_Parent);
-            // }
+            $id_Parent = self::getGUID();
+            if ($status == 1) {
+                //insert con
+                self::insertDataOnline($conn, $data, $id_Parent);
+            }
 
-
-            // return json_encode($data);
             $fieldNames = [
                 $devicesDefine::COLUMN_DEVICES_ID,
                 $devicesDefine::COLUMN_DEVICES_TYPE,
                 $devicesDefine::COLUMN_DEVICES_NAME,
+                $devicesDefine::COLUMN_DEVICES_STATUS,
                 $devicesDefine::COLUMN_DEVICES_IP,
                 $devicesDefine::COLUMN_DEVICES_REGION_ID,
                 $devicesDefine::COLUMN_DEVICES_PROVINCE_ID,
@@ -210,10 +209,13 @@ class Device
 
             $stmt = $conn->prepare($query);
 
-            $executeArray = array_reduce($fieldNames, function ($result, $fieldName) use ($devicesDefine, $device) {
+            $executeArray = array_reduce($fieldNames, function ($result, $fieldName)
+            use ($devicesDefine, $device, $id_Parent, $status) {
                 if ($fieldName == $devicesDefine::COLUMN_DEVICES_ID) {
-                    $GUID = Device::getGUID();
-                    $result[$fieldName] = $GUID;
+                    $result[$fieldName] = $id_Parent;
+                }
+                if ($fieldName == $devicesDefine::COLUMN_DEVICES_STATUS) {
+                    $result[$fieldName] = $status;
                 } else {
                     $result[$fieldName] = $device[$fieldName];
                 }
@@ -221,9 +223,6 @@ class Device
             }, array());
 
             $stmt->execute($executeArray);
-            // if ($status == 1) {
-            //     //xu ly khi status 1
-            // }
             return json_encode(array('status' => true));
         } catch (Throwable $th) {
             $currentFile = basename(__FILE__);
@@ -237,7 +236,6 @@ class Device
         try {
             // Chuyển đổi mảng JSON thành mảng PHP
             $values = array();
-
             foreach ($inventory as $item) {
 
                 $values[] = array(
@@ -332,6 +330,75 @@ class Device
             $stmt->execute();
 
             return json_encode(array('status' => true));
+        } catch (Throwable $th) {
+            $currentFile = basename(__FILE__);
+            throw new Error("Error in $currentFile ->" . $th->getMessage());
+        }
+    }
+
+    private static function getDeviceData()
+    {
+        global $conn;
+        try {
+            $sql = "SELECT 
+                ROW_NUMBER() OVER(ORDER BY d.DeviceName ASC) AS RowNo,
+                d.DeviceName, 
+                d.Ip,
+                dt.name, 
+                ds.name, 
+                r.name, 
+                p.name ,
+                d.long,
+                d.lat,
+                d.address
+                FROM devicesonline d 
+                LEFT JOIN device_type dt ON d.Device_Type = dt.id
+                LEFT JOIN device_status ds ON d.status = ds.id
+                LEFT JOIN region r ON d.region_id = r.id
+                LEFT JOIN province p ON d.province_id = p.id
+                WHERE d.status <> 'D' ";
+            $stmt = $conn->prepare($sql);
+            $stmt->execute();
+            $devices = [];
+            $devices = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            return $devices;
+        } catch (Throwable $th) {
+            $currentFile = basename(__FILE__);
+            throw new Error("Error in $currentFile ->" . $th->getMessage());
+        }
+    }
+
+    public static function export($response)
+    {
+        try {
+            $spreadsheet = new Spreadsheet();
+            $sheet = $spreadsheet->getActiveSheet();
+
+            $devices = self::getDeviceData();
+
+            $rows = [];
+            $rows[] = ['No', 'Device Name', 'Ip', 'Device Type', 'Status', 'Region', 'Province', 'Longitude', 'Latitude', 'Address'];
+            foreach ($devices as $device) {
+                $rows[] = array_values($device);
+            }
+
+            $sheet->setTitle('Devices');
+
+            //set column titles
+            $columnNames = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J'];
+            foreach ($columnNames as $name) {
+                $sheet->getStyle($name . '1')->getFont()->setBold(true);
+                $sheet->getColumnDimension($name)->setWidth(15);
+            }
+
+            $sheet->fromArray($rows);
+            header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+            header('Content-Disposition: attachment; filename="my_excel_file.xlsx"');
+            header('Cache-Control: max-age=0');
+
+            $writer = \PhpOffice\PhpSpreadsheet\IOFactory::createWriter($spreadsheet, 'Xlsx');
+            $writer->save('php://output');
+            $response->getBody()->write(file_get_contents('php://output'));
         } catch (Throwable $th) {
             $currentFile = basename(__FILE__);
             throw new Error("Error in $currentFile ->" . $th->getMessage());

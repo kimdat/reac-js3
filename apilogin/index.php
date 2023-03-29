@@ -275,6 +275,15 @@ try {
         }
     });
 
+    $app->get('/api/devices/export', function (Request $request, Response $response, array $args) {
+        try {
+            Online\Device::export($response);
+            return $response;
+        } catch (Error $e) {
+            return writeErr($e);
+        }
+    });
+
     $app->run();
 } catch (Error $e) {
     throw new Error($e->getMessage());

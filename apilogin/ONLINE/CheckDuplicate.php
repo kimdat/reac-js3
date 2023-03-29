@@ -41,7 +41,6 @@ class  CheckDuplicate
     {
         global $devicesDefine, $conn;
         try {
-
             if (!isset($_POST["name"])) {
                 return;
             }

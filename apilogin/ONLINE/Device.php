@@ -6,10 +6,6 @@ use DeviceStatus;
 use Error;
 use Exception;
 use PDO;
-<<<<<<< HEAD
-=======
-use PhpParser\Node\Stmt\Return_;
->>>>>>> a855a2cdb0c0ba9487e3933a493e48f0d1bedc91
 use Throwable;
 use PhpOffice\PhpSpreadsheet\Reader\Xlsx;
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
@@ -175,7 +171,6 @@ class Device
             $device = self::mappingHardware($device);
             $connectDevice = new connectDevice();
 
-<<<<<<< HEAD
             $res =  $connectDevice->connectDevice($device, "http://localhost/NETMIKO/netmikoIndex.py");
 
             $data = json_decode($res);
@@ -192,11 +187,6 @@ class Device
                 //insert con
                 self::insertDataOnline($conn, $data, $id_Parent);
             }
-=======
-            // $ip = $device[$devicesDefine::COLUMN_DEVICES_IP];
-            $res =  $connectDevice->connectDevice($device, "http://localhost/NETMIKO/netmikoIndex.py");
-            $data = json_decode($res);
->>>>>>> a855a2cdb0c0ba9487e3933a493e48f0d1bedc91
 
 
             $status = 1;
@@ -242,14 +232,11 @@ class Device
             }, array());
             $executeArray[$devicesDefine::COLUMN_DEVICES_STATUS] = $status;
             $stmt->execute($executeArray);
-<<<<<<< HEAD
-=======
             if ($status == 1) {
                 //insert con
                 self::insertDataOnline($conn, $data, $executeArray[$devicesDefine::COLUMN_DEVICES_ID]);
             }
             $conn->commit();
->>>>>>> a855a2cdb0c0ba9487e3933a493e48f0d1bedc91
             return json_encode(array('status' => true));
         } catch (Throwable $th) {
             if ($conn->inTransaction()) {
@@ -266,10 +253,6 @@ class Device
         try {
             // Chuyển đổi mảng JSON thành mảng PHP
             $values = array();
-<<<<<<< HEAD
-=======
-
->>>>>>> a855a2cdb0c0ba9487e3933a493e48f0d1bedc91
             foreach ($inventory as $item) {
 
                 $values[] = array(

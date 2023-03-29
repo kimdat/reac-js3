@@ -275,13 +275,7 @@ try {
         }
     });
 
-    $app->post('/api/devices', function (Request $request, Response $response, array $args) {
-        try {
-            return writeSucces(Online\Device::addDevice($request->getParsedBody()));
-        } catch (Error $e) {
-            return writeErr($e);
-        }
-    });
+
 
     $app->get('/api/devices/export', function (Request $request, Response $response, array $args) {
         try {
@@ -291,7 +285,13 @@ try {
             return writeErr($e);
         }
     });
-
+    $app->post('/api/connectDevices', function (Request $request, Response $response, array $args) {
+        try {
+            return writeSucces(Online\Device::connectDevice($request->getParsedBody()));
+        } catch (Error $e) {
+            return writeErr($e);
+        }
+    });
     $app->run();
 } catch (Error $e) {
     throw new Error($e->getMessage());

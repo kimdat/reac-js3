@@ -49,10 +49,16 @@ class  CheckDuplicate
 
             //nếu là ip thì check theo ip, không thì check theo name
             $where = $name == "Ip" ? $devicesDefine::COLUMN_DEVICES_IP . "=:value" : $devicesDefine::COLUMN_DEVICES_NAME . "=:value";
+            if (isset($_POST['id'])) {
+                $where .= ' AND ' . $devicesDefine::COLUMN_DEVICES_ID . '<>:id';
+            }
             $sql = "SELECT  " . $devicesDefine::COLUMN_DEVICES_IP . " FROM " . $devicesDefine::TABLE_DEVICES . " WHERE "
                 . $devicesDefine::COLUMN_DEVICES_STATUS . " <> 'D' AND (" . $where . ")";
             $stmt = $conn->prepare($sql);
             $stmt->bindParam(':value', $value);
+            if (isset($_POST['id'])) {
+                $stmt->bindParam(':id', $_POST['id']);
+            }
 
             $stmt->execute();
 

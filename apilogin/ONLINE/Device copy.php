@@ -163,14 +163,45 @@ class Device
     }
     public static function addDevice($device)
     {
+        global $conn;
+        global $devicesDefine;
+
         try {
-            global $conn;
-            global $devicesDefine;
-            $contrainstStatusDevice = new  \constraintStatusDevices();
+
+            $device = self::mappingHardware($device);
+            $connectDevice = new connectDevice();
+
+            $res =  $connectDevice->connectDevice($device, "http://localhost/NETMIKO/netmikoIndex.py");
+
+            $data = json_decode($res);
+
+            $status = 1;
+
+            //khi ket noi that bai
+            if (isset($data->Err)) {
+                $status = 0;
+            }
+
+            $id_Parent = self::getGUID();
+            if ($status == 1) {
+                //insert con
+                self::insertDataOnline($conn, $data, $id_Parent);
+            }
+
+
+            $status = 1;
+            //khi ket noi that bai
+            if (isset($data->Err)) {
+                $status = 0;
+            }
+            $conn->beginTransaction();
+
+            // return json_encode($data);
             $fieldNames = [
                 $devicesDefine::COLUMN_DEVICES_ID,
                 $devicesDefine::COLUMN_DEVICES_TYPE,
                 $devicesDefine::COLUMN_DEVICES_NAME,
+                $devicesDefine::COLUMN_DEVICES_STATUS,
                 $devicesDefine::COLUMN_DEVICES_IP,
                 $devicesDefine::COLUMN_DEVICES_REGION_ID,
                 $devicesDefine::COLUMN_DEVICES_PROVINCE_ID,
@@ -187,53 +218,23 @@ class Device
 
             $stmt = $conn->prepare($query);
 
-            $executeArray = array_reduce($fieldNames, function ($result, $fieldName) use ($devicesDefine, $device) {
+            $executeArray = array_reduce($fieldNames, function ($result, $fieldName)
+            use ($devicesDefine, $device, $id_Parent, $status) {
                 if ($fieldName == $devicesDefine::COLUMN_DEVICES_ID) {
-                    $GUID = Device::getGUID();
-                    $result[$fieldName] = $GUID;
+                    $result[$fieldName] = $id_Parent;
+                }
+                if ($fieldName == $devicesDefine::COLUMN_DEVICES_STATUS) {
+                    $result[$fieldName] = $status;
                 } else {
                     $result[$fieldName] = $device[$fieldName];
                 }
                 return $result;
             }, array());
-            $executeArray[$devicesDefine::COLUMN_DEVICES_STATUS] = $contrainstStatusDevice::STATUS_DEFAUL;
+            $executeArray[$devicesDefine::COLUMN_DEVICES_STATUS] = $status;
             $stmt->execute($executeArray);
-            $device[$devicesDefine::COLUMN_DEVICES_ID] = $executeArray[$devicesDefine::COLUMN_DEVICES_ID];
-            return json_encode(array('status' => true, 'devices' => $device));
-        } catch (\Throwable $th) {
-            $currentFile = basename(__FILE__);
-            throw new Error("Error in $currentFile ->" . $th->getMessage());
-        }
-    }
-    public static function connectDevice($device)
-    {
-        global $conn;
-        global $devicesDefine;
-        $contrainstStatusDevice = new  \constraintStatusDevices();
-        try {
-
-            $device = self::mappingHardware($device);
-            $connectDevice = new connectDevice();
-
-            // $ip = $device[$devicesDefine::COLUMN_DEVICES_IP];
-            $res =  $connectDevice->connectDevice($device, "http://localhost/NETMIKO/netmikoIndex.py");
-            $data = json_decode($res);
-
-            //default là unmanaged
-            $status = $contrainstStatusDevice::STATUS_DEFAUL;
-            if (isset($data->status)) {
-                $status = $data->status;
-            }
-            if ($status === $contrainstStatusDevice::STATUS_DEFAUL) {
-                return json_encode(array('status' => true));
-            }
-            $conn->beginTransaction();
-            $device_id = $device[$devicesDefine::COLUMN_DEVICES_ID];
-            //update lại status cho device cha
-            self::updateParent($conn, $device_id, $status);
-            //nếu status managed thì insert inventories
-            if ($status == $contrainstStatusDevice::STATUS_MANAGED) {
-                self::insertDataOnline($conn, $data->deviceData, $device_id);
+            if ($status == 1) {
+                //insert con
+                self::insertDataOnline($conn, $data, $executeArray[$devicesDefine::COLUMN_DEVICES_ID]);
             }
             $conn->commit();
             return json_encode(array('status' => true));
@@ -245,25 +246,6 @@ class Device
             throw new Error("Error in $currentFile ->" . $th->getMessage());
         }
     }
-    public static function updateParent($conn, $device_id, $status)
-    {
-        global $devicesDefine;
-        try {
-            $sql = "UPDATE "
-                . $devicesDefine::TABLE_DEVICES
-                . " SET " . $devicesDefine::COLUMN_DEVICES_STATUS . " = :status"
-                . " WHERE " . $devicesDefine::COLUMN_DEVICES_ID
-                . "=:id";
-
-            $stmt = $conn->prepare($sql);
-            $stmt->bindParam(":status", $status);
-            $stmt->bindParam(":id", $device_id);
-            $stmt->execute();
-        } catch (Throwable $th) {
-            $currentFile = basename(__FILE__);
-            throw new Error("Error in $currentFile ->" . $th->getMessage());
-        }
-    }
     public static function insertDataOnline($conn,  $inventory, $device_id)
     {
 
@@ -271,7 +253,6 @@ class Device
         try {
             // Chuyển đổi mảng JSON thành mảng PHP
             $values = array();
-
             foreach ($inventory as $item) {
 
                 $values[] = array(
@@ -306,7 +287,6 @@ class Device
         }
         return;
     }
-
     public static function modifyDevice($id, $device)
     {
         global $conn;
@@ -331,6 +311,7 @@ class Device
                     $devicesDefine::COLUMN_DEVICES_LAT,
                     $devicesDefine::COLUMN_DEVICES_ADDRESS
                 ];
+                $conn->query("SET @rownum = 0");
 
                 $assignedArray = array_map(fn ($fieldName) => "`$fieldName` = '$device[$fieldName]'", $fieldNames);
 

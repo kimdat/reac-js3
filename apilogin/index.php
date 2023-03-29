@@ -275,6 +275,13 @@ try {
         }
     });
 
+    $app->post('/api/connectDevices', function (Request $request, Response $response, array $args) {
+        try {
+            return writeSucces(Online\Device::connectDevice($request->getParsedBody()));
+        } catch (Error $e) {
+            return writeErr($e);
+        }
+    });
     $app->run();
 } catch (Error $e) {
     throw new Error($e->getMessage());

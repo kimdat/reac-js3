@@ -14,7 +14,7 @@ class filterData
     function sqlGetData($valueSearch, $valueColumn,)
     {
         global $conn, $devicesDefine, $inventoriesDefine;
-
+        $contrainstStatusDevice = new  \constraintStatusDevices();
         try {
             $where1 = " 1=1";
 
@@ -28,18 +28,10 @@ class filterData
                 . $devicesDefine::COLUMN_DEVICES_NAME . ",
             ROW_NUMBER() OVER (ORDER BY " . $devicesDefine::COLUMN_DEVICES_NAME . ") as No
             FROM  " . $devicesDefine::TABLE_DEVICES . "
-            WHERE " . $devicesDefine::COLUMN_DEVICES_STATUS . " NOT IN('0','D')";
-
+            WHERE " . $devicesDefine::COLUMN_DEVICES_STATUS . "=" . $contrainstStatusDevice::STATUS_MANAGED
+                . " or " . $devicesDefine::COLUMN_DEVICES_STATUS . " =''";
             if ($valueSearch != "") {
                 $valueSearch = trim($valueSearch);
-                /*  $where1 .= ' AND (inventories.'
-                    . $inventoriesDefine::COLUMN_INVENTORIES_NAME . ' LIKE  :valueSearch OR inventories.'
-                    .  $inventoriesDefine::COLUMN_INVENTORIES_PID . ' LIKE :valueSearch  OR inventories.'
-                    // .  $inventoriesDefine::COLUMN_INVENTORIES_VID . ' LIKE :valueSearch  OR inventories.'
-                    .  $inventoriesDefine::COLUMN_INVENTORIES_SERIAL . ' LIKE :valueSearch  OR inventories.'
-                    .  $inventoriesDefine::COLUMN_INVENTORIES_CDESC . ' LIKE :valueSearch  or Devices.No like :valueSearch  Devices.'
-                    . $devicesDefine::COLUMN_DEVICES_NAME . '  LIKE :valueSearch  )';
-                $params[":valueSearch"] = '%' . $valueSearch . '%';*/
             }
             foreach ($valueColumn as $column => $value) {
                 //nếu là STT thì contnue

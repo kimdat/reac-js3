@@ -28,3 +28,11 @@ class InventoriesOnline
     const COLUMN_INVENTORIES_STATUS_DELETED = 'STATUS_DELETED';
     const COLUMN_INVENTORIES_DELETE_AT = 'deleteAt';
 }
+class constraintStatusDevices
+{
+    const STATUS_UN_MANAGED = '0';
+    const STATUS_MANAGED = '1';
+    const STATUS_UNREACH = '2';
+    //default là umanagedy
+    const STATUS_DEFAUL = self::STATUS_UN_MANAGED;
+}

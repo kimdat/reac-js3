@@ -6,6 +6,13 @@ class DeviceStatus
     const COLUMN_DEVICESTATUS_NAME = 'name';
 }
 
+class DeviceTypeTable
+{
+    const TABLE_DEVICE_TYPE = 'device_type';
+    const COLUMN_DEVICE_TYPE_ID = 'id';
+    const COLUMN_DEVICE_TYPE_NAME = 'name';
+}
+
 class RegionTable
 {
     const TABLE_REGION = 'region';

@@ -3,6 +3,7 @@
 namespace Online;
 
 use DeviceStatus;
+use DeviceTypeTable;
 use Error;
 use Exception;
 use PDO;
@@ -435,6 +436,22 @@ class Device
             $writer = \PhpOffice\PhpSpreadsheet\IOFactory::createWriter($spreadsheet, 'Xlsx');
             $writer->save('php://output');
             $response->getBody()->write(file_get_contents('php://output'));
+        } catch (Throwable $th) {
+            $currentFile = basename(__FILE__);
+            throw new Error("Error in $currentFile ->" . $th->getMessage());
+        }
+    }
+
+    public static function getAllDeviceTypes()
+    {
+        global $conn;
+        try {
+            $sql = "SELECT * FROM " . DeviceTypeTable::TABLE_DEVICE_TYPE;
+            $stmt = $conn->prepare($sql);
+            $stmt->execute();
+            $devices = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+            return json_encode(array('types' => $devices));
         } catch (Throwable $th) {
             $currentFile = basename(__FILE__);
             throw new Error("Error in $currentFile ->" . $th->getMessage());

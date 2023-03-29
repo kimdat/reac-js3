@@ -292,6 +292,15 @@ try {
             return writeErr($e);
         }
     });
+
+    $app->get('/api/device-types', function (Request $request, Response $response, array $args) {
+        try {
+            return writeSucces(Online\Device::getAllDeviceTypes());
+        } catch (Error $e) {
+            return writeErr($e);
+        }
+    });
+
     $app->run();
 } catch (Error $e) {
     throw new Error($e->getMessage());

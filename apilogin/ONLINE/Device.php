@@ -31,7 +31,7 @@ class Device
         }
     }
 
-    protected static function queryBuilder($query, $conditions)
+    protected static function addAndConditions($query, $conditions)
     {
         if (count($conditions) > 0) {
             $query .= " WHERE " . implode(' AND ', $conditions);
@@ -88,13 +88,13 @@ class Device
 
             //get row count without pagination
             $rowCoutnWithoutPaginationQuery =
-                self::queryBuilder("SELECT count(*) FROM " . $devicesDefine::TABLE_DEVICES, $conditions);
+                self::addAndConditions("SELECT count(*) FROM " . $devicesDefine::TABLE_DEVICES, $conditions);
             $stmt = $conn->prepare($rowCoutnWithoutPaginationQuery);
             $stmt->execute();
             $rowCountWithoutPagination = $stmt->fetchColumn();
 
             //building query
-            $query = self::queryBuilder("SELECT * FROM " . $devicesDefine::TABLE_DEVICES, $conditions);
+            $query = self::addAndConditions("SELECT * FROM " . $devicesDefine::TABLE_DEVICES, $conditions);
 
             //add pagination to query
             if (isset($filters["currentPage"]) && isset($filters["rowsPerPage"])) {
@@ -373,27 +373,47 @@ class Device
         }
     }
 
-    private static function getDeviceData()
+    protected static function addOrConditions($query, $conditions)
+    {
+        if (count($conditions) > 0) {
+            $query .= " WHERE " . implode(' OR ', $conditions);
+        }
+        return $query;
+    }
+
+    private static function getDeviceData($ids)
     {
         global $conn;
         try {
             $sql = "SELECT 
                 ROW_NUMBER() OVER(ORDER BY d.DeviceName ASC) AS RowNo,
-                d.DeviceName, 
-                d.Ip,
-                dt.name, 
-                ds.name, 
-                r.name, 
-                p.name ,
-                d.long,
-                d.lat,
-                d.address
+                d.DeviceName AS DeviceName, 
+                d.Ip AS Ip,
+                dt.name AS DeviceType, 
+                ds.name AS Status, 
+                r.name AS Region, 
+                p.name AS Province ,
+                d.long AS Longitude,
+                d.lat AS Latitude,
+                d.address AS Address
                 FROM devicesonline d 
                 LEFT JOIN device_type dt ON d.Device_Type = dt.id
                 LEFT JOIN device_status ds ON d.status = ds.id
                 LEFT JOIN region r ON d.region_id = r.id
-                LEFT JOIN province p ON d.province_id = p.id
-                WHERE d.status <> 'D' ";
+                LEFT JOIN province p ON d.province_id = p.id WHERE d.status <> 'D'";
+
+            if (sizeof($ids) != 0) {
+                $sql .= ' AND (';
+                $conditions = [];
+                foreach ($ids as $id) {
+                    if ($id != null) {
+                        $conditions[] = "d.Id = '$id'";
+                    }
+                }
+                $sql .= implode(' OR ', $conditions);
+                $sql .= ')';
+            }
+
             $stmt = $conn->prepare($sql);
             $stmt->execute();
             $devices = [];
@@ -405,13 +425,13 @@ class Device
         }
     }
 
-    public static function export($response)
+    public static function export($ids, $response)
     {
         try {
             $spreadsheet = new Spreadsheet();
             $sheet = $spreadsheet->getActiveSheet();
 
-            $devices = self::getDeviceData();
+            $devices = self::getDeviceData($ids);
 
             $rows = [];
             $rows[] = ['No', 'Device Name', 'Ip', 'Device Type', 'Status', 'Region', 'Province', 'Longitude', 'Latitude', 'Address'];

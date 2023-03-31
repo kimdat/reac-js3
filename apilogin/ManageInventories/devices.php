@@ -13,7 +13,7 @@ class devices
     function getAllDevices()
     {
         global  $devicesDefine;
-
+        $contrainstStatusDevice = new  \constraintStatusDevices();
         global $conn;
         // Khởi tạo giá trị ban đầu cho biến @rownum
         try {
@@ -25,8 +25,8 @@ class devices
             $sql = "SELECT  d." .  $devicesDefine::COLUMN_DEVICES_ID . " as id, d." .  $devicesDefine::COLUMN_DEVICES_NAME . " as Name, 
         false as showChild, (@rownum := @rownum + 1) as No
         FROM " .  $devicesDefine::TABLE_DEVICES . " d 
-        WHERE d." .  $devicesDefine::COLUMN_DEVICES_STATUS . " NOT IN('0','D')
-        ORDER BY d." . $devicesDefine::COLUMN_DEVICES_NAME;
+        WHERE d." .  $devicesDefine::COLUMN_DEVICES_STATUS . "=" . $contrainstStatusDevice::STATUS_MANAGED . "
+        or " . $devicesDefine::COLUMN_DEVICES_STATUS . "=''" . "ORDER BY d." . $devicesDefine::COLUMN_DEVICES_NAME;
             $stmt = $conn->prepare($sql);
             $stmt->execute();
             $inventories = $stmt->fetchAll(PDO::FETCH_ASSOC);
